@@ -28,8 +28,46 @@ export default class HomeScreen extends React.Component {
               key: 'item-a',
               description: 'New selfie, might take it down, idk, give me likes',
               author: '@baconbrix',
-              image:
-                'https://resize-parismatch.ladmedia.fr/r/940,628/l/logo/img/var/news/storage/images/paris-match/actu/economie/elon-musk-force-de-demissionner-du-poste-de-president-du-ca-de-tesla-1577422/25590649-1-fre-FR/Elon-Musk-force-de-demissionner-du-poste-de-president-du-CA-de-Tesla.jpg',
+              source: {
+                uri:
+                  'https://resize-parismatch.ladmedia.fr/r/940,628/l/logo/img/var/news/storage/images/paris-match/actu/economie/elon-musk-force-de-demissionner-du-poste-de-president-du-ca-de-tesla-1577422/25590649-1-fre-FR/Elon-Musk-force-de-demissionner-du-poste-de-president-du-CA-de-Tesla.jpg',
+              },
+            },
+            {
+              key: 'item-b',
+              description: 'New selfie, might take it down, idk, give me likes',
+              author: '@baconbrix',
+              source: {
+                uri:
+                  'https://media.novinky.cz/511/695110-top_foto1-5ir4w.jpg?1537214402',
+              },
+            },
+            {
+              key: 'item-c',
+              description: 'New selfie, might take it down, idk, give me likes',
+              author: '@baconbrix',
+              source: {
+                uri:
+                  'https://resize-parismatch.ladmedia.fr/r/940,628/l/logo/img/var/news/storage/images/paris-match/actu/economie/elon-musk-force-de-demissionner-du-poste-de-president-du-ca-de-tesla-1577422/25590649-1-fre-FR/Elon-Musk-force-de-demissionner-du-poste-de-president-du-CA-de-Tesla.jpg',
+              },
+            },
+            {
+              key: 'item-d',
+              description: 'New selfie, might take it down, idk, give me likes',
+              author: '@baconbrix',
+              source: {
+                uri:
+                  'https://cdn2.i-scmp.com/sites/default/files/styles/landscape/public/images/methode/2018/04/20/c0d961b2-43b0-11e8-ab09-36e8e67fb996_1280x720_125123.JPG?itok=SYeH_4My',
+              },
+            },
+            {
+              key: 'item-e',
+              description: 'New selfie, might take it down, idk, give me likes',
+              author: '@baconbrix',
+              source: {
+                uri:
+                  'https://resize-parismatch.ladmedia.fr/r/940,628/l/logo/img/var/news/storage/images/paris-match/actu/economie/elon-musk-force-de-demissionner-du-poste-de-president-du-ca-de-tesla-1577422/25590649-1-fre-FR/Elon-Musk-force-de-demissionner-du-poste-de-president-du-CA-de-Tesla.jpg',
+              },
             },
           ]}
         />
