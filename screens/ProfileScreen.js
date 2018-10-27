@@ -26,9 +26,9 @@ const Stat = ({ title, children, onPress }) => (
 
 const StatsBar = ({ stats }) => (
   <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-    {Object.keys(stats).map(title => (
-      <Stat key={title} title={title}>
-        {stats[title]}
+    {stats.map(({ title, value, onPress }) => (
+      <Stat key={title} title={title} onPress={onPress}>
+        {value}
       </Stat>
     ))}
   </View>
@@ -100,16 +100,26 @@ const EditButton = () => (
 );
 
 class ProfileHead extends React.Component {
-  static defaultProps = {
-    followers: '1M',
-    following: '72k',
-    posts: '4k',
-  };
-
   render() {
-    const { followers, following, posts } = this.props;
-
-    const stats = { followers, following, posts };
+    const stats = [
+      {
+        title: 'posts',
+        value: '4k',
+        onPress: () => {
+          //TODO: Bacon: Scroll down
+        },
+      },
+      {
+        title: 'following',
+        value: '72k',
+        onPress: () => NavigationService.navigate('Following', { users: [] }),
+      },
+      {
+        title: 'followers',
+        value: '1M',
+        onPress: () => NavigationService.navigate('Followers', { users: [] }),
+      },
+    ];
 
     return (
       <View style={styles.row}>
@@ -299,7 +309,7 @@ class PhotoGrid extends React.Component {
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
-    title: 'Links',
+    title: 'Baconbrix',
   };
 
   componentDidMount() {

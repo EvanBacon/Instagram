@@ -16,15 +16,6 @@ import { Item } from '../components/Item';
 import NavigationService from '../navigation/NavigationService';
 
 export default class HomeScreen extends React.Component {
-  //   static navigationOptions = ({ navigation }) => ({
-  //     header: { title: navigation.state.params.title },
-  //   });
-
-  componentDidMount() {
-    // setTimeout(() =>
-    //   NavigationService.navigate('Comments', COMMENTS),
-    // );
-  }
   static defaultProps = {
     item: {
       key: 'item-a',
@@ -143,7 +134,7 @@ const COMMENTS = [
     },
     isLiked: true,
     date: '2w',
-    comment: 'Aint it chief',
+    title: 'Aint it chief',
   },
   {
     name: 'fake hacker',
@@ -152,7 +143,7 @@ const COMMENTS = [
     },
     isLiked: false,
     date: '2w',
-    comment:
+    title:
       'Chief called, he said this aint it,  this aint it, this aint it, this aint it, this aint it,',
   },
   {
@@ -163,6 +154,6 @@ const COMMENTS = [
     },
     isLiked: true,
     date: '3w',
-    comment: 'hello officer, this post right here...',
+    title: 'hello officer, this post right here...',
   },
-];
+].map(item => ({ ...item, hasLike: true, hasReply: true }));

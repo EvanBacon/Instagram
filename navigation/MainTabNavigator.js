@@ -1,14 +1,14 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import {
-  createStackNavigator,
-  createBottomTabNavigator,
-} from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 
+import ExploreScreenHeader from '../components/ExploreScreenHeader';
 import TabBarIcon from '../components/TabBarIcon';
-import MediaScreen from '../screens/MediaScreen';
+import ExploreScreen from '../screens/ExploreScreen';
 import FeedScreen from '../screens/FeedScreen';
+import MediaScreen from '../screens/MediaScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import createAppNavigator from './createAppNavigator';
+import LikesTabNavigator from './LikesTabNavigator';
 
 MediaScreen.navigationOptions = {
   tabBarIcon: ({ focused }) => (
@@ -16,22 +16,40 @@ MediaScreen.navigationOptions = {
   ),
 };
 
-FeedScreen.navigationOptions = {
+const FeedNav = createAppNavigator(FeedScreen, 'Feed');
+FeedNav.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={'home'} />,
 };
 
-ProfileScreen.navigationOptions = {
+const ExploreNav = createAppNavigator(ExploreScreen, 'Explore');
+ExploreNav.navigationOptions = {
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="search" />,
+};
+const ProfileNav = createAppNavigator(ProfileScreen, 'Profile');
+ProfileNav.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="person" />,
+};
+
+const LikesNav = createAppNavigator(LikesTabNavigator, 'Likes');
+LikesNav.navigationOptions = {
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={focused ? 'favorite' : 'favorite-border'}
+    />
+  ),
 };
 
 export default createBottomTabNavigator(
   {
-    Feed: FeedScreen,
+    Feed: FeedNav,
+    Explore: ExploreNav,
     Media: { screen: MediaScreen, navigationOptions: { header: null } },
-    Profile: ProfileScreen,
+    Likes: LikesNav,
+    Profile: ProfileNav,
   },
   {
-    initialRouteName: 'Media',
+    initialRouteName: 'Explore',
     tabBarOptions: {
       showLabel: false,
     },
