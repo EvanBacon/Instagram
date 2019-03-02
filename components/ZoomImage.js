@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, Image, Dimensions } from 'react-native';
-import TapView from './TapView';
-const { width } = Dimensions.get('window');
-import { calculateMaximumZoomScale, calculateRect } from './RectUtils';
+import { Dimensions, Image, ScrollView } from 'react-native';
 
+import { calculateMaximumZoomScale, calculateRect } from './RectUtils';
+import TapView from './TapView';
+
+const { width } = Dimensions.get('window');
 async function getImageSizeAsync(uri) {
   return new Promise((res, rej) =>
     Image.getSize(uri, (width, height) => res({ width, height }), rej),

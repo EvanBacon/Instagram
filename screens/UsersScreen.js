@@ -1,9 +1,10 @@
 import React from 'react';
+import { View } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 
 import { UserList } from '../components/UserList';
 import NavigationService from '../navigation/NavigationService';
-import { SearchBar } from 'react-native-elements';
-import { View } from 'react-native';
+
 const someUser = {
   name: 'lol anyone else',
   hasFollowButton: true,

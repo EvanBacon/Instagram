@@ -1,16 +1,15 @@
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet,
   Image,
   Linking,
+  ScrollView,
+  StyleSheet,
+  Text,
   TouchableHighlight,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import { Ionicons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 
 import NavigationService from '../navigation/NavigationService';

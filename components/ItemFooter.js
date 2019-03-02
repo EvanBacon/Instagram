@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { IconBar } from './FeedList';
+
 import NavigationService from '../navigation/NavigationService';
+import { IconBar } from './FeedList';
+
 export class ItemFooter extends React.Component {
   static defaultProps = {
     comments: [
@@ -26,15 +28,14 @@ export class ItemFooter extends React.Component {
           <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{name}</Text>{' '}
           {description}
         </Text>
-        {comments &&
-          comments.length && (
-            <Text
-              onPress={this.openComments}
-              style={{ paddingVertical: 8, fontSize: 16, opacity: 0.6 }}
-            >
-              View all {comments.length} comments
-            </Text>
-          )}
+        {comments && comments.length && (
+          <Text
+            onPress={this.openComments}
+            style={{ paddingVertical: 8, fontSize: 16, opacity: 0.6 }}
+          >
+            View all {comments.length} comments
+          </Text>
+        )}
         <Text style={{ fontSize: 12, opacity: 0.6 }}>{date.toUpperCase()}</Text>
       </View>
     );

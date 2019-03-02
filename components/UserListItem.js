@@ -2,15 +2,15 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import {
   Image,
-  TouchableHighlight,
   StyleSheet,
   Text,
+  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Button } from 'react-native-elements';
 
 import ReplyButton from './ReplyButton';
+
 export default class Comment extends React.Component {
   constructor(props) {
     super(props);

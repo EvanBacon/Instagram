@@ -1,22 +1,16 @@
-import { ExpoConfigView } from '@expo/samples';
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import {
+  Dimensions,
+  Image,
   ScrollView,
   TouchableOpacity,
   View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  Image,
-  Linking,
-  TouchableHighlight,
 } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import { Ionicons } from '@expo/vector-icons';
 import { FlatList } from 'react-native-gesture-handler';
 
-import NavigationService from '../navigation/NavigationService';
 import ZoomImage from '../components/ZoomImage';
+import NavigationService from '../navigation/NavigationService';
 
 const PhotoGridIcon = ({ name }) => (
   <Ionicons

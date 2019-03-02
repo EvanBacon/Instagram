@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Image, View } from 'react-native';
+
 import { ItemFooter } from './ItemFooter';
 import { ItemHeader } from './ItemHeader';
 

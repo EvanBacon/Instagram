@@ -1,8 +1,8 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
-import { View, TouchableOpacity, Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { ifIphoneX } from 'react-native-iphone-x-helper';
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default class Header extends React.Component {
   onPress = user => {

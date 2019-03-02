@@ -1,16 +1,7 @@
-import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
 import { WebBrowser } from 'expo';
+import React from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 import FeedList from '../components/FeedList';
 
 export default class HomeScreen extends React.Component {

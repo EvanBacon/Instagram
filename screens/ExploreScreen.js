@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
+
 import ExploreScreenHeader from '../components/ExploreScreenHeader';
+
 export default class ExploreScreen extends PureComponent {
   static navigationOptions = {
     headerStyle: { borderWidth: 0 },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 
 import Comment from '../components/UserListItem';
 import NavigationService from '../navigation/NavigationService';

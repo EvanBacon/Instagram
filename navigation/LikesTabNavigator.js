@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { createMaterialTopTabNavigator } from 'react-navigation';
-import TabBarIcon from '../components/TabBarIcon';
+
 import LikesScreen from '../screens/LikesScreen';
+
 const LikesTabNavigator = createMaterialTopTabNavigator(
   {
     LikesFollowing: {

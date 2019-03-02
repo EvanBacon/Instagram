@@ -1,19 +1,7 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { WebBrowser } from 'expo';
+import { Platform, StyleSheet, View } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
-import FeedList from '../components/FeedList';
 import { Item } from '../components/Item';
-import NavigationService from '../navigation/NavigationService';
 
 export default class HomeScreen extends React.Component {
   static defaultProps = {

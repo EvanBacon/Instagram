@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import ExploreScreenHeader from '../components/ExploreScreenHeader';
 import TabBarIcon from '../components/TabBarIcon';
 import ExploreScreen from '../screens/ExploreScreen';
 import FeedScreen from '../screens/FeedScreen';

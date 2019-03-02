@@ -2,10 +2,6 @@ import React from 'react';
 import { Text } from 'react-native';
 
 export default class ReplyButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { style, ...props } = this.props;
 

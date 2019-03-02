@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react';
-import { Text, FlatList, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import React, { PureComponent } from 'react';
+import { FlatList, Text, View } from 'react-native';
+
 import { Item } from './Item';
 
 class Footer extends PureComponent {

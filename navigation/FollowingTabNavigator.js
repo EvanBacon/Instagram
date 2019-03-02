@@ -1,5 +1,7 @@
 import { createMaterialTopTabNavigator } from 'react-navigation';
+
 import UsersScreen from '../screens/UsersScreen';
+
 const FollowingTabNavigator = createMaterialTopTabNavigator(
   {
     People: UsersScreen,

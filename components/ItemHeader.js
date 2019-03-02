@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, StyleSheet, Image, View } from 'react-native';
-import { profileImageSize, Icon } from './FeedList';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { Icon, profileImageSize } from './FeedList';
+
 export class ItemHeader extends React.Component {
   constructor(props) {
     super(props);
