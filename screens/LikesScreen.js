@@ -18,7 +18,7 @@ export default class LikeScreen extends React.Component {
   };
 
   openComments = () => {
-    NavigationService.navigate('Comments', this.props.comments);
+    NavigationService.navigate('Profile_Comments', this.props.comments);
   };
   render() {
     const { comments } = this.props;

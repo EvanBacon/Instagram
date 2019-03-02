@@ -13,8 +13,8 @@ export default class ExploreScreen extends PureComponent {
 
   render() {
     return (
-      <View>
-        <Text> ExploreScreen </Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text> lol... this is hard </Text>
       </View>
     );
   }

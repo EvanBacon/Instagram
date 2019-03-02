@@ -13,7 +13,9 @@ export class ItemFooter extends React.Component {
   };
 
   openComments = () => {
-    NavigationService.navigate('Comments', { comments: this.props.comments });
+    NavigationService.navigate('Profile_Comments', {
+      comments: this.props.comments,
+    });
   };
   render() {
     const { name, description, date, comments } = this.props;

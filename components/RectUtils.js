@@ -16,7 +16,7 @@ export function calculateMaximumZoomScale(imageSize, { width, height }) {
 
 export function calculateRect({ imageSize, containerSize, resizeMode }) {
   if (!imageSize || !containerSize) {
-    console.warn('imageSize or containerSize not ready yet!');
+    // console.warn('imageSize or containerSize not ready yet!');
     return;
   }
   const { width, height } = containerSize;

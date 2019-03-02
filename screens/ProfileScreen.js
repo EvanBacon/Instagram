@@ -112,12 +112,14 @@ class ProfileHead extends React.Component {
       {
         title: 'following',
         value: '72k',
-        onPress: () => NavigationService.navigate('Following', { users: [] }),
+        onPress: () =>
+          NavigationService.navigate('Profile_Following', { users: [] }),
       },
       {
         title: 'followers',
         value: '1M',
-        onPress: () => NavigationService.navigate('Followers', { users: [] }),
+        onPress: () =>
+          NavigationService.navigate('Profile_Followers', { users: [] }),
       },
     ];
 
@@ -255,7 +257,7 @@ class PhotoGridItem extends React.PureComponent {
       >
         <TouchableOpacity
           onPress={() =>
-            NavigationService.navigate('Details', { item: this.props })
+            NavigationService.navigate('Profile_Details', { item: this.props })
           }
           activeOpacity={0.6}
           style={{ flex: 1 }}

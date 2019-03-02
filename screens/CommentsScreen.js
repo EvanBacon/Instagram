@@ -15,7 +15,7 @@ export default class CommentsScreen extends React.Component {
   };
 
   openComments = () => {
-    NavigationService.navigate('Comments', this.props.comments);
+    NavigationService.navigate('Profile_Comments', this.props.comments);
   };
   render() {
     return (
