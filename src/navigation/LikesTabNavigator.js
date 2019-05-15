@@ -1,15 +1,12 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation';
 
-import LikesScreen from '../screens/LikesScreen';
+import LikesFollowing from '../screens/LikesScreen';
 
 const LikesTabNavigator = createMaterialTopTabNavigator(
   {
-    LikesFollowing: {
-      screen: LikesScreen,
-      navigationOptions: { title: 'Following' },
-    },
-    LikesYou: { screen: LikesScreen, navigationOptions: { title: 'You' } },
+    LikesFollowing: LikesFollowing,
+    LikesYou: { screen: LikesFollowing, navigationOptions: { title: 'You' } },
   },
   {
     header: null,

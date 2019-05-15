@@ -1,29 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
-import {
-  createBottomTabNavigator,
-  createSwitchNavigator,
-} from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 
 import initialScreens from '../constants/initialScreens';
-import MainUITabNavigator from './MainUITabNavigator';
 import CameraNavigator from './CameraNavigator';
-
-CameraNavigator.path = 'camera';
-MainUITabNavigator.path = '';
+import DrawerNavigator from './DrawerNavigator';
 
 export default createSwitchNavigator(
   {
     MediaCreation: CameraNavigator,
-    SocialUI: MainUITabNavigator,
+    SocialUI: DrawerNavigator,
   },
   {
     initialRouteName: initialScreens.app,
-    tabBarComponent: () => <View />,
-    swipeEnabled: true,
-    animationEnabled: true,
-    tabBarOptions: {
-      showLabel: false,
-    },
   },
 );

@@ -28,6 +28,7 @@
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-is-iphonex": "^1.0.1",
     "react-native-paper": "^2.15.2",
+    "react-native-reanimated": "git://github.com/EvanBacon/react-native-reanimated.git",
     "react-native-web": "^0.11.2",
     "react-navigation": "^3.9.1",
     "react-redux": "^6.0.1",

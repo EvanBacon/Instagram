@@ -6,7 +6,7 @@ import CameraSettings from '../screens/CameraSettingsScreen';
 Camera.path = '';
 CameraSettings.path = 'settings';
 
-export default createSwitchNavigator(
+const CameraNavigator = createSwitchNavigator(
   {
     Camera,
     CameraSettings,
@@ -18,3 +18,6 @@ export default createSwitchNavigator(
     headerTransitionPreset: 'fade-in-place',
   },
 );
+
+CameraNavigator.path = 'camera';
+export default CameraNavigator;

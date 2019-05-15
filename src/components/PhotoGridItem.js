@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 
-import Square from '../components/Square';
+import Square from './Square';
 import NavigationService from '../navigation/NavigationService';
 
 export default class PhotoGridItem extends React.PureComponent {
@@ -14,11 +14,15 @@ export default class PhotoGridItem extends React.PureComponent {
           aspectRatio: 1,
           flex: 0.333,
           marginRight: 1,
-        }}>
+        }}
+      >
         <TouchableOpacity
-          onPress={() => NavigationService.navigate('Profile_Details', { item: this.props })}
+          onPress={() =>
+            NavigationService.navigate('Profile_Details', { item: this.props })
+          }
           activeOpacity={0.6}
-          style={{ flex: 1 }}>
+          style={{ flex: 1 }}
+        >
           <Image
             style={{
               resizeMode: 'cover',

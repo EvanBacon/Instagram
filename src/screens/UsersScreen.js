@@ -11,11 +11,12 @@ const someUser = {
   isFollowing: true,
   onPressFollowing: () => {},
   source: {
-    uri: 'https://i.cspa.io/user_1092/89c808b0-24f0-4be3-94d4-b2b7af2ca987/400x.png',
+    uri:
+      'https://i.cspa.io/user_1092/89c808b0-24f0-4be3-94d4-b2b7af2ca987/400x.png',
   },
   title: 'liked 8 posts',
 };
-export default class LikeScreen extends React.Component {
+export default class UsersScreen extends React.Component {
   onPress = user => {
     NavigationService.navigate('Profile', { user });
   };
@@ -24,7 +25,8 @@ export default class LikeScreen extends React.Component {
 
   render() {
     const { state = {} } = this.props.navigation;
-    const { data = [someUser, someUser, someUser, someUser] } = state.params || {};
+    const { data = [someUser, someUser, someUser, someUser] } =
+      state.params || {};
 
     return (
       <View style={{ flex: 1 }}>

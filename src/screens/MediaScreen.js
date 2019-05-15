@@ -1,6 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { Dimensions, Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  Button,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import ZoomImage from '../components/ZoomImage';
@@ -17,14 +25,16 @@ class PhotoGridItem extends React.PureComponent {
           aspectRatio: 1,
           flex: 0.25,
           marginRight: 1,
-        }}>
+        }}
+      >
         <TouchableOpacity
           onPress={() => {
             NavigationService.navigate('Details', { item: this.props });
             onSelect(this.props.source);
           }}
           activeOpacity={0.6}
-          style={{ flex: 1 }}>
+          style={{ flex: 1 }}
+        >
           <Image
             style={{
               resizeMode: 'cover',
@@ -65,7 +75,9 @@ class PhotoGrid extends React.Component {
           justifyContent: 'space-between',
         }}
         contentContainerStyle={{ marginBottom: 64 }}
-        renderItem={({ item }) => <PhotoGridItem onSelect={onSelect} {...item} />}
+        renderItem={({ item }) => (
+          <PhotoGridItem onSelect={onSelect} {...item} />
+        )}
         keyExtractor={(item, index) => `${index}-`}
         {...props}
       />
@@ -74,8 +86,25 @@ class PhotoGrid extends React.Component {
 }
 
 export default class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'app.json',
+  static navigationOptions = ({ navigation }) => {
+    // const goToAlbums = () => navigation.navigate('MediaAlbums');
+    // const clearAlbumSelection = () => navigation.pop(2);
+    // const { params } = navigation.state;
+    // const isAlbumSet = params && params.album;
+
+    return {
+      title: 'Camera Roll',
+      headerRight: (
+        <View style={{ marginRight: 5 }}>
+          <Button
+            title="Next"
+            onPress={() => {
+              navigation.navigate('EditMedia');
+            }}
+          />
+        </View>
+      ),
+    };
   };
 
   state = {
@@ -88,14 +117,21 @@ export default class SettingsScreen extends React.Component {
     const { selectedImage } = this.state;
     const { width } = Dimensions.get('window');
     return (
-      <ScrollView bounces={false} pagingEnabled style={{ flex: 1, backgroundColor: 'white' }}>
+      <ScrollView
+        bounces={false}
+        pagingEnabled
+        style={{ flex: 1, backgroundColor: 'white' }}
+      >
         <ZoomImage
           size={{ width, height: width }}
           uri={selectedImage.uri}
           style={{ width: '100%', aspectRatio: 1 }}
         />
 
-        <PhotoGrid data={posts} onSelect={post => this.setState({ selectedImage: post })} />
+        <PhotoGrid
+          data={posts}
+          onSelect={post => this.setState({ selectedImage: post })}
+        />
       </ScrollView>
     );
   }
@@ -107,7 +143,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -151,7 +188,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -185,7 +223,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -229,7 +268,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -263,7 +303,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -307,7 +348,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -341,7 +383,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -385,7 +428,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -419,7 +463,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {
@@ -463,7 +508,8 @@ const posts = [
     account: 'baconbrix',
     description: 'enjoying a hammysammy',
     source: {
-      uri: 'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
+      uri:
+        'https://regularshowwiki.weebly.com/uploads/7/4/1/1/7411048/8617815_orig.png',
     },
   },
   {

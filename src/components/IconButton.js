@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import InstaIcon from '../components/InstaIcon';
+import InstaIcon from './InstaIcon';
 
 // import Popular from './data/Popular.json';
 
@@ -20,8 +20,13 @@ const IconButton = ({
   <TouchableOpacity
     pointerEvents={enabled ? 'auto' : 'none'}
     style={[containerStyle, { width: iconButtonSize, height: iconButtonSize }]}
-    onPress={onPress}>
-    <InstaIcon style={[style, { opacity: enabled ? 1 : 0.7 }]} active={active} name={name} />
+    onPress={onPress}
+  >
+    <InstaIcon
+      style={[style, { opacity: enabled ? 1 : 0.7 }]}
+      active={active}
+      name={name}
+    />
   </TouchableOpacity>
 );
 
