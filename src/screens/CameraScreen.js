@@ -86,8 +86,8 @@ const pages = [
   };
 });
 
-const INITIAL_TAB_ID = 'type';
-// const INITIAL_TAB_ID = 'normal';
+// const INITIAL_TAB_ID = 'type';
+const INITIAL_TAB_ID = 'normal';
 const INITIAL_TAB = Math.max(
   0,
   pages.findIndex(({ id }) => id === INITIAL_TAB_ID),
@@ -230,7 +230,7 @@ const ConnectedEditorComboScreen = connect(({ image }) => ({ image }))(
 
 export default ConnectedEditorComboScreen;
 
-const DISABLE_BOTTOM_DRAWER = true;
+const DISABLE_BOTTOM_DRAWER = false;
 const DISABLE_CAMERA_SETTINGS = true;
 
 class MediaContainerScreen extends React.Component {
@@ -305,7 +305,7 @@ class BlurredOptionsContainer extends React.Component {
       extrapolate: 'clamp',
     });
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, height: '100vh' }}>
         {this.props.children}
         <Animated.View
           style={{ ...StyleSheet.absoluteFillObject, opacity }}
@@ -460,7 +460,7 @@ class CameraContainerScreen extends React.Component {
       <View
         style={{
           flex: 1,
-          height: height,
+          height: '100vh',
           backgroundColor: 'black',
           justifyContent: 'flex-end',
         }}

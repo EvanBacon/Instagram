@@ -44,6 +44,10 @@ const FeedNav = createAppNavigator(FeedScreen, 'Feed', {
     </View>
   ),
 });
+FeedNav.path = '';
+FeedNav.navigationOptions = {
+  tabBarIcon: createTabBarIcon('home'),
+};
 
 const ProfileNav = createAppNavigator(
   ProfileScreen,
@@ -67,54 +71,49 @@ const ProfileNav = createAppNavigator(
     ),
   }),
 );
+ProfileNav.path = '';
+ProfileNav.navigationOptions = {
+  tabBarIcon: createTabBarIcon('profile'),
+};
 
 function createTabBarIcon(name) {
   return ({ focused }) => <TabBarIcon focused={focused} name={name} />;
 }
 
+const Media = createStackNavigator(
+  {
+    MediaScreen,
+    EditMedia,
+  },
+  {
+    // initialRouteName: 'EditMedia',
+  },
+);
+Media.path = '';
+Media.navigationOptions = {
+  tabBarIcon: createTabBarIcon('capture'),
+};
 const MainTabNavigator = createBottomTabNavigator(
   {
-    Feed: {
-      screen: FeedNav,
-      navigationOptions: {
-        tabBarIcon: createTabBarIcon('home'),
-      },
-    },
-    Explore: {
-      screen: createAppNavigator(ExploreScreen, 'Explore'),
-      navigationOptions: {
-        tabBarIcon: createTabBarIcon('search'),
-      },
-    },
-    Media: {
-      screen: createStackNavigator(
-        {
-          MediaScreen,
-          EditMedia,
-        },
-        {
-          // initialRouteName: 'EditMedia',
-        },
-      ),
-      navigationOptions: {
-        tabBarIcon: createTabBarIcon('capture'),
-      },
-    },
-    Likes: {
-      screen: createAppNavigator(LikesTabNavigator, 'Likes', {
-        header: null,
-      }),
-      navigationOptions: {
-        tabBarIcon: createTabBarIcon('like'),
-        header: null,
-      },
-    },
-    Profile: {
-      screen: ProfileNav,
-      navigationOptions: {
-        tabBarIcon: createTabBarIcon('profile'),
-      },
-    },
+    Feed: FeedNav,
+    // Explore: {
+    //   screen: createAppNavigator(ExploreScreen, 'Explore'),
+    //   navigationOptions: {
+    //     tabBarIcon: createTabBarIcon('search'),
+    //   },
+    // },
+    Media: Media,
+
+    // Likes: {
+    //   screen: createAppNavigator(LikesTabNavigator, 'Likes', {
+    //     header: null,
+    //   }),
+    //   navigationOptions: {
+    //     tabBarIcon: createTabBarIcon('like'),
+    //     header: null,
+    //   },
+    // },
+    Profile: ProfileNav,
   },
   {
     initialRouteName: initialScreens.UI,

@@ -7,6 +7,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
+    "build": "expo build:web --no-polyfill",
+    "predeploy": "npm run build && expo optimize",
+    "deploy": "netlify deploy --prod",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
