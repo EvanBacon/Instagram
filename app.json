@@ -21,6 +21,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "web": { "build": { "report": false } }
+    "web": { "barStyle": "black-translucent", "build": { "report": false } }
   }
 }

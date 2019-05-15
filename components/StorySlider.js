@@ -1,13 +1,26 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import dispatch from '../rematch/dispatch';
 import ProfileImage from './ProfileImage';
 
 class OutlineImage extends React.Component {
   render() {
-    const { style, source, renderImage, account, imageSize, ...props } = this.props;
+    const {
+      style,
+      source,
+      renderImage,
+      account,
+      imageSize,
+      ...props
+    } = this.props;
 
     const imagePadding = 4;
     const imageBorderWidth = 1;
@@ -46,7 +59,8 @@ class OutlineImage extends React.Component {
           borderRadius: imageWrapperSize / 2,
           borderWidth: imageBorderWidth,
           borderColor: 'rgba(0,0,0,0.3)',
-        }}>
+        }}
+      >
         {imageComponent}
       </View>
     );
@@ -77,7 +91,8 @@ class StoryItem extends React.Component {
             dispatch().stories.openCarousel({ index, offset });
           });
         }}
-        style={{ alignItems: 'center', marginRight: 12 }}>
+        style={{ alignItems: 'center', marginRight: 12 }}
+      >
         <OutlineImage
           source={source}
           account={account}
@@ -101,7 +116,8 @@ const NewStory = () => {
             justifyContent: 'center',
             marginTop: 4,
             alignItems: 'center',
-          }}>
+          }}
+        >
           <Ionicons name="ios-add" size={48} />
         </View>
       )}
@@ -117,7 +133,7 @@ class Stories extends React.Component {
       <ScrollView horizontal style={styles.row}>
         {hasNew && <NewStory />}
         {stories.map((story, index) => (
-          <StoryItem {...story} index={index} />
+          <StoryItem key={story.account} {...story} index={index} />
         ))}
       </ScrollView>
     );

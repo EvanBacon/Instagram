@@ -86,8 +86,8 @@ const pages = [
   };
 });
 
-// const INITIAL_TAB_ID = 'type';
-const INITIAL_TAB_ID = 'normal';
+const INITIAL_TAB_ID = 'music';
+// const INITIAL_TAB_ID = 'normal';
 const INITIAL_TAB = Math.max(
   0,
   pages.findIndex(({ id }) => id === INITIAL_TAB_ID),
@@ -180,6 +180,7 @@ class CameraScreen extends React.Component {
 
   render() {
     const {
+      page,
       headerLeft,
       camera = {},
       headerLeftIconName = 'settings',
@@ -193,15 +194,17 @@ class CameraScreen extends React.Component {
           style={{ flex: 1 }}
           {...camera}
         />
-        <Header>
-          {headerLeft({ name: headerLeftIconName })}
-          <IconButton
-            name={'chevron-right'}
-            onPress={() => {
-              NavigationService.navigate('SocialUI');
-            }}
-          />
-        </Header>
+        {page.id !== 'music' && (
+          <Header>
+            {headerLeft({ name: headerLeftIconName })}
+            <IconButton
+              name={'chevron-right'}
+              onPress={() => {
+                NavigationService.navigate('SocialUI');
+              }}
+            />
+          </Header>
+        )}
       </View>
     );
   }
@@ -216,7 +219,7 @@ const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 class EditorComboScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={StyleSheet.absoluteFill}>
         <MediaContainerScreen />
         {this.props.image && <EditorScreen image={this.props.image} />}
       </View>
@@ -264,48 +267,99 @@ class MediaContainerScreen extends React.Component {
   };
 
   render() {
-    const { height } = Dimensions.get('window');
-    const drawerHeight = height * 0.9;
-
     if (DISABLE_BOTTOM_DRAWER) {
-      return <CameraContainerScreen />;
+      return (
+        <Resizable>
+          {layout => <CameraContainerScreen window={layout} />}
+        </Resizable>
+      );
     }
     return (
-      <AnimatedScrollView
-        ref={ref => (this.scrollView = ref)}
-        scrollEventThrottle={16}
-        onScroll={this.onScroll}
-        pagingEnabled
-        style={{ flex: 1 }}
-        contentContainerStyle={{ height: height + drawerHeight }}
-      >
-        <BlurredOptionsContainer
-          animation={this.animation}
-          onPress={this.openCamera}
-        >
-          <CameraContainerScreen openMediaDrawer={this.openMediaDrawer} />
-        </BlurredOptionsContainer>
-        <MediaScreen
-          style={{
-            width: '100%',
-            backgroundColor: 'black',
-            height: drawerHeight,
-          }}
-        />
-      </AnimatedScrollView>
+      <Resizable>
+        {layout => {
+          const drawerHeight = layout.height * 0.9;
+          return (
+            <AnimatedScrollView
+              ref={ref => (this.scrollView = ref)}
+              scrollEventThrottle={16}
+              onScroll={this.onScroll}
+              pagingEnabled
+              style={{ flex: 1 }}
+              contentContainerStyle={{ height: layout.height + drawerHeight }}
+            >
+              <BlurredOptionsContainer
+                height={layout.height}
+                animation={this.animation}
+                onPress={this.openCamera}
+              >
+                <CameraContainerScreen
+                  window={layout}
+                  openMediaDrawer={this.openMediaDrawer}
+                />
+              </BlurredOptionsContainer>
+              <MediaScreen
+                window={layout}
+                style={{
+                  width: '100%',
+                  backgroundColor: 'black',
+                  height: drawerHeight,
+                }}
+              />
+            </AnimatedScrollView>
+          );
+        }}
+      </Resizable>
     );
+  }
+}
+
+import { element, func, oneOfType } from 'prop-types';
+
+export class Resizable extends React.Component {
+  static displayName = 'Resizable';
+  static propTypes = {
+    children: oneOfType([func, element]),
+  };
+
+  componentDidMount() {
+    Dimensions.addEventListener('change', this.resize);
+  }
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.resize);
+  }
+
+  resize = ({ window }) => {
+    console.log('layout', window);
+
+    this.setState(state => ({ ...state, ...window }));
+  };
+
+  state = { ...Dimensions.get('window') };
+
+  render() {
+    const { children } = this.props;
+    const child =
+      typeof children === 'function' ? children(this.state) : children;
+
+    return React.cloneElement(React.Children.only(child), {});
   }
 }
 
 class BlurredOptionsContainer extends React.Component {
   render() {
     const opacity = this.props.animation.interpolate({
-      inputRange: [0, Dimensions.get('window').height],
+      inputRange: [0, this.props.height],
       outputRange: [0, 1],
       extrapolate: 'clamp',
     });
     return (
-      <View style={{ flex: 1, height: '100vh' }}>
+      <View
+        style={{
+          flex: 1,
+          maxHeight: this.props.height,
+          minHeight: this.props.height,
+        }}
+      >
         {this.props.children}
         <Animated.View
           style={{ ...StyleSheet.absoluteFillObject, opacity }}
@@ -317,7 +371,7 @@ class BlurredOptionsContainer extends React.Component {
           >
             <BlurView
               tint={'dark'}
-              intensity={100}
+              intensity={50}
               style={{
                 flex: 1,
                 justifyContent: 'flex-end',
@@ -333,7 +387,11 @@ class BlurredOptionsContainer extends React.Component {
                 }}
               >
                 <Text
-                  style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}
+                  style={{
+                    color: 'white',
+                    fontWeight: 'bold',
+                    fontSize: 16,
+                  }}
                 >
                   LAST 24 HOURS
                 </Text>
@@ -354,7 +412,9 @@ class MediaScreen extends React.Component {
       <View style={this.props.style}>
         <FlatList
           keyExtractor={(item, index) => index + '--'}
-          renderItem={({ item }) => <MediaItem {...item} />}
+          renderItem={({ item }) => (
+            <MediaItem window={this.props.window} {...item} />
+          )}
           contentContainerStyle={{ padding: 1 }}
           style={{ flex: 1 }}
           data={MediaLibraryData}
@@ -370,7 +430,7 @@ class MediaItem extends React.Component {
     dispatch().image.set(this.props.image);
   };
   render() {
-    const { height, width: screenWidth } = Dimensions.get('window');
+    const { height, width: screenWidth } = this.props.window;
     const width = screenWidth - 8;
     const aspectRatio = height / width;
     const itemWidth = width / 3;
@@ -403,23 +463,12 @@ class CameraContainerScreen extends React.Component {
     this.state = {
       ready: false,
       index: INITIAL_TAB,
-      height: Dimensions.get('window').height,
       selectedGradient: 0,
       selectedFont: 0,
     };
   }
 
-  componentWillUnmount() {
-    Dimensions.removeEventListener('change', this.onResize);
-  }
-
-  onResize = ({ window: { height } }) => {
-    this.setState({ height });
-  };
-
   async componentDidMount() {
-    Dimensions.addEventListener('change', this.onResize);
-
     try {
       await Permissions.askAsync(Permissions.CAMERA);
       await Font.loadAsync({
@@ -447,8 +496,8 @@ class CameraContainerScreen extends React.Component {
       selectedFont,
       selectedGradient,
       useGradientCamera,
-      height,
     } = this.state;
+    const { height, width } = this.props.window;
     if (!ready) {
       return <View />;
     }
@@ -460,12 +509,15 @@ class CameraContainerScreen extends React.Component {
       <View
         style={{
           flex: 1,
-          height: '100vh',
+          height,
           backgroundColor: 'black',
           justifyContent: 'flex-end',
         }}
       >
-        <ConnectedCameraScreen headerLeftIconName={page.headerLeftIconName} />
+        <ConnectedCameraScreen
+          page={page}
+          headerLeftIconName={page.headerLeftIconName}
+        />
 
         {USE_GRADIENT && (
           <View
@@ -489,6 +541,7 @@ class CameraContainerScreen extends React.Component {
           </View>
         )}
         <MainFooter
+          window={this.props.window}
           page={page}
           index={index}
           gradient={gradient}
@@ -505,6 +558,7 @@ class CameraContainerScreen extends React.Component {
           }}
         />
         <Slider
+          window={this.props.window}
           initialIndex={INITIAL_TAB}
           data={pages.map(value => value.name)}
           onIndexChange={index => {
@@ -790,6 +844,7 @@ class MainFooter extends React.Component {
               }}
             >
               <FlashButtonContainer
+                width={this.props.window.width}
                 openMediaDrawer={this.props.openMediaDrawer}
                 {...page}
               />
@@ -901,7 +956,7 @@ class FlashButtonContainer extends React.Component {
         <View
           style={{
             flex: 1,
-            marginLeft: Dimensions.get('window').width * 0.1,
+            marginLeft: this.props.width * 0.1,
             width: '50%',
             flexDirection: 'row',
             alignItems: 'center',
@@ -1086,6 +1141,7 @@ class CaptureButton extends React.Component {
         <BlurView
           pointerEvents="none"
           tint={'light'}
+          intensity={50}
           style={{
             width,
             height: width,

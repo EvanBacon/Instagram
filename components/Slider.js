@@ -1,10 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import ViewPager from './ViewPager';
 
-const { width } = Dimensions.get('window');
 const HORIZONTAL_ITEM_WIDTH = 95;
 // const width = HORIZONTAL_ITEM_WIDTH;
 // const HORIZONTAL_ITEM_END_SPACE = (width - HORIZONTAL_ITEM_WIDTH) / 2;
@@ -28,18 +27,23 @@ export default class Slider extends React.Component {
     }
   };
 
+  componentWillUnmount() {
+    this.viewPager = null;
+  }
+
   renderItem = ({ item, index }) => {
     // const marginLeft = index === 0 ? HORIZONTAL_ITEM_END_SPACE : 0;
     // const marginRight = index === pages.length - 1 ? HORIZONTAL_ITEM_END_SPACE : 0;
     return (
       <View
         style={{
-          width,
+          width: this.props.window.width,
           height: sliderHeight,
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <Text
           style={{
             fontWeight: 'bold',
@@ -47,7 +51,8 @@ export default class Slider extends React.Component {
             color: 'white',
             textAlign: 'center',
           }}
-          key={item}>
+          key={item}
+        >
           {item}
         </Text>
       </View>
@@ -59,32 +64,39 @@ export default class Slider extends React.Component {
         colors={['rgba(0,0,0,0.3)', 'rgba(0,0,0,0.0)']}
         start={{ x: 0.5, y: 0 }}
         end={{ x: 0.5, y: 1 }}
-        style={{ flex: 1, maxHeight: sliderHeight }}>
+        style={{ flex: 1, maxHeight: sliderHeight }}
+      >
         <ViewPager
           pagingEnabled
           centerContent
           initialIndex={this.props.initialIndex}
-          onMomentumScrollEnd={() => {
+          onScrollEndDrag={() => {
             // TODO: Bacon: PR this method into RNWeb
-            // const { index } = this.viewPager;
-            // if (this.state.index !== index) {
-            //   this.props.onIndexChange(index, this.state.index);
-            //   this.setState({ index });
-            // }
-          }}
-          onScroll={({ value }) => {
+            if (!this.viewPager) {
+              return;
+            }
             const { index } = this.viewPager;
             if (this.state.index !== index) {
-              this.setState({ index }, () => {
-                this.props.onIndexChange(index, this.state.index);
-              });
+              this.props.onIndexChange(index, this.state.index);
+              this.setState({ index });
             }
+          }}
+          onScroll={({ value }) => {
+            // if (!this.viewPager) {
+            //   return;
+            // }
+            // const { index } = this.viewPager;
+            // if (this.state.index !== index) {
+            //   this.setState({ index }, () => {
+            //     this.props.onIndexChange(index, this.state.index);
+            //   });
+            // }
           }}
           ref={ref => (this.viewPager = ref)}
           data={this.props.data}
           renderItem={this.renderItem}
           style={{ flex: 1 }}
-          size={width}
+          size={this.props.window.width}
           horizontal
         />
       </LinearGradient>

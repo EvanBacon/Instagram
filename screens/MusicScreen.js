@@ -14,6 +14,7 @@ import {
   createAppContainer,
   createMaterialTopTabNavigator,
   createStackNavigator,
+  createSwitchNavigator,
   SafeAreaView,
 } from 'react-navigation';
 
@@ -27,19 +28,29 @@ import Popular from '../data/Popular-itunes.json';
 const { height } = Dimensions.get('window');
 
 export default class MusicScreen extends React.Component {
+  renderSearchBar = () => {
+    return null;
+    return (
+      <SearchBar
+        round
+        containerStyle={{
+          backgroundColor: 'transparent',
+          borderBottomWidth: 0,
+        }}
+        inputStyle={{
+          color: 'white',
+          outlineWidth: 0,
+          outlineStyle: 'none',
+        }}
+        placeholder="Search music"
+      />
+    );
+  };
   render() {
     return (
-      <BlurView
-        tint={'dark'}
-        intensity={100}
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+      <BlurView tint={'dark'} intensity={50} style={StyleSheet.absoluteFill}>
         <SafeAreaView style={{ flex: 1 }}>
-          <SearchBar
-            round
-            containerStyle={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}
-            inputStyle={{ color: 'white', outlineWidth: 0, outlineStyle: 'none' }}
-            placeholder="Search music"
-          />
+          {this.renderSearchBar()}
           <MusicNav />
         </SafeAreaView>
       </BlurView>
@@ -48,7 +59,13 @@ export default class MusicScreen extends React.Component {
 }
 
 const listItemImageSize = 56;
-const ListScreenItem = ({ renderImage, title, subtitle, renderAction, onPress }) => (
+const ListScreenItem = ({
+  renderImage,
+  title,
+  subtitle,
+  renderAction,
+  onPress,
+}) => (
   <TouchableOpacity
     onPress={onPress}
     style={{
@@ -57,8 +74,15 @@ const ListScreenItem = ({ renderImage, title, subtitle, renderAction, onPress })
       paddingVertical: 8,
       justifyContent: 'space-between',
       alignItems: 'center',
-    }}>
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    }}
+  >
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
       {renderImage({
         style: {
           shadowOpacity: 0.4,
@@ -69,10 +93,20 @@ const ListScreenItem = ({ renderImage, title, subtitle, renderAction, onPress })
           backgroundColor: 'gray',
         },
       })}
-      <View style={{ justifyContent: 'space-between', marginLeft: 12, maxWidth: '80%' }}>
-        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>{title}</Text>
+      <View
+        style={{
+          justifyContent: 'space-between',
+          marginLeft: 12,
+          maxWidth: '80%',
+        }}
+      >
+        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+          {title}
+        </Text>
         {subtitle && (
-          <Text style={{ marginTop: 4, color: 'white', opacity: 0.7, fontSize: 14 }}>
+          <Text
+            style={{ marginTop: 4, color: 'white', opacity: 0.7, fontSize: 14 }}
+          >
             {subtitle}
           </Text>
         )}
@@ -85,7 +119,9 @@ const ListScreenItem = ({ renderImage, title, subtitle, renderAction, onPress })
 const SongListScreenItem = ({ title, artist, image, onPress }) => (
   <ListScreenItem
     onPress={onPress}
-    renderImage={({ style }) => <Image style={style} resizeMode="cover" source={image} />}
+    renderImage={({ style }) => (
+      <Image style={style} resizeMode="cover" source={image} />
+    )}
     title={title}
     subtitle={artist}
     renderAction={() => <PlayButtonIcon />}
@@ -98,7 +134,11 @@ const GenreListScreenItem = ({ genre, image, onPress }) => (
     onPress={onPress}
     renderImage={({ style }) => (
       <View style={StyleSheet.flatten([style, { padding: 12 }])}>
-        <Image style={{ flex: 1, tintColor: 'white' }} resizeMode={'contain'} source={image} />
+        <Image
+          style={{ flex: 1, tintColor: 'white' }}
+          resizeMode={'contain'}
+          source={image}
+        />
       </View>
     )}
     title={genre}
@@ -117,7 +157,7 @@ const ListScreen = ({ onPress, ...props }) => (
         return (
           <GenreListScreenItem
             onPress={() => {
-              props.navigation.push('MusicScreen', { item });
+              props.navigation.navigate('MusicScreen', { item });
             }}
             {...item}
           />
@@ -143,7 +183,10 @@ async function playSongAsync({ audio }) {
 
   playingAudio = new Audio.Sound();
   try {
-    await playingAudio.loadAsync({ uri: audio }, { progressUpdateIntervalMillis: 100 });
+    await playingAudio.loadAsync(
+      { uri: audio },
+      { progressUpdateIntervalMillis: 100 },
+    );
     await playingAudio.playAsync();
     //   soundObject.setOnPlaybackStatusUpdate(this._updateStateToStatus);
     //   const status = await soundObject.getStatusAsync();
@@ -155,7 +198,9 @@ async function playSongAsync({ audio }) {
   }
 }
 
-const createGenreScreen = data => props => <ListScreen {...props} data={data} />;
+const createGenreScreen = data => props => (
+  <ListScreen {...props} data={data} />
+);
 
 const transformCategorySet = categories => {
   return Object.keys(categories).map(itemKey => {
@@ -170,7 +215,6 @@ const transformCategorySet = categories => {
 };
 
 const moods = transformCategorySet(Moods);
-const genres = transformCategorySet(Genres);
 
 function transformSongList(list) {
   return list
@@ -190,24 +234,25 @@ function transformSongList(list) {
       };
     });
 }
-const Songs = transformSongList(Popular);
+const Songs = transformSongList(Popular.splice(0, 5));
 
-const GenreScreen = createGenreScreen(genres);
+// const GenreScreen = createGenreScreen(transformCategorySet(Genres));
 const MoodScreen = createGenreScreen(moods);
 
-const PopularScreen = props => <ListScreen {...props} data={Songs.splice(0, 50)} />;
+const PopularScreen = props => <ListScreen {...props} data={Songs} />;
 
 const MusicTabNavigator = createMaterialTopTabNavigator(
   {
-    Popular: PopularScreen,
+    // Popular: PopularScreen,
     Moods: MoodScreen,
-    Genres: GenreScreen,
+    // Genres: GenreScreen,
   },
   {
     style: {
       maxHeight: height - (48 + 8), // Tab Bar Height + padding
     },
     tabBarOptions: {
+      bounces: false,
       swipeEnabled: true,
       activeTintColor: 'white',
       inactiveBackgroundColor: 'transparent',
@@ -228,7 +273,7 @@ const MusicTabNavigator = createMaterialTopTabNavigator(
         fontWeight: 'bold',
       },
     },
-  }
+  },
 );
 
 MusicTabNavigator.navigationOptions = { header: null };
@@ -243,7 +288,7 @@ class SecondaryMusicScreen extends React.Component {
     const { props } = this;
     const item = props.navigation.getParam('item') || {};
 
-    return <ListScreen {...props} data={item.items.splice(0, 5)} />;
+    return <ListScreen {...props} data={item.items.slice(0, 5)} />;
   }
 }
 
@@ -251,12 +296,17 @@ const PlayButtonIcon = props => (
   <EvilIcons name="play" color={'rgba(255,255,255,0.7)'} size={36} {...props} />
 );
 const ChevronRight = props => (
-  <EvilIcons name="chevron-right" color={'rgba(255,255,255,0.7)'} size={36} {...props} />
+  <EvilIcons
+    name="chevron-right"
+    color={'rgba(255,255,255,0.7)'}
+    size={36}
+    {...props}
+  />
 );
 
 const musicBackgroundColor = 'rgba(0,0,0,0.0)';
 const MusicNav = createAppContainer(
-  createStackNavigator(
+  createSwitchNavigator(
     {
       GenreScreen: MusicTabNavigator,
       MusicScreen: SecondaryMusicScreen,
@@ -278,8 +328,10 @@ const MusicNav = createAppContainer(
           borderBottomWidth: 1,
         },
         headerTintColor: 'white',
-        headerBackImage: () => <EvilIcons name="chevron-left" color={'white'} size={56} />,
+        headerBackImage: () => (
+          <EvilIcons name="chevron-left" color={'white'} size={56} />
+        ),
       },
-    }
-  )
+    },
+  ),
 );
