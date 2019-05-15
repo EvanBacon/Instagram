@@ -18,7 +18,7 @@ import {
   SafeAreaView,
 } from 'react-navigation';
 
-import { Audio } from 'expo';
+import { Audio, LinearGradient } from 'expo';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Genres from '../data/Genres.json';
 import Moods from '../data/Moods.json';
@@ -233,8 +233,7 @@ function transformSongList(list) {
       };
     });
 }
-const Songs = transformSongList(Popular.splice(0, 5));
-
+const Songs = transformSongList(Popular.splice(0, 10));
 // const GenreScreen = createGenreScreen(transformCategorySet(Genres));
 const MoodScreen = createGenreScreen(moods);
 
@@ -242,7 +241,7 @@ const PopularScreen = props => <ListScreen {...props} data={Songs} />;
 
 const MusicTabNavigator = createMaterialTopTabNavigator(
   {
-    // Popular: PopularScreen,
+    Popular: PopularScreen,
     Moods: MoodScreen,
     // Genres: GenreScreen,
   },

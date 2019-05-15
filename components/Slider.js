@@ -59,13 +59,21 @@ export default class Slider extends React.Component {
     );
   };
   render() {
+    const isLarge = ['music', 'live'].includes(this.props.page.id);
     return (
-      <LinearGradient
-        colors={['rgba(0,0,0,0.3)', 'rgba(0,0,0,0.0)']}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
-        style={{ flex: 1, maxHeight: sliderHeight }}
-      >
+      <View style={{ flex: 1, maxHeight: sliderHeight }}>
+        <LinearGradient
+          colors={['rgba(0,0,0,0.0)', isLarge ? 'black' : 'rgba(0,0,0,0.3)']}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 1 }}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: isLarge ? sliderHeight * 2 : sliderHeight,
+          }}
+        />
         <ViewPager
           pagingEnabled
           centerContent
@@ -99,7 +107,7 @@ export default class Slider extends React.Component {
           size={this.props.window.width}
           horizontal
         />
-      </LinearGradient>
+      </View>
     );
   }
 }

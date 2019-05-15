@@ -558,6 +558,7 @@ class CameraContainerScreen extends React.Component {
           }}
         />
         <Slider
+          page={page}
           window={this.props.window}
           initialIndex={INITIAL_TAB}
           data={pages.map(value => value.name)}
@@ -779,6 +780,7 @@ class MainFooter extends React.Component {
       justifyContent: 'space-between',
       flexDirection: 'row',
       alignItems: 'center',
+      zIndex: 1,
     };
 
     switch (page.id) {
