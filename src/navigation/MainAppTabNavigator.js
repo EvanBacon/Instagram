@@ -1,14 +1,20 @@
 import React from 'react';
 import { View } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createSwitchNavigator,
+} from 'react-navigation';
 
-import MainUITabNavigator from './MainUITabNavigator';
-import MediaCreationNavigator from './MediaCreationNavigator';
 import initialScreens from '../constants/initialScreens';
+import MainUITabNavigator from './MainUITabNavigator';
+import CameraNavigator from './CameraNavigator';
 
-export default createBottomTabNavigator(
+CameraNavigator.path = 'camera';
+MainUITabNavigator.path = '';
+
+export default createSwitchNavigator(
   {
-    MediaCreation: MediaCreationNavigator,
+    MediaCreation: CameraNavigator,
     SocialUI: MainUITabNavigator,
   },
   {
@@ -19,5 +25,5 @@ export default createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
     },
-  }
+  },
 );

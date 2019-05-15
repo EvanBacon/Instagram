@@ -1,12 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import FollowButton from './FollowButton';
 import LikeButton from './LikeButton';
 import ProfileImage from './ProfileImage';
 import ReplyButton from './ReplyButton';
-import FollowButton from './FollowButton';
 
 export default class UserListItem extends React.Component {
+  static defaultProps = {
+    item: {},
+  };
   onPress = () => {
     this.props.onPress(this.props.item);
   };
@@ -22,7 +25,8 @@ export default class UserListItem extends React.Component {
               flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
-            }}>
+            }}
+          >
             <LikeButton size={16} active={isLiked} color="gray" />
           </TouchableOpacity>
         </View>
@@ -57,7 +61,8 @@ export default class UserListItem extends React.Component {
           minHeight: 64,
           marginBottom: 4,
           alignItems: 'stretch',
-        }}>
+        }}
+      >
         <View>
           <ProfileImage
             account={account}
@@ -77,12 +82,14 @@ export default class UserListItem extends React.Component {
             flexDirection: 'row',
             flex: 1,
             justifyContent: 'space-between',
-          }}>
+          }}
+        >
           <View
             style={{
               flex: 1,
               justifyContent: 'space-between',
-            }}>
+            }}
+          >
             <Text style={{ flexWrap: 'wrap' }}>
               <Text style={{ fontWeight: '500' }}>{account}</Text> {title}
             </Text>

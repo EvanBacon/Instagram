@@ -11,7 +11,7 @@ export class UserList extends React.Component {
         style={style}
         keyExtractor={(item, index) => `-${index}`}
         renderItem={({ item, index }) => (
-          <UserListItem {...item} index={index} onPress={onPress} />
+          <UserListItem item={item} index={index} onPress={onPress} />
         )}
         {...props}
       />

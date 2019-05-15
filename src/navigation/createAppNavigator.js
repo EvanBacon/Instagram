@@ -9,7 +9,7 @@ import UsersScreen from '../screens/UsersScreen';
 import FollowingTabNavigator from './FollowingTabNavigator';
 
 function createAppNavigator(screen, name, navigationOptions) {
-  return createStackNavigator(
+  const nav = createStackNavigator(
     {
       [name]: { screen, navigationOptions },
       // Media: { screen: MediaScreen, navigationOptions: { header: null } },
@@ -43,7 +43,9 @@ function createAppNavigator(screen, name, navigationOptions) {
     {
       cardStyle: { backgroundColor: 'white' },
       defaultNavigationOptions: () => ({
-        headerBackImage: () => <InstaIcon name={'chevron-left'} size={30} color={'black'} />,
+        headerBackImage: () => (
+          <InstaIcon name={'chevron-left'} size={30} color={'black'} />
+        ),
         headerTintColor: 'black',
         headerStyle: {
           borderBottomWidth: 0.5,
@@ -52,8 +54,10 @@ function createAppNavigator(screen, name, navigationOptions) {
         headerRight: <InstaHeaderButton name={'flip'} />,
         // header: props => <Header {...props} />,
       }),
-    }
+    },
   );
+  nav.path = '';
+  return nav;
 }
 
 export default createAppNavigator;
