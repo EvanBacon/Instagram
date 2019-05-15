@@ -1,8 +1,9 @@
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
+// import { createMaterialTopTabNavigator } from 'react-navigation';
 
 import UsersScreen from '../screens/UsersScreen';
 
-const FollowingTabNavigator = createMaterialTopTabNavigator(
+const FollowingTabNavigator = createBottomTabNavigator(
   {
     People: UsersScreen,
     Hashtags: UsersScreen,

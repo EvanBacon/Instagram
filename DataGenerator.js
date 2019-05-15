@@ -1,5 +1,5 @@
-import Popular from '../data/Popular';
-import { getApiUrl } from '../itunes';
+import Popular from './data/Popular';
+import { getApiUrl } from './itunes';
 
 // https://rss.itunes.apple.com/en-us
 const popularAPI =

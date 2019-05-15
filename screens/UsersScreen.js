@@ -17,6 +17,7 @@ const someUser = {
   title: 'liked 8 posts',
 };
 export default class UsersScreen extends React.Component {
+  static navigationOptions = {};
   onPress = user => {
     NavigationService.navigate('Profile', { user });
   };

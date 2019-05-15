@@ -4,10 +4,13 @@ import {
   createDrawerNavigator,
   DrawerItems,
   SafeAreaView,
+  createStackNavigator,
 } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import InstaIcon from '../components/InstaIcon';
+import InstaHeaderButton from '../components/InstaHeaderButton';
+import NavigationService from './NavigationService';
 
 const CustomDrawerContentComponent = ({ items, ...props }) => {
   return (
@@ -75,20 +78,79 @@ const createDrawerOptions = (name, icon) => ({
   drawerLabel: name,
 });
 
-const createDrawerScreen = (screen, name, icon) => ({
-  screen,
-  navigationOptions: createDrawerOptions(name, icon),
-});
+const createDrawerScreen = (screen, name, icon, url) => {
+  screen.navigationOptions = {
+    title: name,
+  };
+  screen.path = '';
+
+  const stackScreen = createStackNavigator(
+    {
+      screen,
+    },
+    {
+      defaultNavigationOptions: ({ navigation }) => ({
+        headerTintColor: 'black',
+        headerStyle: {
+          borderBottomWidth: 0.5,
+          borderBottomColor: 'rgba(0,0,0,0.098)',
+          boxShadow: undefined,
+        },
+        headerLeft: (
+          <InstaHeaderButton
+            name={'chevron-left'}
+            onPress={() => {
+              NavigationService.goBack();
+            }}
+          />
+        ),
+        headerRight: (
+          <InstaHeaderButton
+            name={'menu'}
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          />
+        ),
+      }),
+    },
+  );
+
+  stackScreen.path = url;
+  stackScreen.navigationOptions = createDrawerOptions(name, icon);
+
+  return stackScreen;
+};
 
 const DrawerNavigator = createDrawerNavigator(
   {
     MainTabUI: MainTabNavigator,
-    Activity: createDrawerScreen(View, 'Activity', 'history'),
-    Nametag: createDrawerScreen(View, 'Nametag', 'scan'),
-    Saved: createDrawerScreen(View, 'Saved', 'bookmark'),
-    CloseFriends: createDrawerScreen(View, 'Close Friends', 'likes'),
-    DiscoverPeople: createDrawerScreen(View, 'Discover People', 'add-user'),
-    OpenFacebook: createDrawerScreen(View, 'Open Facebook', 'facebook'),
+    Activity: createDrawerScreen(
+      () => <View />,
+      'Activity',
+      'history',
+      'activity',
+    ),
+    Nametag: createDrawerScreen(() => <View />, 'Nametag', 'scan', 'nametag'),
+    Saved: createDrawerScreen(() => <View />, 'Saved', 'bookmark', 'saved'),
+    CloseFriends: createDrawerScreen(
+      () => <View />,
+      'Close Friends',
+      'likes',
+      'closefriends',
+    ),
+    DiscoverPeople: createDrawerScreen(
+      () => <View />,
+      'Discover People',
+      'add-user',
+      'discoverpeople',
+    ),
+    OpenFacebook: createDrawerScreen(
+      () => <View />,
+      'Open Facebook',
+      'facebook',
+      'openfacebook',
+    ),
   },
   {
     contentComponent: CustomDrawerContentComponent,

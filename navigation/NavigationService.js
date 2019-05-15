@@ -19,5 +19,8 @@ function navigate(routeName, params) {
 
 export default {
   navigate,
+  goBack() {
+    _navigator.dispatch(NavigationActions.back({}));
+  },
   setTopLevelNavigator,
 };

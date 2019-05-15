@@ -1,13 +1,12 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+
 import InstaHeaderButton from '../../components/InstaHeaderButton';
 import InstaIcon from '../../components/InstaIcon';
 import CommentsScreen from '../../screens/CommentsScreen';
 import DetailsScreen from '../../screens/DetailsScreen';
 import UsersScreen from '../../screens/UsersScreen';
 import FollowingTabNavigator from '../FollowingTabNavigator';
-import wrapScreenWithHeader from './wrapScreenWithHeader';
 
 const options = {
   cardStyle: { backgroundColor: 'white' },
@@ -27,19 +26,19 @@ const options = {
   }),
 };
 
-function createSwitch(routes) {
-  let outputRoutes = {};
+// function createSwitch(routes) {
+//   let outputRoutes = {};
 
-  for (const key of Object.keys(routes)) {
-    const { screen: Comp, navigationOptions } = routes[key];
-    Comp.navigationOptions = navigationOptions;
-    outputRoutes[key] = wrapScreenWithHeader(Comp);
-  }
+//   for (const key of Object.keys(routes)) {
+//     const { screen: Comp, navigationOptions } = routes[key];
+//     Comp.navigationOptions = navigationOptions;
+//     outputRoutes[key] = wrapScreenWithHeader(Comp);
+//   }
 
-  const nav = createSwitchNavigator(outputRoutes, options);
-  nav.path = '';
-  return nav;
-}
+//   const nav = createSwitchNavigator(outputRoutes, options);
+//   nav.path = '';
+//   return nav;
+// }
 
 function createStack(routes) {
   const nav = createStackNavigator(routes, options);

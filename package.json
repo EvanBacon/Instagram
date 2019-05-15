@@ -2,12 +2,19 @@
   "name": "my-new-project",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
+  "sideEffects": [
+    "src/rematch/Gate.js",
+    "src/rematch/dispatch.js",
+    "src/rematch/models.js",
+    "src/rematch/store.js"
+  ],
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
     "build": "expo build:web --no-polyfill",
+    "debug-prod": "expod build:web --no-polyfill --no-pwa && serve ./web-build",
     "predeploy": "npm run build && expo optimize",
     "deploy": "netlify deploy --prod",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
