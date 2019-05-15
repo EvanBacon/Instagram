@@ -19,7 +19,7 @@ import {
 } from 'react-navigation';
 
 import { Audio } from 'expo';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import Genres from '../data/Genres.json';
 import Moods from '../data/Moods.json';
 import Popular from '../data/Popular-itunes.json';
@@ -29,7 +29,6 @@ const { height } = Dimensions.get('window');
 
 export default class MusicScreen extends React.Component {
   renderSearchBar = () => {
-    return null;
     return (
       <SearchBar
         round
