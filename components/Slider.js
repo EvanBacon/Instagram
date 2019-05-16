@@ -103,7 +103,7 @@ export default class Slider extends React.Component {
           ref={ref => (this.viewPager = ref)}
           data={this.props.data}
           renderItem={this.renderItem}
-          style={{ flex: 1 }}
+          style={{ flex: 1, scrollIndicator: 'none' }}
           size={this.props.window.width}
           horizontal
         />

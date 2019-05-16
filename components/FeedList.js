@@ -126,32 +126,42 @@ class SelectedPhoto extends React.Component {
     ];
 
     let backgroundOpacityValue = scaleValue.interpolate({
-      inputRange: [1.0, 2.0],
-      outputRange: [0.1, 0.75],
+      inputRange: [1.0, 1.1, 2.0],
+      outputRange: [0.0, 0.15, 0.75],
       extrapolate: 'clamp',
     });
 
     return (
-      <View style={styles.root}>
-        <Animated.View
-          style={[
-            styles.background,
-            {
-              opacity: backgroundOpacityValue,
-            },
-          ]}
-        />
-        <Animated.Image
-          style={imageStyle}
-          onLoad={() => {
-            setTimeout(() => {
-              this.setState({ isLoaded: true });
-            });
-          }}
-          source={selectedPhoto.source}
-        />
-      </View>
+      <BodyPortal>
+        <View style={styles.root}>
+          <Animated.View
+            style={[
+              styles.background,
+              {
+                opacity: backgroundOpacityValue,
+              },
+            ]}
+          />
+          <Animated.Image
+            style={imageStyle}
+            onLoad={() => {
+              setTimeout(() => {
+                this.setState({ isLoaded: true });
+              });
+            }}
+            source={selectedPhoto.source}
+          />
+        </View>
+      </BodyPortal>
     );
+  }
+}
+
+import ReactDOM from 'react-dom';
+
+export class BodyPortal extends React.PureComponent {
+  render() {
+    return ReactDOM.createPortal(this.props.children, global.document.body);
   }
 }
 

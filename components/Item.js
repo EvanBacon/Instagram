@@ -1,19 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import {
-  UIManager,
-  findNodeHandle,
-  View,
   Animated,
-  PanResponder,
   Easing,
+  findNodeHandle,
+  PanResponder,
+  UIManager,
+  View,
 } from 'react-native';
 
+import DisableBodyScrollingView from './DisableScrolling';
 import ItemFooter from './ItemFooter';
 import ItemHeader from './ItemHeader';
 import ItemImage from './ItemImage';
-import DisableBodyScrollingView from './DisableScrolling';
-// @flow
 
 export function pow2abs(a, b) {
   return Math.pow(Math.abs(a - b), 2);
@@ -39,7 +38,7 @@ export function getDeltaTranslation(position, initial) {
   return { x: position.x - initial.x, y: position.y - initial.y };
 }
 
-const SCALE_MULTIPLIER = 1.2;
+const SCALE_MULTIPLIER = 1;
 
 export function getScale(currentDistance, initialDistance) {
   return (currentDistance / initialDistance) * SCALE_MULTIPLIER;
@@ -56,19 +55,8 @@ export function measureNode(node, parent) {
       },
     );
   });
-  // return new Promise((resolve, reject) => {
-  //   UIManager.measureLayout(
-  //     node,
-  //     parent || (node && node.parentNode),
-  //     e => reject(e),
-  //     (x, y, w, h, l, t) => {
-  //       resolve({ x, y, w, h });
-  //     },
-  //   );
-  // });
 }
 const RESTORE_ANIMATION_DURATION = 200;
-
 class Item extends React.PureComponent {
   _opacity = new Animated.Value(1);
   _initialTouches = [];
@@ -81,7 +69,6 @@ class Item extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    console.log(UIManager);
     this._generatePanHandlers();
   }
 
@@ -114,7 +101,6 @@ class Item extends React.PureComponent {
     }
     event.preventDefault();
     event.stopPropagation();
-    console.log('start');
     this._gestureInProgress = gestureState.stateID;
     let { item, onGestureStart } = this.props;
     let { gesturePosition, getScrollPosition } = this.context;
@@ -150,9 +136,7 @@ class Item extends React.PureComponent {
     if (!this._gestureInProgress) {
       return;
     }
-    event.preventDefault();
-    event.stopPropagation();
-    // console.log('move', event);
+
     if (touches.length < 2) {
       // Trigger a realease
       this._onGestureRelease(event, gestureState);
@@ -166,7 +150,6 @@ class Item extends React.PureComponent {
     let initialPosition = getPosition(this._initialTouches);
 
     const { x, y } = getDeltaTranslation(currentPosition, initialPosition);
-    console.log('move', x, y);
     gesturePosition.x.setValue(x);
     gesturePosition.y.setValue(y);
 
@@ -174,7 +157,7 @@ class Item extends React.PureComponent {
     let currentDistance = getDistance(touches);
     let initialDistance = getDistance(this._initialTouches);
     let newScale = getScale(currentDistance, initialDistance);
-    scaleValue.setValue(newScale);
+    scaleValue.setValue(Math.max(newScale, 1));
   };
 
   _onGestureRelease = (event, gestureState) => {
@@ -182,31 +165,27 @@ class Item extends React.PureComponent {
       return;
     }
 
-    console.log('end');
+    // https://medium.com/@audytanudjaja/react-native-ui-challenge-building-instagram-zoom-draggable-photo-9127413b1d29
     this._gestureInProgress = null;
     this._initialTouches = [];
     let { onGestureRelease } = this.props;
     let { gesturePosition, scaleValue, getScrollPosition } = this.context;
 
-    // set to initial position and scale
     Animated.parallel([
       Animated.timing(gesturePosition.x, {
         toValue: 0,
         duration: RESTORE_ANIMATION_DURATION,
-        easing: Easing.ease,
-        // useNativeDriver: true,
+        easing: Easing.linear,
       }),
       Animated.timing(gesturePosition.y, {
         toValue: 0,
         duration: RESTORE_ANIMATION_DURATION,
-        easing: Easing.ease,
-        // useNativeDriver: true,
+        easing: Easing.linear,
       }),
       Animated.timing(scaleValue, {
         toValue: 1,
         duration: RESTORE_ANIMATION_DURATION,
-        easing: Easing.ease,
-        // useNativeDriver: true,
+        easing: Easing.linear,
       }),
     ]).start(() => {
       gesturePosition.setOffset({
@@ -226,27 +205,18 @@ class Item extends React.PureComponent {
   };
 
   _measureSelectedPhoto = async () => {
-    const list = findNodeHandle(this.props.getParent());
     let parent = findNodeHandle(this._parent);
     let photoComponent = findNodeHandle(this._photoComponent);
 
     try {
-      console.log(photoComponent);
-      // let photoMeasurement = {}; // measureNode(photoComponent);
-      // let parentMeasurement = await measureNode(parent);
-      let [parentMeasurement, photoMeasurement] = await Promise.all([
-        measureNode(parent, list),
-        measureNode(photoComponent, parent),
-      ]);
-
+      const photoMeasurement = await measureNode(photoComponent, parent);
       const bodyRect = document.body.getBoundingClientRect();
       const elemRect = photoComponent.getBoundingClientRect();
       const offset = elemRect.top + window.scrollY;
 
-      console.log(photoMeasurement, parentMeasurement, offset);
       return {
         x: photoMeasurement.x,
-        y: offset, //parentMeasurement.y + photoMeasurement.y,
+        y: offset,
         w: photoMeasurement.w,
         h: photoMeasurement.h,
       };
