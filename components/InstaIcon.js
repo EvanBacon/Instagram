@@ -14,17 +14,17 @@ export default class InstaIcon extends React.PureComponent {
         width: size,
         height: size,
         resizeMode: 'contain',
-        tintColor: color,
+        // tintColor: color,
         flex: size === undefined ? 1 : undefined,
       },
       style,
     ];
 
-    let icon = Assets.icons[name + '.png'];
-    if (active && Assets.icons[name + '-on' + '.png']) {
-      icon = Assets.icons[name + '-on' + '.png'];
-    } else if (Assets.icons[name + '-off' + '.png']) {
-      icon = Assets.icons[name + '-off' + '.png'];
+    let icon = Assets.icons[color][name + '.png'];
+    if (active && Assets.icons[color][name + '-on' + '.png']) {
+      icon = Assets.icons[color][name + '-on' + '.png'];
+    } else if (Assets.icons[color][name + '-off' + '.png']) {
+      icon = Assets.icons[color][name + '-off' + '.png'];
     }
     return <Image source={icon} style={colorStyle} {...props} />;
   }

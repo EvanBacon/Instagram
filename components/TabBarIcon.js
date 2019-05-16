@@ -9,7 +9,7 @@ export default class TabBarIcon extends React.Component {
     return (
       <View style={{ width: '100%', flex: 1, paddingVertical: 8 }}>
         <InstaIcon
-          color={Colors.tabIconDefault}
+          color={'black'}
           active={this.props.focused}
           name={this.props.name}
         />

@@ -52,7 +52,7 @@ export default class MusicScreen extends React.Component {
         animation="fadeIn"
         duration={300}
       >
-        <BlurView tint={'dark'} intensity={50} style={{ flex: 1 }}>
+        <BlurView tint={'dark'} intensity={100} style={{ flex: 1 }}>
           {this.renderSearchBar()}
           <MusicNav />
         </BlurView>
