@@ -16,7 +16,7 @@ export const image = {
 };
 export const camera = {
   state: {
-    type: 'back',
+    type: 'front',
   },
   reducers: {
     update: (state, payload) => ({ ...state, ...payload }),

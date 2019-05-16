@@ -114,22 +114,46 @@ const Highlights = [
   {
     title: 'Expo',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TZR2DHPXLS.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TZR2DHPXLS.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'Hair',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/7WQZUEU75C.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/7WQZUEU75C.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'Stickers 👟',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/DJQQTMR8XV.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XLYI8D8H5R.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8N1P2AHD0W.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/DJQQTMR8XV.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XLYI8D8H5R.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8N1P2AHD0W.jpg',
+        type: 'img',
+      },
     ],
   },
 ];
@@ -139,67 +163,417 @@ const Stories = [
     title: 'Your Story',
     account: ACCOUNT,
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/DJQQTMR8XV.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XLYI8D8H5R.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8N1P2AHD0W.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/DJQQTMR8XV.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XLYI8D8H5R.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8N1P2AHD0W.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'ccheever',
     account: 'ccheever',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/7WQZUEU75C.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/7WQZUEU75C.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'jameside',
     account: 'jameside',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TZR2DHPXLS.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TZR2DHPXLS.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'notbrent',
     account: 'notbrent',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/FC9HYIWC9B.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8BY0ULY9GK.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SFJPODPJY4.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/FC9HYIWC9B.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8BY0ULY9GK.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SFJPODPJY4.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'expo.io',
+    account: 'expo.io',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'quinlanjung',
     account: 'quinlanjung',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
     ],
   },
   {
-    title: 'tzhongg',
-    account: 'tzhongg',
+    title: 'collin_bacon',
+    account: 'collin_bacon',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R16PYWVG7N.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/5ECBT47XF5.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/95U1U3BR0Y.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/T6J8OZBM38.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'aalices_',
+    account: 'aalices_',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'adam_nav',
+    account: 'adam_nav',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'wcandillon',
+    account: 'wcandillon',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'github',
+    account: 'github',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'satya164',
+    account: 'satya164',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+
+  {
+    title: 'calebnance',
+    account: 'calebnance',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'thekenwheeler',
+    account: 'thekenwheeler',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+
+  {
+    title: 'sjchmiela',
+    account: 'sjchmiela',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'monikasmolec',
+    account: 'monikasmolec',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'meanjim',
+    account: 'meanjim',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'kiki_bacon',
+    account: 'keegan._.bacon',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'ams_bacon',
+    account: '_lil.bacon.bit_',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'peterpme',
+    account: 'peterpme',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'amanhimselfcodes',
+    account: 'amanhimselfcodes',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'i_am_nader',
     account: 'i_am_nader',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/OQ47D2T5AP.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/OQ47D2T5AP.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     title: 'theavocoder',
     account: 'theavocoder',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XG1ASVK8BU.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R7992YD801.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XG1ASVK8BU.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R7992YD801.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'linchenhsin',
+    account: 'linchenhsin',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
+    ],
+  },
+  {
+    title: 'tzhongg',
+    account: 'tzhongg',
+    items: [
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R16PYWVG7N.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/5ECBT47XF5.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/95U1U3BR0Y.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/T6J8OZBM38.jpg',
+        type: 'img',
+      },
     ],
   },
 ];
