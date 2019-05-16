@@ -86,8 +86,8 @@ const pages = [
   };
 });
 
-const INITIAL_TAB_ID = 'music';
-// const INITIAL_TAB_ID = 'normal';
+// const INITIAL_TAB_ID = 'music';
+const INITIAL_TAB_ID = 'normal';
 const INITIAL_TAB = Math.max(
   0,
   pages.findIndex(({ id }) => id === INITIAL_TAB_ID),
