@@ -29,7 +29,12 @@ const swipeConfig = {
   directionalOffsetThreshold: 80,
 };
 
-function isValidSwipe(velocity, velocityThreshold, directionalOffset, directionalOffsetThreshold) {
+function isValidSwipe(
+  velocity,
+  velocityThreshold,
+  directionalOffset,
+  directionalOffsetThreshold,
+) {
   return (
     Math.abs(velocity) > velocityThreshold &&
     Math.abs(directionalOffset) < directionalOffsetThreshold
@@ -47,7 +52,7 @@ class StoriesView extends React.Component {
       ],
       {
         useNativeDriver: true,
-      }
+      },
     );
     this.swipeConfig = Object.assign(swipeConfig, props.config);
 
@@ -55,7 +60,8 @@ class StoriesView extends React.Component {
       //   onMoveShouldSetResponderCapture: () => true,
       //   onStartShouldSetPanResponder: this._handleShouldSetPanResponder,
       onMoveShouldSetPanResponder: this._onMoveShouldSetPanResponderCapture,
-      onMoveShouldSetPanResponderCapture: this._onMoveShouldSetPanResponderCapture,
+      onMoveShouldSetPanResponderCapture: this
+        ._onMoveShouldSetPanResponderCapture,
       onPanResponderRelease: this._handlePanResponderEnd,
       onPanResponderTerminate: this._handlePanResponderEnd,
       onPanResponderGrant: () => {
@@ -68,7 +74,8 @@ class StoriesView extends React.Component {
     });
   }
 
-  _onMoveShouldSetPanResponderCapture = ({ nativeEvent: { touches } }, { dy }) => {
+  _onMoveShouldSetPanResponderCapture = ({ nativeEvent }, { dy }) => {
+    const { touches } = nativeEvent;
     // if (Math.abs(dx) > 5) {
     //   dispatch().stories.update({ swipedHorizontally: true });
     //   return true;
@@ -76,6 +83,8 @@ class StoriesView extends React.Component {
     const isSingleFinger = touches.length === 1;
 
     if (isSingleFinger && dy > 5) {
+      nativeEvent.preventDefault();
+
       dispatch().stories.update({ swipedHorizontally: false });
       return true;
     }
@@ -85,7 +94,14 @@ class StoriesView extends React.Component {
   };
 
   _triggerSwipeHandlers = (swipeDirection, gestureState) => {
-    const { onSwipe, onSwipeUp, onSwipeDown, onSwipeLeft, onSwipeRight, onTap } = this.props;
+    const {
+      onSwipe,
+      onSwipeUp,
+      onSwipeDown,
+      onSwipeLeft,
+      onSwipeRight,
+      onTap,
+    } = this.props;
     const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } = swipeDirections;
     onSwipe && onSwipe(swipeDirection, gestureState);
     switch (swipeDirection) {
@@ -140,7 +156,8 @@ class StoriesView extends React.Component {
     return (
       <Animated.View
         style={[{ width, height, transform: this._getTransformsFor(index) }]}
-        key={`child-${index}`}>
+        key={`child-${index}`}
+      >
         <Story story={item} currentDeck={this.props.deckIdx === index} />
         <Animated.View
           pointerEvents={'none'}
@@ -221,6 +238,7 @@ class StoriesView extends React.Component {
     }
     return this.list.getNode();
   }
+
   componentDidUpdate(prevProps) {
     if (this.props.deckIdx !== prevProps.deckIdx) {
       this.scrollToIndex(this.props.deckIdx);

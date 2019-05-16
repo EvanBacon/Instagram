@@ -74,13 +74,13 @@ class StoriesView extends React.Component {
       onPanResponderRelease: this._handlePanResponderEnd,
       onPanResponderTerminate: this._handlePanResponderEnd,
       onPanResponderGrant: () => {
-        console.log('Start Gesture');
+        // console.log('Start Gesture');
         // dispatch().stories.onPanResponderGrant();
         dispatch().stories.pause();
         dispatch().stories.setBackOpacity(0);
       },
       onPanResponderMove: (e, gesture) => {
-        console.log('onPanResponderMove');
+        // console.log('onPanResponderMove');
         dispatch().stories.onPanResponderMove({ e, gesture });
       },
     });
@@ -316,8 +316,8 @@ class StoriesView extends React.Component {
 
     return (
       <DisableBodyScrollingView
-        shouldDisable={e => {
-          return true;
+        shouldDisable={(e, { state, dy }) => {
+          return state === 'MOVED' && dy > 3;
         }}
       >
         <Animated.View

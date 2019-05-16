@@ -18,13 +18,28 @@ class DisableBodyScrollingView extends React.Component {
   };
   componentWillUnmount() {
     if (this.view) {
-      this.view.removeEventListener('touchstart', this.freezeBody, false);
-      this.view.removeEventListener('touchmove', this.freezeBody, false);
+      this.view.removeEventListener('touchstart', this.freezeBodyStart, false);
+      this.view.removeEventListener('touchmove', this.freezeBodyMove, false);
     }
   }
+  start = { x: 0, y: 0 };
+  freezeBodyStart = e => {
+    this.start.x = e.touches[0].pageX;
+    this.start.y = e.touches[0].pageY;
 
-  freezeBody = e => {
-    if (this.props.shouldDisable(e)) {
+    if (this.props.shouldDisable(e, { state: 'BEGAN', dx: 0, dy: 0 })) {
+      e.preventDefault();
+    }
+  };
+
+  freezeBodyMove = e => {
+    let delta = {
+      state: 'MOVED',
+      dx: this.start.x - e.touches[0].pageX,
+      dy: this.start.y - e.touches[0].pageY,
+    };
+
+    if (this.props.shouldDisable(e, delta)) {
       e.preventDefault();
     }
   };
@@ -39,12 +54,24 @@ class DisableBodyScrollingView extends React.Component {
         ref={view => {
           const nextView = getElement(view);
           if (nextView && nextView.addEventListener) {
-            nextView.addEventListener('touchstart', this.freezeBody, false);
-            nextView.addEventListener('touchmove', this.freezeBody, false);
+            nextView.addEventListener(
+              'touchstart',
+              this.freezeBodyStart,
+              false,
+            );
+            nextView.addEventListener('touchmove', this.freezeBodyMove, false);
           }
           if (this.view && this.view.removeEventListener) {
-            this.view.removeEventListener('touchstart', this.freezeBody, false);
-            this.view.removeEventListener('touchmove', this.freezeBody, false);
+            this.view.removeEventListener(
+              'touchstart',
+              this.freezeBodyStart,
+              false,
+            );
+            this.view.removeEventListener(
+              'touchmove',
+              this.freezeBodyMove,
+              false,
+            );
           }
           this.view = nextView;
         }}
