@@ -10,17 +10,24 @@ const getElement = component => {
   }
 };
 
-const freezeBody = e => {
-  if (e.touches.length > 1) e.preventDefault();
-};
-
 class DisableBodyScrollingView extends React.Component {
+  static defaultProps = {
+    shouldDisable: e => {
+      return e.touches.length > 1;
+    },
+  };
   componentWillUnmount() {
     if (this.view) {
-      this.view.removeEventListener('touchstart', freezeBody, false);
-      this.view.removeEventListener('touchmove', freezeBody, false);
+      this.view.removeEventListener('touchstart', this.freezeBody, false);
+      this.view.removeEventListener('touchmove', this.freezeBody, false);
     }
   }
+
+  freezeBody = e => {
+    if (this.props.shouldDisable(e)) {
+      e.preventDefault();
+    }
+  };
 
   render() {
     const { style, ...props } = this.props;
@@ -32,12 +39,12 @@ class DisableBodyScrollingView extends React.Component {
         ref={view => {
           const nextView = getElement(view);
           if (nextView && nextView.addEventListener) {
-            nextView.addEventListener('touchstart', freezeBody, false);
-            nextView.addEventListener('touchmove', freezeBody, false);
+            nextView.addEventListener('touchstart', this.freezeBody, false);
+            nextView.addEventListener('touchmove', this.freezeBody, false);
           }
           if (this.view && this.view.removeEventListener) {
-            this.view.removeEventListener('touchstart', freezeBody, false);
-            this.view.removeEventListener('touchmove', freezeBody, false);
+            this.view.removeEventListener('touchstart', this.freezeBody, false);
+            this.view.removeEventListener('touchmove', this.freezeBody, false);
           }
           this.view = nextView;
         }}

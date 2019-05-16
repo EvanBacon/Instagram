@@ -1,4 +1,9 @@
-import { LayoutAnimation, Animated, Dimensions, PanResponder } from 'react-native';
+import {
+  LayoutAnimation,
+  Animated,
+  Dimensions,
+  PanResponder,
+} from 'react-native';
 // import data from './data';
 import dispatch from './dispatch';
 // import store from './store';
@@ -14,67 +19,146 @@ export const data = [
     idx: 0,
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/7WQZUEU75C.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/7WQZUEU75C.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/marcogomes/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TZR2DHPXLS.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TZR2DHPXLS.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/DJQQTMR8XV.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XLYI8D8H5R.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8N1P2AHD0W.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/DJQQTMR8XV.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XLYI8D8H5R.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8N1P2AHD0W.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg',
+    avatar:
+      'https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/FC9HYIWC9B.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8BY0ULY9GK.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SFJPODPJY4.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/FC9HYIWC9B.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/8BY0ULY9GK.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/SFJPODPJY4.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    avatar:
+      'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TPZVAKR2HA.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/WY4HT9B3QJ.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/suprb/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R16PYWVG7N.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/5ECBT47XF5.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/95U1U3BR0Y.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/T6J8OZBM38.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R16PYWVG7N.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/TXGQ76N3J0.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/5ECBT47XF5.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/95U1U3BR0Y.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/T6J8OZBM38.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
-    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/flamekaizar/128.jpg',
+    avatar:
+      'https://s3.amazonaws.com/uifaces/faces/twitter/flamekaizar/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/OQ47D2T5AP.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/OQ47D2T5AP.jpg',
+        type: 'img',
+      },
     ],
   },
   {
     idx: 0,
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/itsjonq/128.jpg',
     items: [
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XG1ASVK8BU.jpg', type: 'img' },
-      { uri: 'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R7992YD801.jpg', type: 'img' },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/XG1ASVK8BU.jpg',
+        type: 'img',
+      },
+      {
+        uri:
+          'https://snap-photos.s3.amazonaws.com/img-thumbs/960w/R7992YD801.jpg',
+        type: 'img',
+      },
     ],
   },
 ];
@@ -134,7 +218,7 @@ const stories = {
         e,
         gesture: { dx, dy },
       },
-      state
+      state,
     ) {
       if (Math.abs(dx) > 5) {
         dispatch().stories.update({ swipedHorizontally: true });
@@ -153,7 +237,7 @@ const stories = {
       props,
       {
         stories: { swipedHorizontally },
-      }
+      },
     ) {
       dispatch().stories.pause();
       dispatch().stories.setBackOpacity(0);
@@ -166,7 +250,7 @@ const stories = {
       },
       {
         stories: { swipedHorizontally },
-      }
+      },
     ) {
       if (!swipedHorizontally) {
         // horizontalSwipe.setValue(-dx);
@@ -182,11 +266,16 @@ const stories = {
       },
       {
         stories: { swipedHorizontally, deckIdx, stories },
-      }
+      },
     ) {
       if (!swipedHorizontally) {
         if (direction === 'SWIPE_DOWN') {
-          dispatch().stories.leaveStories();
+          Animated.timing(verticalSwipe, {
+            toValue: Dimensions.get('window').height * 2,
+            duration: 300,
+          }).start(() => {
+            dispatch().stories.leaveStories();
+          });
         } else {
           dispatch().stories.play();
           dispatch().stories.resetVerticalSwipe();
@@ -225,7 +314,7 @@ const stories = {
       props,
       {
         stories: { swipedHorizontally, deckIdx },
-      }
+      },
     ) {
       if (swipedHorizontally) {
         dispatch().stories.animateDeck({ toValue: width * deckIdx });
@@ -245,7 +334,7 @@ const stories = {
       props,
       {
         stories: { paused },
-      }
+      },
     ) {
       if (paused) {
         dispatch().stories.update({ paused: false });
@@ -279,7 +368,7 @@ const stories = {
       props,
       {
         stories: { paused, stories, deckIdx },
-      }
+      },
     ) {
       console.log('onNextItem', paused, stories, deckIdx);
       if (paused) {
@@ -305,7 +394,7 @@ const stories = {
       props,
       {
         stories: { backOpacity, ...stories },
-      }
+      },
     ) {
       if (backOpacity === 1) {
         dispatch().stories.update({ backOpacity: 0 });
@@ -324,24 +413,30 @@ const stories = {
       props,
       {
         stories: { deckIdx, stories },
-      }
+      },
     ) {
       if (deckIdx >= stories.length - 1) {
         return dispatch().stories.leaveStories();
       }
-      dispatch().stories.animateDeck({ toValue: (deckIdx + 1) * width, reset: true });
+      dispatch().stories.animateDeck({
+        toValue: (deckIdx + 1) * width,
+        reset: true,
+      });
     },
 
     onPrevDeck(
       props,
       {
         stories: { deckIdx, stories },
-      }
+      },
     ) {
       if (deckIdx === 0) {
         return dispatch().stories.leaveStories();
       }
-      dispatch().stories.animateDeck({ toValue: (deckIdx - 1) * width, reset: true });
+      dispatch().stories.animateDeck({
+        toValue: (deckIdx - 1) * width,
+        reset: true,
+      });
     },
 
     animateDeck({ toValue, reset = false }, state) {

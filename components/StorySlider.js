@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  findNodeHandle,
 } from 'react-native';
 
 import dispatch from '../rematch/dispatch';
@@ -83,9 +84,14 @@ class StoryItem extends React.Component {
         ref={ref => (this.item = ref)}
         onPress={() => {
           this.item.measure((ox, oy, width, height, px, py) => {
+            let photoComponent = findNodeHandle(this.item);
+            const elemRect = photoComponent.getBoundingClientRect();
+            const topOffset = elemRect.top + window.scrollY;
+            const leftOffset = elemRect.left + window.scrollX;
+
             const offset = {
-              top: py + ICON_SIZE / 2,
-              left: px + ICON_SIZE / 2,
+              top: topOffset + ICON_SIZE / 2,
+              left: leftOffset + ICON_SIZE / 2,
             };
 
             dispatch().stories.openCarousel({ index, offset });
