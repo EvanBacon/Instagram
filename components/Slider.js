@@ -79,26 +79,26 @@ export default class Slider extends React.Component {
           centerContent
           initialIndex={this.props.initialIndex}
           onScrollEndDrag={() => {
-            // TODO: Bacon: PR this method into RNWeb
-            if (!this.viewPager) {
-              return;
-            }
-            const { index } = this.viewPager;
-            if (this.state.index !== index) {
-              this.props.onIndexChange(index, this.state.index);
-              this.setState({ index });
-            }
-          }}
-          onScroll={({ value }) => {
+            // // TODO: Bacon: PR this method into RNWeb
             // if (!this.viewPager) {
             //   return;
             // }
             // const { index } = this.viewPager;
             // if (this.state.index !== index) {
-            //   this.setState({ index }, () => {
-            //     this.props.onIndexChange(index, this.state.index);
-            //   });
+            //   this.props.onIndexChange(index, this.state.index);
+            //   this.setState({ index });
             // }
+          }}
+          onScroll={({ value }) => {
+            if (!this.viewPager) {
+              return;
+            }
+            const { index } = this.viewPager;
+            if (this.state.index !== index) {
+              this.setState({ index }, () => {
+                this.props.onIndexChange(index, this.state.index);
+              });
+            }
           }}
           ref={ref => (this.viewPager = ref)}
           data={this.props.data}

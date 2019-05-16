@@ -23,7 +23,7 @@ import SearchBar from '../components/SearchBar/SearchBar';
 import Genres from '../data/Genres.json';
 import Moods from '../data/Moods.json';
 import Popular from '../data/Popular-itunes.json';
-
+import * as Animatable from 'react-native-animatable';
 // import Popular from './data/Popular.json';
 const { height } = Dimensions.get('window');
 
@@ -47,12 +47,16 @@ export default class MusicScreen extends React.Component {
   };
   render() {
     return (
-      <BlurView tint={'dark'} intensity={50} style={StyleSheet.absoluteFill}>
-        <SafeAreaView style={{ flex: 1 }}>
+      <Animatable.View
+        style={StyleSheet.absoluteFill}
+        animation="fadeIn"
+        duration={300}
+      >
+        <BlurView tint={'dark'} intensity={50} style={{ flex: 1 }}>
           {this.renderSearchBar()}
           <MusicNav />
-        </SafeAreaView>
-      </BlurView>
+        </BlurView>
+      </Animatable.View>
     );
   }
 }

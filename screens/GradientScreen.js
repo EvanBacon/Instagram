@@ -1,18 +1,27 @@
 import { LinearGradient, takeSnapshotAsync } from 'expo';
 import React from 'react';
-import { Text, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import IconButton from '../components/IconButton';
 import Header from '../components/MediaHeader';
 import dispatch from '../rematch/dispatch';
-
+import * as Animatable from 'react-native-animatable';
 const typefaceButtonSize = 36;
 
 class TypefaceButton extends React.Component {
   render() {
     const { onPress, title } = this.props;
     return (
-      <TouchableOpacity style={{ height: typefaceButtonSize }} onPress={onPress}>
+      <TouchableOpacity
+        style={{ height: typefaceButtonSize }}
+        onPress={onPress}
+      >
         <View
           style={{
             borderWidth: 2,
@@ -24,7 +33,8 @@ class TypefaceButton extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: 'rgba(0,0,0,0.05)',
-          }}>
+          }}
+        >
           <Text style={{ color: 'white', fontSize: 12, textAlign: 'center' }}>
             {title.toUpperCase()}
           </Text>
@@ -74,15 +84,26 @@ class TypeScreen extends React.Component {
     } = this.props;
     const opacity = this.state.useEffect ? 1 : 0.5;
     const isLight = gradientTheme === 'light';
-    const textColor = isLight ? `rgba(255,255,255,${opacity})` : `rgba(0,0,0,${opacity})`;
+    const textColor = isLight
+      ? `rgba(255,255,255,${opacity})`
+      : `rgba(0,0,0,${opacity})`;
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }} key="image-container" ref={ref => (this.imageContainer = ref)}>
+      <Animatable.View style={{ flex: 1 }} animation="fadeIn" duration={300}>
+        <View
+          style={{ flex: 1 }}
+          key="image-container"
+          ref={ref => (this.imageContainer = ref)}
+        >
           <LinearGradient
-            style={[StyleSheet.absoluteFill, { opacity: useGradientCamera ? 0.5 : 1 }]}
+            style={[
+              StyleSheet.absoluteFill,
+              { opacity: useGradientCamera ? 0.5 : 1 },
+            ]}
             {...gradient}
           />
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          >
             <TextInput
               onChangeText={value => this.setState({ value })}
               placeholderTextColor={textColor}
@@ -97,7 +118,9 @@ class TypeScreen extends React.Component {
                   padding: 6,
                   borderRadius: 4,
                 },
-                this.state.useEffect && { backgroundColor: isLight ? 'red' : 'white' },
+                this.state.useEffect && {
+                  backgroundColor: isLight ? 'red' : 'white',
+                },
                 typeface.style,
               ]}
               value={this.state.value}
@@ -106,10 +129,13 @@ class TypeScreen extends React.Component {
         </View>
         <Header>
           <IconButton name={'text-effect'} onPress={this.onEffectPressed} />
-          <TypefaceButton title={typeface.name} onPress={onPressTypefaceButton} />
+          <TypefaceButton
+            title={typeface.name}
+            onPress={onPressTypefaceButton}
+          />
           <View />
         </Header>
-      </View>
+      </Animatable.View>
     );
   }
 }
