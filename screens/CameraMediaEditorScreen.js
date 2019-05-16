@@ -12,7 +12,7 @@ import dispatch from '../rematch/dispatch';
 
 const GradientHeader = ({ style, ...props }) => (
   <LinearGradient
-    colors={['transparent', 'rgba(0,0,0,0.3)']}
+    colors={['rgba(0,0,0,0.3)', 'transparent']}
     start={[0.5, 0.0]}
     end={[0.5, 1.0]}
     style={StyleSheet.flatten([
@@ -40,7 +40,10 @@ class EditorScreen extends React.Component {
 
     return (
       <View style={[StyleSheet.absoluteFill, { backgroundColor: 'black' }]}>
-        <Image style={{ flex: 1, resizeMode: 'cover' }} source={this.props.image} />
+        <Image
+          style={{ flex: 1, resizeMode: 'cover' }}
+          source={this.props.image}
+        />
         <GradientHeader>
           <EditorIcon
             name={'cancel'}
@@ -80,7 +83,8 @@ class EditorScreen extends React.Component {
             left: 0,
             right: 0,
             paddingHorizontal: 16,
-          }}>
+          }}
+        >
           <View />
           <TouchableOpacity style={{}}>
             <View
@@ -94,8 +98,12 @@ class EditorScreen extends React.Component {
                 shadowOpacity: 0.3,
                 paddingHorizontal: 12,
                 flexDirection: 'row',
-              }}>
-              <Text style={{ textAlign: 'left', marginBottom: 2, fontSize: 12 }} onPress={() => {}}>
+              }}
+            >
+              <Text
+                style={{ textAlign: 'left', marginBottom: 2, fontSize: 12 }}
+                onPress={() => {}}
+              >
                 Send To
               </Text>
               <InstaIcon name="chevron-right" color="black" size={18} />
@@ -110,5 +118,9 @@ class EditorScreen extends React.Component {
 export default connect(({ image }) => ({ image }))(EditorScreen);
 
 const EditorIcon = ({ style, ...props }) => (
-  <IconButton containerStyle={[{ marginHorizontal: 4 }, style]} color="white" {...props} />
+  <IconButton
+    containerStyle={[{ marginHorizontal: 4 }, style]}
+    color="white"
+    {...props}
+  />
 );

@@ -130,7 +130,7 @@ const SongListScreenItem = ({ title, artist, image, onPress }) => (
     renderAction={() => <PlayButtonIcon />}
   />
 );
-const USE_REMOTE_IMAGES = false;
+const USE_REMOTE_IMAGES = !global.__DEV__;
 
 const GenreListScreenItem = ({ genre, image, onPress }) => (
   <ListScreenItem

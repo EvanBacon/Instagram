@@ -30,15 +30,17 @@ const FeedNav = createAppNavigator(FeedScreen, 'Feed', {
     <View style={{ flexDirection: 'row' }}>
       <InstaHeaderButton
         name={'tv'}
+        disabled
         touchableStyle={{ marginHorizontal: 0 }}
         onPress={() => {
-          NavigationService.navigate('Feed_TV');
+          // NavigationService.navigate('Feed_TV');
         }}
       />
       <InstaHeaderButton
         name={'send'}
+        disabled
         onPress={() => {
-          NavigationService.navigate('Feed_Chat');
+          // NavigationService.navigate('Feed_Chat');
         }}
       />
     </View>
@@ -55,9 +57,10 @@ const ProfileNav = createAppNavigator(
   navigationOptions => ({
     headerLeft: (
       <InstaHeaderButton
+        disabled
         name={'history'}
         onPress={() => {
-          NavigationService.navigate('Profile_History');
+          // NavigationService.navigate('Profile_History');
         }}
       />
     ),

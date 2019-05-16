@@ -284,7 +284,7 @@ class MediaContainerScreen extends React.Component {
               scrollEventThrottle={16}
               onScroll={this.onScroll}
               pagingEnabled
-              style={{ flex: 1 }}
+              style={{ flex: 1, scrollIndicator: 'none' }}
               contentContainerStyle={{ height: layout.height + drawerHeight }}
             >
               <BlurredOptionsContainer

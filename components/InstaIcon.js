@@ -5,12 +5,21 @@ import Assets from '../Assets';
 
 export default class InstaIcon extends React.PureComponent {
   render() {
-    const { name, active, size, color = 'white', style, ...props } = this.props;
+    const {
+      name,
+      active,
+      disabled,
+      size,
+      color = 'white',
+      style,
+      ...props
+    } = this.props;
     if (!name) {
       return null;
     }
     const colorStyle = [
       {
+        opacity: disabled ? 0.5 : 1,
         width: size,
         height: size,
         resizeMode: 'contain',
