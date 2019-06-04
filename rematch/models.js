@@ -14,6 +14,7 @@ export const image = {
     },
   },
 };
+
 export const camera = {
   state: {
     type: 'front',
