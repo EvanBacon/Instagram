@@ -2,12 +2,11 @@ import { LinearGradient } from 'expo';
 import Constants from 'expo-constants';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
 import { connect } from 'react-redux';
+
 import FaceButton from '../components/FaceButton';
 import IconButton from '../components/IconButton';
 import InstaIcon from '../components/InstaIcon';
-import NavigationService from '../navigation/NavigationService';
 import dispatch from '../rematch/dispatch';
 
 const GradientHeader = ({ style, ...props }) => (
