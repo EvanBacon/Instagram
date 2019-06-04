@@ -9,7 +9,6 @@ export default class HomeScreen extends React.Component {
     title: 'Instagram',
   };
 
-  
   render() {
     return <FeedList style={styles.container} data={Posts} />;
   }
