@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { View, StyleSheet } from 'react-native';
+import ReactDOM from 'react-dom';
 
 export class HeaderContainer extends React.PureComponent {
   render() {
