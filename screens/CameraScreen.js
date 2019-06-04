@@ -3,6 +3,7 @@ import { BlurView } from 'expo-blur';
 import { Camera } from 'expo-camera';
 import * as Font from 'expo-font';
 import * as Permissions from 'expo-permissions';
+import { element, func, oneOfType } from 'prop-types';
 import React from 'react';
 import {
   Animated,
@@ -312,8 +313,6 @@ class MediaContainerScreen extends React.Component {
     );
   }
 }
-
-import { element, func, oneOfType } from 'prop-types';
 
 export class Resizable extends React.Component {
   static displayName = 'Resizable';
