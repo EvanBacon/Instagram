@@ -12,8 +12,8 @@ import EditMedia from '../screens/EditMediaScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import FeedScreen from '../screens/FeedScreen';
 import MediaScreen from '../screens/MediaScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import createAppNavigator from './utils/createAppNavigator';
+import ProfileScreen from '../screens/ProfileScreen';
 import LikesTabNavigator from './LikesTabNavigator';
 import NavigationService from './NavigationService';
 
