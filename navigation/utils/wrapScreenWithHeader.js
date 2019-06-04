@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View } from 'react-native';
 import { Appbar } from 'react-native-paper';
+import { View } from 'react-native';
 
 import HeaderContainer from '../HeaderContainer';
 
