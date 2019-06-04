@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import SearchBar from '../components/SearchBar';
 
+import SearchBar from '../components/SearchBar';
 import { UserList } from '../components/UserList';
 import NavigationService from '../navigation/NavigationService';
 
