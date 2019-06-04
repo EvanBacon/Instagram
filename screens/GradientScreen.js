@@ -1,17 +1,18 @@
 import { LinearGradient, takeSnapshotAsync } from 'expo';
 import React from 'react';
 import {
-  Text,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 import IconButton from '../components/IconButton';
 import Header from '../components/MediaHeader';
 import dispatch from '../rematch/dispatch';
-import * as Animatable from 'react-native-animatable';
+
 const typefaceButtonSize = 36;
 
 class TypefaceButton extends React.Component {
