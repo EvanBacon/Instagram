@@ -1,5 +1,5 @@
-import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation';
+import React from 'react';
 
 import LikesFollowing from '../screens/LikesScreen';
 
