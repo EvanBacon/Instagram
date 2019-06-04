@@ -4,6 +4,7 @@ import Camera from '../screens/CameraScreen';
 import CameraSettings from '../screens/CameraSettingsScreen';
 
 Camera.path = '';
+
 CameraSettings.path = 'settings';
 
 const CameraNavigator = createSwitchNavigator(
