@@ -50,7 +50,8 @@ export class OutlineImage extends React.Component {
           borderRadius: imageWrapperSize / 2,
           borderWidth: imageBorderWidth,
           borderColor: 'rgba(0,0,0,0.3)',
-        }}>
+        }}
+      >
         {imageComponent}
       </View>
     );
@@ -86,8 +87,14 @@ export default class ProfileScreen extends React.Component {
       <ScrollView style={styles.container}>
         <ProfileHead />
         <ProfileBody />
-        <StorySlider stories={Highlights.filter(({ items }) => items.length)} hasNew />
-        <FeedDisplayRow onSelect={tag => this.setState({ tag })} selected={this.state.tag} />
+        <StorySlider
+          stories={Highlights.filter(({ items }) => items.length)}
+          hasNew
+        />
+        <FeedDisplayRow
+          onSelect={tag => this.setState({ tag })}
+          selected={this.state.tag}
+        />
 
         {this.renderDisplay()}
       </ScrollView>
