@@ -8,10 +8,7 @@ export default class ExploreScreen extends PureComponent {
     headerStyle: { borderWidth: 0 },
     header: props => <ExploreScreenHeader {...props} />,
   };
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {};
 
   render() {
     return (
