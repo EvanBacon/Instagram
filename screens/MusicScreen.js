@@ -1,4 +1,5 @@
 import EvilIcons from '@expo/vector-icons/EvilIcons';
+import { Audio } from 'expo';
 import { BlurView } from 'expo-blur';
 import React from 'react';
 import {
@@ -10,20 +11,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import {
   createAppContainer,
   createMaterialTopTabNavigator,
-  createStackNavigator,
   createSwitchNavigator,
-  SafeAreaView,
 } from 'react-navigation';
 
-import { Audio, LinearGradient } from 'expo';
 import SearchBar from '../components/SearchBar/SearchBar';
-import Genres from '../data/Genres.json';
 import Moods from '../data/Moods.json';
 import Popular from '../data/Popular-itunes.json';
-import * as Animatable from 'react-native-animatable';
+
 // import Popular from './data/Popular.json';
 const { height } = Dimensions.get('window');
 
