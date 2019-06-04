@@ -9,8 +9,8 @@ import {
 
 import MainTabNavigator from './MainTabNavigator';
 import InstaIcon from '../components/InstaIcon';
-import InstaHeaderButton from '../components/InstaHeaderButton';
 import NavigationService from './NavigationService';
+import InstaHeaderButton from '../components/InstaHeaderButton';
 
 const CustomDrawerContentComponent = ({ items, ...props }) => {
   return (
