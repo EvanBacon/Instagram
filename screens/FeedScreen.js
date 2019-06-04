@@ -8,6 +8,8 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Instagram',
   };
+
+  
   render() {
     return <FeedList style={styles.container} data={Posts} />;
   }
