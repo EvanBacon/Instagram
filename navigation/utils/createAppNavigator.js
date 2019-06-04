@@ -2,8 +2,8 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import InstaHeaderButton from '../../components/InstaHeaderButton';
-import InstaIcon from '../../components/InstaIcon';
 import CommentsScreen from '../../screens/CommentsScreen';
+import InstaIcon from '../../components/InstaIcon';
 import DetailsScreen from '../../screens/DetailsScreen';
 import UsersScreen from '../../screens/UsersScreen';
 import FollowingTabNavigator from '../FollowingTabNavigator';
