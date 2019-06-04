@@ -1,7 +1,7 @@
-import { createBottomTabNavigator } from 'react-navigation';
 // import { createMaterialTopTabNavigator } from 'react-navigation';
 
 import UsersScreen from '../screens/UsersScreen';
+import { createBottomTabNavigator } from 'react-navigation';
 
 const FollowingTabNavigator = createBottomTabNavigator(
   {
