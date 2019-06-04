@@ -1,9 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import {
-  Dimensions,
   Button,
-  Text,
+  Dimensions,
   Image,
   ScrollView,
   TouchableOpacity,
@@ -11,10 +10,9 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
+import Square from '../components/Square';
 import ZoomImage from '../components/ZoomImage';
 import NavigationService from '../navigation/NavigationService';
-
-import Square from '../components/Square';
 
 class PhotoGridItem extends React.PureComponent {
   render() {
