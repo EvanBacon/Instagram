@@ -8,10 +8,13 @@ import {
 import dispatch from './dispatch';
 // import store from './store';
 const { width, height } = Dimensions.get('window');
+
 export const VERTICAL_THRESHOLD = 80;
+
 export const HORIZONTAL_THRESHOLD = 60;
 
 export let indicatorAnim = new Animated.Value(0);
+
 export let verticalSwipe = new Animated.Value(0);
 
 export const data = [
