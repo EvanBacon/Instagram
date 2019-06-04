@@ -1,8 +1,8 @@
 import React from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 
-import initialScreens from '../constants/initialScreens';
 import CameraNavigator from './CameraNavigator';
+import initialScreens from '../constants/initialScreens';
 import DrawerNavigator from './DrawerNavigator';
 
 export default createSwitchNavigator(
