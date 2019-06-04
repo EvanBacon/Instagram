@@ -5,11 +5,11 @@ import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import Stories from './components/Stories/StoriesExperimental';
-// import Stories from './components/Stories/Stories';
 import MainNavigation from './navigation/MainNavigation';
 import NavigationService from './navigation/NavigationService';
 import Gate from './rematch/Gate';
 
+// import Stories from './components/Stories/Stories';
 export default class App extends React.Component {
   render() {
     return (
