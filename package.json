@@ -14,7 +14,7 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "build": "expo build:web --no-polyfill",
-    "debug-prod": "expod build:web --no-polyfill --no-pwa && serve ./web-build",
+    "debug-prod": "expo build:web --no-polyfill --no-pwa && serve ./web-build",
     "predeploy": "npm run build && expo optimize",
     "deploy": "netlify deploy --prod",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
