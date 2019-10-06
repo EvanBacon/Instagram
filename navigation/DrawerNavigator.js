@@ -1,11 +1,11 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import {
+  DrawerNavigatorItems,
   createDrawerNavigator,
-  DrawerItems,
-  SafeAreaView,
-  createStackNavigator,
-} from 'react-navigation';
+} from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import MainTabNavigator from './MainTabNavigator';
 import InstaIcon from '../components/InstaIcon';
@@ -20,7 +20,7 @@ const CustomDrawerContentComponent = ({ items, ...props }) => {
     >
       <DrawerHeader>Baconbrix</DrawerHeader>
       <ScrollView>
-        <DrawerItems
+        <DrawerNavigatorItems
           labelStyle={{ marginHorizontal: 0, fontWeight: 'normal' }}
           iconContainerStyle={{ marginHorizontal: 8 }}
           {...props}

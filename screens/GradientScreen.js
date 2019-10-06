@@ -1,4 +1,5 @@
-import { LinearGradient, takeSnapshotAsync } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
+import { takeSnapshotAsync } from 'expo';
 import React from 'react';
 import {
   StyleSheet,

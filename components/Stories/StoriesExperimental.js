@@ -1,20 +1,20 @@
 import React from 'react';
 import {
-  StyleSheet,
-  Platform,
-  View,
-  ScrollView,
-  PanResponder,
+  Animated,
   Dimensions,
   FlatList,
-  Animated,
+  PanResponder,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Story from './Story';
+
 import dispatch from '../../rematch/dispatch';
 import { verticalSwipe } from '../../rematch/stories';
 import DisableBodyScrollingView from '../DisableScrolling';
+import Story from './Story';
 
 const { width, height } = Dimensions.get('window');
 const halfWidth = width * 0.5;
@@ -312,7 +312,7 @@ class StoriesView extends React.Component {
   }
 
   render() {
-    const { stories = [], swipedHorizontally } = this.props;
+    const { stories = [] } = this.props;
 
     return (
       <DisableBodyScrollingView
@@ -358,77 +358,9 @@ class StoriesView extends React.Component {
         </Animated.View>
       </DisableBodyScrollingView>
     );
-    // children={stories.map((item, index) => this.renderItem({ item, index }))}
   }
 }
 
-// {stories.map((story, idx) => {
-//     //   let scale = verticalSwipe.interpolate({
-//     //     inputRange: [-1, 0, height],
-//     //     outputRange: [1, 1, 0.75],
-//     //   });
-
-//     //   if (swipedHorizontally) {
-//     //     scale = horizontalSwipe.interpolate({
-//     //       inputRange: [width * (idx - 1), width * idx, width * (idx + 1)],
-//     //       outputRange: [0.79, 1, 0.78],
-//     //     });
-//     //   }
-
-//     const offset = idx * width;
-//     const inputRange = [offset - width, offset + width];
-//     const translateX = horizontalSwipe.interpolate({
-//       inputRange,
-//       outputRange: [width / ratio, -width / ratio],
-//       extrapolate: 'clamp',
-//     });
-
-//     const rotateY = horizontalSwipe.interpolate({
-//       inputRange,
-//       outputRange: [`${angle}rad`, `-${angle}rad`],
-//       extrapolate: 'clamp',
-//     });
-//     const rotateYValue = rotateY.__getValue();
-
-//     const parsed = parseFloat(rotateYValue.substr(0, rotateYValue.indexOf('rad')), 10);
-//     const alpha = Math.abs(parsed);
-//     const gamma = angle - alpha;
-//     const beta = Math.PI - alpha - gamma;
-//     const w = halfWidth - (halfWidth * Math.sin(gamma)) / Math.sin(beta);
-//     const translateX2 = parsed > 0 ? w : -w;
-
-//     return (
-//       <Animated.View
-//         key={idx}
-//         style={[
-//           styles.deck,
-//           {
-//             transform: [
-//               { perspective },
-//               { translateX },
-//               { rotateY },
-//               { translateX: translateX2 },
-
-//               // {
-//               //   translateX: horizontalSwipe.interpolate({
-//               //     inputRange: [width * (idx - 1), width * idx, width * (idx + 1)],
-//               //     outputRange: [width, 0, -width],
-//               //   }),
-//               // },
-//               // {
-//               //   translateY: verticalSwipe.interpolate({
-//               //     inputRange: [-1, 0, height],
-//               //     outputRange: [0, 0, height / 2],
-//               //   }),
-//               // },
-//               // { scale },
-//             ],
-//           },
-//         ]}>
-//         <Story story={story} currentDeck={deckIdx === idx} />
-//       </Animated.View>
-//     );
-//   })}
 export default connect(({ stories }) => ({ ...stories }))(StoriesView);
 
 const styles = StyleSheet.create({

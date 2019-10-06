@@ -1,4 +1,4 @@
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { Camera } from 'expo-camera';
 import * as Font from 'expo-font';
@@ -285,7 +285,7 @@ class MediaContainerScreen extends React.Component {
               scrollEventThrottle={16}
               onScroll={this.onScroll}
               pagingEnabled
-              style={{ flex: 1, scrollIndicator: 'none' }}
+              style={{ flex: 1 }}
               contentContainerStyle={{ height: layout.height + drawerHeight }}
             >
               <BlurredOptionsContainer

@@ -1,8 +1,10 @@
-import { GestureHandler } from 'expo';
 import React, { Component } from 'react';
 import { View } from 'react-native';
-
-const { LongPressGestureHandler, State, TapGestureHandler } = GestureHandler;
+import {
+  LongPressGestureHandler,
+  State,
+  TapGestureHandler,
+} from 'react-native-gesture-handler';
 
 export default class TapView extends Component {
   onHandlerStateChange = event => {

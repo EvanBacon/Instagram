@@ -1,6 +1,17 @@
-import { Constants, Camera, FileSystem, Permissions, BarCodeScanner } from 'expo';
+import { BarCodeScanner } from 'expo-bar-code-scanner';
+import * as Permissions from 'expo-permissions';
+import { Camera } from 'expo-camera';
+import * as FileSystem from 'expo-file-system';
+import Constants from 'expo-constants';
 import React from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import isIPhoneX from 'react-native-is-iphonex';
 
 import {
@@ -77,7 +88,9 @@ export default class CameraScreen extends React.Component {
       return;
     }
     try {
-      FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+      FileSystem.makeDirectoryAsync(
+        FileSystem.documentDirectory + 'photos',
+      ).catch(e => {
         console.log(e, 'Directory exists');
       });
     } catch (error) {}
@@ -88,29 +101,43 @@ export default class CameraScreen extends React.Component {
     return ratios;
   };
 
-  toggleView = () => this.setState({ showGallery: !this.state.showGallery, newPhotos: false });
+  toggleView = () =>
+    this.setState({ showGallery: !this.state.showGallery, newPhotos: false });
 
-  toggleMoreOptions = () => this.setState({ showMoreOptions: !this.state.showMoreOptions });
+  toggleMoreOptions = () =>
+    this.setState({ showMoreOptions: !this.state.showMoreOptions });
 
-  toggleFacing = () => this.setState({ type: this.state.type === 'back' ? 'front' : 'back' });
+  toggleFacing = () =>
+    this.setState({ type: this.state.type === 'back' ? 'front' : 'back' });
 
-  toggleFlash = () => this.setState({ flash: flashModeOrder[this.state.flash] });
+  toggleFlash = () =>
+    this.setState({ flash: flashModeOrder[this.state.flash] });
 
   setRatio = ratio => this.setState({ ratio });
 
-  toggleWB = () => this.setState({ whiteBalance: wbOrder[this.state.whiteBalance] });
+  toggleWB = () =>
+    this.setState({ whiteBalance: wbOrder[this.state.whiteBalance] });
 
-  toggleFocus = () => this.setState({ autoFocus: this.state.autoFocus === 'on' ? 'off' : 'on' });
+  toggleFocus = () =>
+    this.setState({ autoFocus: this.state.autoFocus === 'on' ? 'off' : 'on' });
 
-  zoomOut = () => this.setState({ zoom: this.state.zoom - 0.1 < 0 ? 0 : this.state.zoom - 0.1 });
+  zoomOut = () =>
+    this.setState({
+      zoom: this.state.zoom - 0.1 < 0 ? 0 : this.state.zoom - 0.1,
+    });
 
-  zoomIn = () => this.setState({ zoom: this.state.zoom + 0.1 > 1 ? 1 : this.state.zoom + 0.1 });
+  zoomIn = () =>
+    this.setState({
+      zoom: this.state.zoom + 0.1 > 1 ? 1 : this.state.zoom + 0.1,
+    });
 
   setFocusDepth = depth => this.setState({ depth });
 
-  toggleBarcodeScanning = () => this.setState({ barcodeScanning: !this.state.barcodeScanning });
+  toggleBarcodeScanning = () =>
+    this.setState({ barcodeScanning: !this.state.barcodeScanning });
 
-  toggleFaceDetection = () => this.setState({ faceDetecting: !this.state.faceDetecting });
+  toggleFaceDetection = () =>
+    this.setState({ faceDetecting: !this.state.faceDetecting });
 
   takePicture = () => {
     if (this.camera) {
@@ -135,7 +162,7 @@ export default class CameraScreen extends React.Component {
   onBarCodeScanned = code => {
     this.setState(
       { barcodeScanning: !this.state.barcodeScanning },
-      Alert.alert(`Barcode found: ${code.data}`)
+      Alert.alert(`Barcode found: ${code.data}`),
     );
   };
 
@@ -144,7 +171,9 @@ export default class CameraScreen extends React.Component {
 
   collectPictureSizes = async () => {
     if (this.camera) {
-      const pictureSizes = await this.camera.getAvailablePictureSizesAsync(this.state.ratio);
+      const pictureSizes = await this.camera.getAvailablePictureSizesAsync(
+        this.state.ratio,
+      );
       let pictureSizeId = 0;
       if (Platform.OS === 'ios') {
         pictureSizeId = pictureSizes.indexOf('High');
@@ -152,7 +181,11 @@ export default class CameraScreen extends React.Component {
         // returned array is sorted in ascending order - default size is the largest one
         pictureSizeId = pictureSizes.length - 1;
       }
-      this.setState({ pictureSizes, pictureSizeId, pictureSize: pictureSizes[pictureSizeId] });
+      this.setState({
+        pictureSizes,
+        pictureSizeId,
+        pictureSize: pictureSizes[pictureSizeId],
+      });
     }
   };
 
@@ -167,10 +200,11 @@ export default class CameraScreen extends React.Component {
     } else if (newId < 0) {
       newId = length - 1;
     }
-    this.setState({ pictureSize: this.state.pictureSizes[newId], pictureSizeId: newId });
+    this.setState({
+      pictureSize: this.state.pictureSizes[newId],
+      pictureSizeId: newId,
+    });
   };
-
-  
 
   renderFace({ bounds, faceID, rollAngle, yawAngle }) {
     return (
@@ -188,7 +222,8 @@ export default class CameraScreen extends React.Component {
             left: bounds.origin.x,
             top: bounds.origin.y,
           },
-        ]}>
+        ]}
+      >
         <Text style={styles.faceText}>ID: {faceID}</Text>
         <Text style={styles.faceText}>rollAngle: {rollAngle.toFixed(0)}</Text>
         <Text style={styles.faceText}>yawAngle: {yawAngle.toFixed(0)}</Text>
@@ -252,17 +287,26 @@ export default class CameraScreen extends React.Component {
         <Ionicons name="ios-reverse-camera" size={32} color="white" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.toggleButton} onPress={this.toggleFlash}>
-        <MaterialIcons name={flashIcons[this.state.flash]} size={32} color="white" />
+        <MaterialIcons
+          name={flashIcons[this.state.flash]}
+          size={32}
+          color="white"
+        />
       </TouchableOpacity>
       <TouchableOpacity style={styles.toggleButton} onPress={this.toggleWB}>
-        <MaterialIcons name={wbIcons[this.state.whiteBalance]} size={32} color="white" />
+        <MaterialIcons
+          name={wbIcons[this.state.whiteBalance]}
+          size={32}
+          color="white"
+        />
       </TouchableOpacity>
       <TouchableOpacity style={styles.toggleButton} onPress={this.toggleFocus}>
         <Text
           style={[
             styles.autoFocusLabel,
             { color: this.state.autoFocus === 'on' ? 'white' : '#6b6b6b' },
-          ]}>
+          ]}
+        >
           AF
         </Text>
       </TouchableOpacity>
@@ -271,11 +315,17 @@ export default class CameraScreen extends React.Component {
 
   renderBottomBar = () => (
     <View style={styles.bottomBar}>
-      <TouchableOpacity style={styles.bottomButton} onPress={this.toggleMoreOptions}>
+      <TouchableOpacity
+        style={styles.bottomButton}
+        onPress={this.toggleMoreOptions}
+      >
         <Octicons name="kebab-horizontal" size={30} color="white" />
       </TouchableOpacity>
       <View style={{ flex: 0.4 }}>
-        <TouchableOpacity onPress={this.takePicture} style={{ alignSelf: 'center' }}>
+        <TouchableOpacity
+          onPress={this.takePicture}
+          style={{ alignSelf: 'center' }}
+        >
           <Ionicons name="ios-radio-button-on" size={70} color="white" />
         </TouchableOpacity>
       </View>
@@ -310,13 +360,19 @@ export default class CameraScreen extends React.Component {
       <View style={styles.pictureSizeContainer}>
         <Text style={styles.pictureQualityLabel}>Picture quality</Text>
         <View style={styles.pictureSizeChooser}>
-          <TouchableOpacity onPress={this.previousPictureSize} style={{ padding: 6 }}>
+          <TouchableOpacity
+            onPress={this.previousPictureSize}
+            style={{ padding: 6 }}
+          >
             <Ionicons name="md-arrow-dropleft" size={14} color="white" />
           </TouchableOpacity>
           <View style={styles.pictureSizeLabel}>
             <Text style={{ color: 'white' }}>{this.state.pictureSize}</Text>
           </View>
-          <TouchableOpacity onPress={this.nextPictureSize} style={{ padding: 6 }}>
+          <TouchableOpacity
+            onPress={this.nextPictureSize}
+            style={{ padding: 6 }}
+          >
             <Ionicons name="md-arrow-dropright" size={14} color="white" />
           </TouchableOpacity>
         </View>
@@ -340,7 +396,9 @@ export default class CameraScreen extends React.Component {
         ratio={this.state.ratio}
         pictureSize={this.state.pictureSize}
         onMountError={this.handleMountError}
-        onFacesDetected={this.state.faceDetecting ? this.onFacesDetected : undefined}
+        onFacesDetected={
+          this.state.faceDetecting ? this.onFacesDetected : undefined
+        }
         onFaceDetectionError={this.onFaceDetectionError}
         barCodeScannerSettings={{
           barCodeTypes: [
@@ -348,7 +406,10 @@ export default class CameraScreen extends React.Component {
             BarCodeScanner.Constants.BarCodeType.pdf417,
           ],
         }}
-        onBarCodeScanned={this.state.barcodeScanning ? this.onBarCodeScanned : undefined}>
+        onBarCodeScanned={
+          this.state.barcodeScanning ? this.onBarCodeScanned : undefined
+        }
+      >
         {this.renderTopBar()}
         {this.renderBottomBar()}
       </Camera>

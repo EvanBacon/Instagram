@@ -1,5 +1,5 @@
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { Audio } from 'expo';
+import { Audio } from 'expo-av';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -57,7 +57,7 @@ class InnerApp extends React.Component {
   render() {
     const { offset, children, carouselOpen } = this.props;
     return (
-      <>
+      <React.Fragment>
         {children}
         <View
           style={[
@@ -68,7 +68,7 @@ class InnerApp extends React.Component {
         >
           <Stories />
         </View>
-      </>
+      </React.Fragment>
     );
   }
 }

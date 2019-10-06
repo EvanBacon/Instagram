@@ -1,7 +1,6 @@
-// import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import UsersScreen from '../screens/UsersScreen';
-import { createBottomTabNavigator } from 'react-navigation';
 
 const FollowingTabNavigator = createBottomTabNavigator(
   {

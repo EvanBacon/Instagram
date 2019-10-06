@@ -1,4 +1,4 @@
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
   Dimensions,
@@ -49,7 +49,8 @@ class Story extends React.Component {
         delayPressIn={200}
         onPressIn={() => {
           dispatch().stories.pause();
-        }}>
+        }}
+      >
         <View style={{ flex: 1 }}>
           <Image
             source={story.items[story.idx]}
@@ -69,10 +70,15 @@ class Story extends React.Component {
       <TouchableWithoutFeedback
         onPress={() => {
           dispatch().stories.dismissCarousel();
-        }}>
+        }}
+      >
         <View style={styles.closeButton}>
-          <View style={[styles.closeCross, { transform: [{ rotate: '45deg' }] }]} />
-          <View style={[styles.closeCross, { transform: [{ rotate: '-45deg' }] }]} />
+          <View
+            style={[styles.closeCross, { transform: [{ rotate: '45deg' }] }]}
+          />
+          <View
+            style={[styles.closeCross, { transform: [{ rotate: '-45deg' }] }]}
+          />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -91,7 +97,12 @@ class Story extends React.Component {
 
         <View style={styles.indicators}>
           {story.items.map((item, i) => (
-            <Indicator key={i} i={i} animate={currentDeck && story.idx == i} story={story} />
+            <Indicator
+              key={i}
+              i={i}
+              animate={currentDeck && story.idx == i}
+              story={story}
+            />
           ))}
         </View>
       </View>
@@ -106,7 +117,8 @@ class Story extends React.Component {
           dispatch().stories.onPrevItem();
         }}
         onPressIn={() => dispatch().stories.setBackOpacity(1)}
-        onLongPress={() => dispatch().stories.setBackOpacity(0)}>
+        onLongPress={() => dispatch().stories.setBackOpacity(0)}
+      >
         <LinearGradient
           colors={['rgba(0,0,0,0.33)', 'transparent']}
           locations={[0, 0.85]}

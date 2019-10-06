@@ -158,6 +158,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 8,
     paddingHorizontal: 12,
-    scrollIndicator: 'none',
   },
 });

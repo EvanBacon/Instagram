@@ -4,8 +4,7 @@
     "description": "Dev photo sharing app",
     "slug": "Expogram",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
-    "platforms": ["ios", "android", "web"],
+    "sdkVersion": "35.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/brand/icon.png",
@@ -14,13 +13,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": { "_barStyle": "black-translucent", "build": { "report": false } }
+    "web": { "barStyle": "black-translucent" }
   }
 }

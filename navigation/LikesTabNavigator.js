@@ -1,4 +1,4 @@
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import React from 'react';
 
 import LikesFollowing from '../screens/LikesScreen';

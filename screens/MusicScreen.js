@@ -1,7 +1,7 @@
 import EvilIcons from '@expo/vector-icons/EvilIcons';
-import { Audio } from 'expo';
+import { Audio } from 'expo-av';
 import { BlurView } from 'expo-blur';
-import React from 'react';
+import * as React from 'react';
 import {
   Dimensions,
   FlatList,
@@ -12,11 +12,9 @@ import {
   View,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import {
-  createAppContainer,
-  createMaterialTopTabNavigator,
-  createSwitchNavigator,
-} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 import SearchBar from '../components/SearchBar/SearchBar';
 import Moods from '../data/Moods.json';

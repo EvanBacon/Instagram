@@ -1,9 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import {
-  createBottomTabNavigator,
-  createStackNavigator,
-} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import InstaHeaderButton from '../components/InstaHeaderButton';
 import TabBarIcon from '../components/TabBarIcon';
