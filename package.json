@@ -32,7 +32,7 @@
     "expo-av": "^7.0.1",
     "expo-blur": "^7.0.0",
     "expo-camera": "^7.0.0",
-    "expo-linear-gradient": "^7.0.0",
+    "expo-linear-gradient": "^7.0.1",
     "i18n-js": "^3.3.0",
     "react": "16.10.2",
     "react-dom": "^16.10.2",
@@ -55,7 +55,7 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^7.0.0",
+    "babel-preset-expo": "^7.1.0",
     "jest-expo": "35.0.0"
   }
 }

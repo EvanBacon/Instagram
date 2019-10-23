@@ -730,18 +730,20 @@ const users = [
     account: 'notbrent',
   },
   {
+    name: 'theavocoder',
+    account: 'lydiahallie',
+  },
+  {
+    name: 'expo',
+    account: 'expo',
+  },
+  {
     name: 'Charlie Cheever',
     account: 'ccheever',
   },
   {
     name: 'James Ide',
-    account: 'jameside',
-  },
-  {
-    name: 'quin',
-    image: {
-      uri: 'quinlanjung',
-    },
+    account: 'ji',
   },
 ];
 
