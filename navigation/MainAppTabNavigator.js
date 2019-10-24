@@ -3,7 +3,7 @@ import { createSwitchNavigator } from 'react-navigation';
 
 import initialScreens from '../constants/initialScreens';
 import CameraNavigator from './CameraNavigator';
-import DrawerNavigator from './DrawerNavigator';
+import DrawerNavigator from './MainTabNavigator';
 
 export default createSwitchNavigator(
   {
