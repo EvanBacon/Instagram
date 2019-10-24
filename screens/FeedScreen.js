@@ -5,9 +5,18 @@ import FeedList from '../components/FeedList';
 import Posts from '../constants/Posts';
 import useBasicQuery from '../useBasicQuery';
 import useLayout from '../useLayout';
+import dispatch from '../rematch/dispatch';
 
 export default function HomeScreen() {
   const { onLayout, width } = useLayout();
+
+  let lastWidth = NaN;
+  React.useEffect(() => {
+    if (width != null && width !== lastWidth) {
+      lastWidth = width;
+      dispatch().splash.set(false);
+    }
+  }, [width]);
 
   return (
     <View

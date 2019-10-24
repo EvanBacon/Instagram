@@ -50,7 +50,7 @@ export default class FeedList extends React.Component {
     ]);
 
     return (
-      <>
+      <React.Fragment>
         <FlatList
           showsVerticalScrollIndicator={false}
           style={{ backgroundColor: 'transparent' }}
@@ -89,7 +89,7 @@ export default class FeedList extends React.Component {
             selectedPhoto={selectedPhoto}
           />
         ) : null}
-      </>
+      </React.Fragment>
     );
   }
 }
@@ -112,7 +112,6 @@ class SelectedPhoto extends React.Component {
     let animatedStyle = {
       transform: gesturePosition.getTranslateTransform(),
     };
-    console.log('translate', gesturePosition.getTranslateTransform());
     animatedStyle.transform.push({
       scale: scaleValue,
     });

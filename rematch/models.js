@@ -15,6 +15,14 @@ export const image = {
   },
 };
 
+export const splash = {
+  state: true,
+  reducers: {
+    update: (state, payload) => ({ ...state, ...payload }),
+    set: (state, payload) => payload,
+  },
+};
+
 export const camera = {
   state: {
     type: 'front',
@@ -37,4 +45,5 @@ export const camera = {
     },
   },
 };
+
 export { default as stories } from './stories';

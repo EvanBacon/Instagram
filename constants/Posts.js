@@ -38,11 +38,11 @@ const IMAGES = {
 const posts = [
   {
     description: 'Being an @expo.io developer is lit 😍🔥💙',
-    image: `http://images.mocpages.com/user_images/62889/14121949901_SPLASH.jpg`,
+    image: `https://live.staticflickr.com/5524/14637340355_e3b2f4d2bc_h.jpg`,
   },
   {
     description: 'New selfie, might take it down, idk, give me likes',
-    image: `http://www.antilogic.co.za/wp-content/uploads/2012/09/iron_man_lego.jpg`,
+    image: `https://live.staticflickr.com/5528/14450721698_2831bd25a6_h.jpg`,
   },
   {
     description: 'Being a 21-year-old @expo.io developer is lit 😍🔥💙',
