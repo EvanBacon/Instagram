@@ -6,6 +6,7 @@ import {
   findNodeHandle,
   PanResponder,
   UIManager,
+  StyleSheet,
   View,
 } from 'react-native';
 
@@ -227,9 +228,21 @@ class Item extends React.PureComponent {
   };
 
   render() {
-    const { imageWidth, imageHeight, item } = this.props;
+    const { imageWidth, imageHeight, item, isLarge } = this.props;
+
     return (
-      <View ref={parentNode => (this._parent = parentNode)}>
+      <View
+        style={[
+          { backgroundColor: 'white' },
+          isLarge && {
+            borderColor: '#e6e6e6',
+            borderRadius: 3,
+            borderWidth: StyleSheet.hairlineWidth,
+            marginBottom: 15,
+          },
+        ]}
+        ref={parentNode => (this._parent = parentNode)}
+      >
         <ItemHeader item={item} />
         <DisableBodyScrollingView>
           <Animated.View

@@ -16,11 +16,11 @@ class ItemHeader extends React.Component {
           flexDirection: 'row',
           paddingLeft: 16,
           paddingRight: 4,
-          paddingVertical: 16,
+          paddingVertical: 14,
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderBottomWidth: 0.5,
-        }}>
+        }}
+      >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <ProfileImage
             style={{
@@ -36,13 +36,17 @@ class ItemHeader extends React.Component {
             account={account}
           />
           <View>
-            <Text style={{ fontSize: 14, color: '#262626', fontWeight: '600' }}>{account}</Text>
-            <Text style={{ fontSize: 12, color: '#262626' }}>{location || 'Legoland'}</Text>
+            <Text style={{ fontSize: 14, color: '#262626', fontWeight: '600' }}>
+              {account}
+            </Text>
+            <Text style={{ fontSize: 12, color: '#262626' }}>
+              {location || 'Legoland'}
+            </Text>
           </View>
         </View>
         <InstaHeaderButton
           name="more"
-          size={36}
+          size={30}
           color={'black'}
           onPress={() => {
             const options = [
@@ -74,7 +78,7 @@ class ItemHeader extends React.Component {
               buttonIndex => {
                 // Do something here depending on the button index selected
                 // onSelection(buttonIndex);
-              }
+              },
             );
           }}
         />

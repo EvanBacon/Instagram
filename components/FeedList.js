@@ -7,7 +7,7 @@ import FeedListFooter from './FeedListFooter';
 import Item from './Item';
 import StorySlider from './StorySlider';
 
-export const profileImageSize = 30;
+export const profileImageSize = 32;
 
 export default class FeedList extends React.Component {
   static defaultProps = {
@@ -52,6 +52,8 @@ export default class FeedList extends React.Component {
     return (
       <>
         <FlatList
+          showsVerticalScrollIndicator={false}
+          style={{ backgroundColor: 'transparent' }}
           ref={ref => (this.list = ref)}
           scrollEventThrottle={16}
           onScroll={onScroll}
@@ -62,6 +64,7 @@ export default class FeedList extends React.Component {
           minimumZoomScale={1}
           renderItem={({ item }) => (
             <Item
+              isLarge={props.isLarge}
               getParent={() => this.list}
               isDragging={isDragging}
               onGestureStart={selectedPhoto => {

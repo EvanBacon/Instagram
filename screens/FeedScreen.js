@@ -1,22 +1,36 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import FeedList from '../components/FeedList';
 import Posts from '../constants/Posts';
+import useBasicQuery from '../useBasicQuery';
+import useLayout from '../useLayout';
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Instagram',
-  };
+export default function HomeScreen() {
+  const { onLayout, width } = useLayout();
 
-  render() {
-    return <FeedList style={styles.container} data={Posts} />;
-  }
+  return (
+    <View
+      onLayout={onLayout}
+      style={{
+        backgroundColor: 'rgb(250,250,250)',
+        flex: 1,
+        alignItems: width >= 600 ? 'center' : 'stretch',
+      }}
+    >
+      <FeedList isLarge={width >= 600} style={styles.container} data={Posts} />
+    </View>
+  );
 }
+HomeScreen.navigationOptions = {
+  title: 'Instagram',
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    maxWidth: 600,
+
+    backgroundColor: 'transparent',
   },
 });

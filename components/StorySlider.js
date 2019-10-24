@@ -11,6 +11,10 @@ import {
 
 import dispatch from '../rematch/dispatch';
 import ProfileImage from './ProfileImage';
+import useLayout from '../useLayout';
+
+const imagePadding = 2;
+const imageBorderWidth = 2;
 
 class OutlineImage extends React.Component {
   render() {
@@ -23,8 +27,6 @@ class OutlineImage extends React.Component {
       ...props
     } = this.props;
 
-    const imagePadding = 4;
-    const imageBorderWidth = 1;
     const imageWrapperSize = imageSize + (imagePadding + imageBorderWidth) * 2;
 
     let imageComponent;
@@ -59,10 +61,24 @@ class OutlineImage extends React.Component {
           padding: imagePadding,
           borderRadius: imageWrapperSize / 2,
           borderWidth: imageBorderWidth,
-          borderColor: 'rgba(0,0,0,0.3)',
+          borderColor: '#CA4074',
         }}
       >
         {imageComponent}
+        <View
+          style={[
+            {
+              position: 'absolute',
+              top: imagePadding,
+              right: imagePadding,
+              left: imagePadding,
+              bottom: imagePadding,
+              borderRadius: imageWrapperSize / 2,
+              borderWidth: StyleSheet.hairlineWidth,
+              borderColor: 'rgba(0,0,0,0.0975)',
+            },
+          ]}
+        />
       </View>
     );
   }
@@ -105,7 +121,7 @@ class StoryItem extends React.Component {
           renderImage={renderImage}
           imageSize={ICON_SIZE}
         />
-        <Text style={{ fontSize: 16, marginTop: 6 }}>{title}</Text>
+        <Text style={{ fontSize: 12, marginTop: 6 }}>{title}</Text>
       </TouchableOpacity>
     );
   }
@@ -131,19 +147,33 @@ const NewStory = () => {
   );
 };
 
-class Stories extends React.Component {
-  render() {
-    const { stories, hasNew } = this.props;
+function Stories({ stories, hasNew }) {
+  const { onLayout, width } = useLayout();
 
-    return (
-      <ScrollView horizontal style={styles.row}>
-        {hasNew && <NewStory />}
-        {stories.map((story, index) => (
-          <StoryItem key={story.account} {...story} index={index} />
-        ))}
-      </ScrollView>
-    );
-  }
+  const isLarge = width >= 600;
+  return (
+    <ScrollView
+      horizontal
+      onLayout={onLayout}
+      showsHorizontalScrollIndicator={false}
+      style={[
+        styles.row,
+        isLarge && {
+          marginVertical: 24,
+          borderColor: '#e6e6e6',
+          borderRadius: 3,
+          backgroundColor: '#FAFAFA',
+
+          borderWidth: StyleSheet.hairlineWidth,
+        },
+      ]}
+    >
+      {hasNew && <NewStory />}
+      {stories.map((story, index) => (
+        <StoryItem key={story.account} {...story} index={index} />
+      ))}
+    </ScrollView>
+  );
 }
 
 export default Stories;
@@ -152,11 +182,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fafafa',
+    backgroundColor: 'transparent',
   },
   row: {
+    backgroundColor: 'white',
     flexDirection: 'row',
-    marginVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 12,
   },
 });
