@@ -4,7 +4,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import SplashScreen from './components/SplashScreen';
 import Stories from './components/Stories/StoriesExperimental';
 import MainNavigation from './navigation/MainNavigation';
 import NavigationService from './navigation/NavigationService';
@@ -56,7 +55,7 @@ class AudioMode extends React.PureComponent {
 
 class InnerApp extends React.Component {
   render() {
-    const { offset, children, carouselOpen, splash } = this.props;
+    const { offset, children, carouselOpen } = this.props;
     return (
       <React.Fragment>
         {children}
@@ -69,13 +68,11 @@ class InnerApp extends React.Component {
         >
           <Stories />
         </View>
-        {splash && <SplashScreen />}
       </React.Fragment>
     );
   }
 }
 
-const ConnectedInnerApp = connect(({ stories, splash }) => ({
+const ConnectedInnerApp = connect(({ stories }) => ({
   ...stories,
-  splash,
 }))(InnerApp);

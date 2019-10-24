@@ -6,15 +6,16 @@ import Posts from '../constants/Posts';
 import useBasicQuery from '../useBasicQuery';
 import useLayout from '../useLayout';
 import dispatch from '../rematch/dispatch';
+import SplashScreen from '../components/SplashScreen';
 
 export default function HomeScreen() {
   const { onLayout, width } = useLayout();
-
+  const [isShowingSplashScreen, setShowingSplash] = React.useState(true);
   let lastWidth = NaN;
   React.useEffect(() => {
     if (width != null && width !== lastWidth) {
       lastWidth = width;
-      dispatch().splash.set(false);
+      setShowingSplash(false);
     }
   }, [width]);
 
@@ -28,6 +29,7 @@ export default function HomeScreen() {
       }}
     >
       <FeedList isLarge={width >= 600} style={styles.container} data={Posts} />
+      {isShowingSplashScreen && <SplashScreen />}
     </View>
   );
 }

@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.2.0",
-    "@react-navigation/web": "^1.0.0-alpha.8",
+    "@react-navigation/web": "^1.0.0-alpha.9",
     "@rematch/core": "^1.1.0",
     "@rematch/persist": "^1.1.6",
     "date-format": "^2.1.0",
