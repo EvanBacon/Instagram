@@ -242,7 +242,7 @@ const PopularScreen = props => <ListScreen {...props} data={Songs} />;
 const MusicTabNavigator = createMaterialTopTabNavigator(
   {
     Popular: PopularScreen,
-    Moods: MoodScreen,
+    // Moods: MoodScreen,
     // Genres: GenreScreen,
   },
   {
@@ -307,7 +307,7 @@ const MusicNav = createAppContainer(
   createSwitchNavigator(
     {
       GenreScreen: MusicTabNavigator,
-      MusicScreen: SecondaryMusicScreen,
+      // MusicScreen: SecondaryMusicScreen,
     },
     {
       transparentCard: true,
