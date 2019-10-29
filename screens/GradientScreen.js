@@ -50,7 +50,8 @@ const DEFAULT_PLACEHOLDER = 'Tap to Type';
 class TypeScreen extends React.Component {
   state = { useEffect: false, value: '', placeholder: DEFAULT_PLACEHOLDER };
 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     global.takeGradientPictureGlobal = this.captureAsync;
   }
   onEffectPressed = () => {

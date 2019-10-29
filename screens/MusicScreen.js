@@ -119,7 +119,7 @@ const SongListScreenItem = ({ title, artist, image, onPress }) => (
   <ListScreenItem
     onPress={onPress}
     renderImage={({ style }) => (
-      <Image style={style} resizeMode="cover" source={image} />
+      <Image loading="lazy" style={style} resizeMode="cover" source={image} />
     )}
     title={title}
     subtitle={artist}

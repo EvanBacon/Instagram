@@ -6,6 +6,7 @@ import {
   PanResponder,
   ScrollView,
   StatusBar,
+  Platform,
   StyleSheet,
   View,
 } from 'react-native';
@@ -60,7 +61,7 @@ class StoriesView extends React.Component {
         },
       ],
       {
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS !== 'web',
       },
     );
     this.swipeConfig = Object.assign(swipeConfig, props.config);
@@ -150,7 +151,7 @@ class StoriesView extends React.Component {
   _handlePanResponderEnd = (evt, gestureState) => {
     const direction = this._getSwipeDirection(gestureState);
 
-    console.log('End Gesture', direction);
+    // console.log('End Gesture', direction);
     // this._triggerSwipeHandlers(swipeDirection, gestureState);
     dispatch().stories.onPanResponderRelease({ direction });
   };

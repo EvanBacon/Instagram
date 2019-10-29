@@ -356,7 +356,7 @@ const stories = {
           duration: 5000 * (1 - indicatorAnim._value),
         }).start(({ finished }) => {
           if (finished) {
-            console.log('FINISHED');
+            // console.log('FINISHED');
             dispatch().stories.onNextItem();
           }
         });
@@ -373,19 +373,19 @@ const stories = {
         stories: { paused, stories, deckIdx },
       },
     ) {
-      console.log('onNextItem', paused, stories, deckIdx);
+      // console.log('onNextItem', paused, stories, deckIdx);
       if (paused) {
         return dispatch().stories.play();
       }
 
       const story = getCurrentStory({ stories, deckIdx });
-      console.log('onNextItem.story', story);
+      // console.log('onNextItem.story', story);
       if (story) {
         if (story.idx >= story.items.length - 1) {
-          console.log('onNextItem.story.nextStory');
+          // console.log('onNextItem.story.nextStory');
           return dispatch().stories.onNextDeck();
         }
-        console.log('onNextItem.story.continue', story.idx + 1);
+        // console.log('onNextItem.story.continue', story.idx + 1);
         dispatch().stories.animateIndicator(true);
         dispatch().stories.setStoryIdx(story.idx + 1);
       } else {

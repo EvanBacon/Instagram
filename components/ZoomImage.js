@@ -20,13 +20,7 @@ export default class ZoomImage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      uri: props.uri,
-      size: props.size,
-    };
-  }
 
-  componentWillMount() {
     (async () => {
       const { size, uri } = this.state;
       if (!size && uri) {
@@ -36,9 +30,14 @@ export default class ZoomImage extends React.Component {
         });
       }
     })();
+
+    this.state = {
+      uri: props.uri,
+      size: props.size,
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { props } = this;
     if (nextProps.selected != props.selected) {
       if (props.selected && !nextProps.selected) {

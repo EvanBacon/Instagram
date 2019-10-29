@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Animated, FlatList } from 'react-native';
+import { Animated, FlatList, Platform } from 'react-native';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 class ViewPager extends Component {
@@ -17,7 +17,7 @@ class ViewPager extends Component {
     snapToAlignment: 'start',
     onEndReachedThreshold: 50,
     horizontal: true,
-    useNativeDriver: true,
+    useNativeDriver: Platform.OS !== 'web',
     initialIndex: 0,
     scroll: new Animated.Value(0),
   };
@@ -85,7 +85,8 @@ class ViewPager extends Component {
 
   next = animated => this.scrollToIndex({ index: this.index + 1, animated });
 
-  previous = animated => this.scrollToIndex({ index: this.index - 1, animated });
+  previous = animated =>
+    this.scrollToIndex({ index: this.index - 1, animated });
 
   setupOnScroll = (useNativeDriver, horizontal) => {
     const key = horizontal ? 'x' : 'y';
@@ -97,17 +98,20 @@ class ViewPager extends Component {
       ],
       {
         useNativeDriver,
-      }
+      },
     );
   };
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { props } = this;
     if (
       nextProps.useNativeDriver != props.useNativeDriver ||
       nextProps.horizontal != props.horizontal
     ) {
       this.setState({
-        onScroll: this.setupOnScroll(nextProps.useNativeDriver, nextProps.horizontal),
+        onScroll: this.setupOnScroll(
+          nextProps.useNativeDriver,
+          nextProps.horizontal,
+        ),
       });
     }
   }
@@ -192,7 +196,10 @@ class ViewPager extends Component {
         snapToAlignment={snapToAlignment}
         snapToInterval={this.size}
         decelerationRate={decelerationRate}
-        contentContainerStyle={[this.contentContainerStyle, contentContainerStyle]}
+        contentContainerStyle={[
+          this.contentContainerStyle,
+          contentContainerStyle,
+        ]}
         getItemLayout={getItemLayout || this.getItemLayout}
         renderItem={renderItem}
         onRefresh={onRefresh}

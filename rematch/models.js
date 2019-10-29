@@ -36,13 +36,11 @@ export const permissions = {
     getAsync: async (props = {}) => {
       const { permission } = props;
       const { status } = await Permissions.getAsync(permission);
-      console.log('model permissions getAsync ', permission, status);
       dispatch().permissions.update({ [permission]: status });
     },
     askAsync: async (props = {}) => {
       const { permission } = props;
       const { status } = await Permissions.askAsync(permission);
-      console.log('model permissions ask ', permission, status);
       dispatch().permissions.update({ [permission]: status });
     },
   },

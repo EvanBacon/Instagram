@@ -322,7 +322,7 @@ class MediaContainerScreen extends React.Component {
         },
       ],
       {
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS !== 'web',
       },
     );
   }
@@ -828,7 +828,7 @@ class MainFooter extends React.Component {
 
   getAnimatedValue = ({ page }) => (page.id === 'live' ? 1 : 0);
 
-  componentWillReceiveProps(nextProps, prevState, snapshot) {
+  UNSAFE_componentWillReceiveProps(nextProps, prevState, snapshot) {
     if (nextProps.page.id !== this.props.page.id) {
       Animated.timing(this.liveAnimation, {
         toValue: this.getAnimatedValue(nextProps),
@@ -999,7 +999,7 @@ class FlashButtonContainer extends React.Component {
 
   getAnimatedValue = ({ id }) => (id === 'live' ? 1 : 0);
 
-  componentWillReceiveProps(nextProps, prevState, snapshot) {
+  UNSAFE_componentWillReceiveProps(nextProps, prevState, snapshot) {
     if (nextProps.id !== this.props.id) {
       Animated.timing(this.animation, {
         toValue: this.getAnimatedValue(nextProps),
@@ -1124,7 +1124,7 @@ class FlipButtonContainer extends React.Component {
     this.animation = new Animated.Value(props.isFilterable ? 0 : 1);
   }
 
-  componentWillReceiveProps(nextProps, prevState, snapshot) {
+  UNSAFE_componentWillReceiveProps(nextProps, prevState, snapshot) {
     if (nextProps.isFilterable !== this.props.isFilterable) {
       Animated.timing(this.animation, {
         toValue: nextProps.isFilterable ? 0 : 1,
@@ -1335,7 +1335,7 @@ class RotatingIcon extends React.Component {
     return (
       <ViewPager
         pagingEnabled
-        useNativeDriver
+        useNativeDriver={Platform.OS !== 'web'}
         scroll={this.animatedValue}
         ref={ref => (this.viewPager = ref)}
         data={data}
