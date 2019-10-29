@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { takeSnapshotAsync } from 'expo';
+import captureRef from 'expo/build/takeSnapshotAsync/captureRef';
 import React from 'react';
 import {
   StyleSheet,
@@ -59,20 +59,19 @@ class TypeScreen extends React.Component {
   };
 
   captureAsync = async () => {
-    console.log('heeee', this.imageContainer);
     if (!this.imageContainer) {
       return;
     }
     await new Promise(res => this.setState({ placeholder: '' }, res));
     try {
-      const image = await takeSnapshotAsync(this.imageContainer, {
+      const image = await captureRef(this.imageContainer, {
         format: 'png',
         quality: 0.9,
         result: 'data-uri',
       });
       dispatch().image.set(image);
     } catch (e) {
-      alert(e.message);
+      console.log(e);
     } finally {
       this.setState({ placeholder: DEFAULT_PLACEHOLDER });
     }
