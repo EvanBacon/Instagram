@@ -27,7 +27,33 @@ export default class Slider extends React.Component {
     }
   };
 
+  componentDidMount() {
+    window.addEventListener('keyup', this.onKeyUp, false);
+  }
+
+  onKeyUp = e => {
+    const keyMap = {
+      ArrowLeft: 'LEFT',
+      KeyA: 'LEFT',
+      ArrowRight: 'RIGHT',
+      KeyD: 'RIGHT',
+    };
+
+    const direction = keyMap[e.code];
+    if (direction) {
+      e.preventDefault();
+      this.props.onSwipe(direction);
+      if (direction === 'LEFT') {
+        this.next();
+      } else if (direction === 'RIGHT') {
+        this.previous();
+      }
+    }
+  };
+
   componentWillUnmount() {
+    window.removeEventListener('keyup', this.onKeyUp);
+
     this.viewPager = null;
   }
 
