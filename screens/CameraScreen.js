@@ -54,13 +54,13 @@ const pages = [
     screen: () => <MusicScreen />,
   },
   { name: 'Live', id: 'live', isFilterable: true, icon: null },
-  { name: 'Normal', id: 'normal', isFilterable: true, icon: null },
   {
     name: 'Boomerang',
     id: 'boomerang',
     isFilterable: true,
     icon: Assets['inf.png'],
   },
+  { name: 'Normal', id: 'normal', isFilterable: true, icon: null },
   {
     name: 'Superzoom',
     id: 'superzoom',

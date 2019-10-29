@@ -50,6 +50,7 @@ export default class Slider extends React.Component {
             fontSize: 14,
             color: 'white',
             textAlign: 'center',
+            userSelect: 'none',
           }}
           key={item}
         >
