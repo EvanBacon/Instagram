@@ -542,7 +542,6 @@ class CameraContainerScreen extends React.Component {
 
   async componentDidMount() {
     try {
-      await Permissions.askAsync(Permissions.CAMERA);
       await Font.loadAsync({
         'insta-strong': Assets.fonts['insta-strong.otf'],
         'insta-neon': Assets.fonts['insta-neon.otf'],
