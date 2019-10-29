@@ -185,16 +185,20 @@ class CameraScreen extends React.Component {
       headerLeft,
       camera = {},
       headerLeftIconName = 'settings',
+      hasPermission,
     } = this.props;
     return (
       <View
         style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
       >
-        <Camera
-          ref={ref => (this.camera = ref)}
-          style={{ flex: 1 }}
-          {...camera}
-        />
+        {!hasPermission && <CameraPermissionScreen />}
+        {hasPermission && (
+          <Camera
+            ref={ref => (this.camera = ref)}
+            style={{ flex: 1 }}
+            {...camera}
+          />
+        )}
         {page.id !== 'music' && (
           <Header>
             {headerLeft({ name: headerLeftIconName })}
@@ -211,9 +215,78 @@ class CameraScreen extends React.Component {
   }
 }
 
-const ConnectedCameraScreen = connect(({ camera }) => ({ camera }))(
-  CameraScreen,
-);
+function CameraPermissionScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ marginBottom: 36 }}>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: 18,
+            textAlign: 'center',
+            marginBottom: 8,
+          }}
+        >
+          Share on Expogram
+        </Text>
+        <Text style={{ color: 'white', opacity: 0.6, textAlign: 'center' }}>
+          Enable access so you can start taking photos and videos.
+        </Text>
+      </View>
+
+      <View>
+        <ConnectedPermissionButton
+          name="Camera"
+          permission={Permissions.CAMERA}
+        />
+        <ConnectedPermissionButton
+          name="Microphone"
+          permission={Permissions.AUDIO_RECORDING}
+        />
+      </View>
+    </View>
+  );
+}
+
+function PermissionButton({ permission, name, ...props }) {
+  const hasPermission = props[permission] === 'granted';
+  const isDenied = props[permission] === 'denied';
+  const text =
+    hasPermission == null
+      ? 'Loading...'
+      : hasPermission
+      ? `${name} Access Enabled`
+      : `Enable ${name} Access`;
+
+  const style = {
+    color: isDenied ? 'red' : hasPermission ? 'lightgray' : '#7e7ec3',
+    textAlign: 'center',
+    padding: 12,
+  };
+  return (
+    <Text
+      style={style}
+      onPress={async () => {
+        dispatch().permissions.askAsync({ permission });
+      }}
+      pointerEvents={hasPermission ? 'none' : undefined}
+    >
+      {text}
+    </Text>
+  );
+}
+
+const ConnectedPermissionButton = connect(({ permissions }) => ({
+  ...permissions,
+}))(PermissionButton);
+
+const ConnectedCameraScreen = connect(({ camera, permissions }) => ({
+  camera,
+  hasPermission:
+    permissions[Permissions.CAMERA] === 'granted' &&
+    permissions[Permissions.AUDIO_RECORDING] === 'granted',
+}))(CameraScreen);
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 

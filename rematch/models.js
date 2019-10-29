@@ -1,4 +1,6 @@
-// import dispatch from './dispatch';
+import * as Permissions from 'expo-permissions';
+
+import dispatch from './dispatch';
 
 export const image = {
   state: null,
@@ -20,6 +22,29 @@ export const splash = {
   reducers: {
     update: (state, payload) => ({ ...state, ...payload }),
     set: (state, payload) => payload,
+  },
+};
+export const permissions = {
+  state: {
+    location: undefined,
+  },
+  reducers: {
+    update: (state, payload) => ({ ...state, ...payload }),
+    set: (state, payload) => payload,
+  },
+  effects: {
+    getAsync: async (props = {}) => {
+      const { permission } = props;
+      const { status } = await Permissions.getAsync(permission);
+      console.log('model permissions getAsync ', permission, status);
+      dispatch().permissions.update({ [permission]: status });
+    },
+    askAsync: async (props = {}) => {
+      const { permission } = props;
+      const { status } = await Permissions.askAsync(permission);
+      console.log('model permissions ask ', permission, status);
+      dispatch().permissions.update({ [permission]: status });
+    },
   },
 };
 

@@ -8,9 +8,20 @@ import Stories from './components/Stories/StoriesExperimental';
 import MainNavigation from './navigation/MainNavigation';
 import NavigationService from './navigation/NavigationService';
 import Gate from './rematch/Gate';
+import dispatch from './rematch/dispatch';
 
+import * as Permissions from 'expo-permissions';
+
+const Settings = {
+  permissions: [Permissions.CAMERA, Permissions.AUDIO_RECORDING],
+};
 // import Stories from './components/Stories/Stories';
 export default class App extends React.Component {
+  componentDidMount() {
+    for (const permission of Settings.permissions) {
+      dispatch().permissions.getAsync({ permission });
+    }
+  }
   render() {
     return (
       <Gate>
