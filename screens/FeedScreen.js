@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 
 import FeedList from '../components/FeedList';
 import Posts from '../constants/Posts';
@@ -19,17 +19,22 @@ export default function HomeScreen() {
     }
   }, [width]);
 
+  const isLarge = width >= 600;
+
   return (
-    <View
-      onLayout={onLayout}
-      style={{
-        backgroundColor: 'rgb(250,250,250)',
-        flex: 1,
-        alignItems: width >= 600 ? 'center' : 'stretch',
-      }}
-    >
-      <FeedList isLarge={width >= 600} style={styles.container} data={Posts} />
-      {isShowingSplashScreen && <SplashScreen />}
+    <View onLayout={onLayout} style={{ flex: 1 }}>
+      <ScrollView
+        contentContainerStyle={{
+          alignItems: isLarge ? 'center' : 'stretch',
+        }}
+        style={{
+          backgroundColor: 'rgb(250,250,250)',
+          flex: 1,
+        }}
+      >
+        <FeedList isLarge={isLarge} style={styles.container} data={Posts} />
+        {isShowingSplashScreen && <SplashScreen />}
+      </ScrollView>
     </View>
   );
 }
