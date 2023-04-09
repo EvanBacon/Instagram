@@ -4,7 +4,6 @@
     "description": "Dev photo sharing app",
     "slug": "Expogram",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/brand/icon.png",
@@ -13,6 +12,8 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "web": { "barStyle": "black-translucent" }
+    "web": {
+      "barStyle": "black-translucent"
+    }
   }
 }
