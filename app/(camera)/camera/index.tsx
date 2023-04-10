@@ -26,14 +26,15 @@ import IconButton from "@/components/IconButton";
 import Header from "@/components/MediaHeader";
 import { ProfileImage } from "@/components/ProfileImage";
 import Slider from "@/components/Slider";
-import ViewPager from "@/components/ViewPager";
+import { ViewPager } from "@/components/ViewPager";
 import MediaLibraryData from "@/constants/MediaLibraryData";
 import dispatch from "@/rematch/dispatch";
 import EditorScreen from "@/screens/CameraMediaEditorScreen";
 import GradientScreen from "@/screens/GradientScreen";
-import MusicScreen from "@/screens/MusicScreen";
+// import MusicScreen from "@/screens/MusicScreen";
 import { Link, Stack, useRouter } from "expo-router";
 
+const MusicScreen = () => <Text>Music</Text>;
 // import Popular from './data/Popular.json';
 const pages = [
   {
@@ -209,9 +210,17 @@ function CameraScreen({
       {hasPermission && (
         <Camera ref={camera} style={{ flex: 1 }} {...props.camera} />
       )}
-      {page.id !== "music" && (
+      {page?.id !== "music" && (
         <Header>
-          {headerLeft({ name: headerLeftIconName })}
+          <Link asChild href="/camera/settings">
+            <IconButton
+              enabled={!DISABLE_CAMERA_SETTINGS}
+              name="settings"
+              {...props}
+            />
+          </Link>
+
+          {/* {headerLeft({ name: headerLeftIconName })} */}
           <Link asChild href="/">
             <IconButton name={"chevron-right"} />
           </Link>
@@ -335,7 +344,8 @@ function MediaContainerScreen(props: {}) {
     if (DISABLE_BOTTOM_DRAWER || !scrollView.current) {
       return;
     }
-    scrollView.current._component.scrollToEnd({
+    console.log("scrollView.current", scrollView.current);
+    scrollView.current.scrollToEnd({
       duration: 300,
       animated: true,
     });
@@ -344,7 +354,7 @@ function MediaContainerScreen(props: {}) {
     if (DISABLE_BOTTOM_DRAWER || !scrollView.current) {
       return;
     }
-    scrollView.current._component.scrollTo({ x: 0, y: 0, duration: 300 });
+    scrollView.current.scrollTo({ x: 0, y: 0, duration: 300 });
   };
 
   const layout = useWindowDimensions();
@@ -358,14 +368,14 @@ function MediaContainerScreen(props: {}) {
     <AnimatedScrollView
       ref={scrollView}
       scrollEventThrottle={16}
-      onScroll={onScroll}
+      onScroll={onScroll.current}
       pagingEnabled
       style={{ flex: 1 }}
       contentContainerStyle={{ height: layout.height + drawerHeight }}
     >
       <BlurredOptionsContainer
         height={layout.height}
-        animation={animation}
+        animation={animation.current}
         onPress={openCamera}
       >
         <CameraContainerScreen openMediaDrawer={openMediaDrawer} />
@@ -594,7 +604,11 @@ function CameraContainerScreen({
     return null;
   }
   LayoutAnimation.easeInEaseOut();
+  console.log("index", index);
   const page = pages[index];
+  if (!page) {
+    return null;
+  }
   const typeface = types[selectedFont];
   const { theme: gradientTheme, ...gradient } = gradients[selectedGradient];
   return (
@@ -608,7 +622,7 @@ function CameraContainerScreen({
     >
       <ConnectedCameraScreen
         page={page}
-        headerLeftIconName={page.headerLeftIconName}
+        headerLeftIconName={page?.headerLeftIconName}
       />
 
       {USE_GRADIENT && (
@@ -622,7 +636,7 @@ function CameraContainerScreen({
             bottom: 0,
           }}
         >
-          {page.screen &&
+          {page?.screen &&
             page.screen({
               typeface,
               useGradientCamera,
@@ -655,7 +669,9 @@ function CameraContainerScreen({
         initialIndex={INITIAL_TAB}
         data={pages.map((value) => value.name)}
         onIndexChange={(index) => {
-          setState({ index });
+          if (index != null) {
+            setState({ index });
+          }
         }}
       />
       <View
@@ -999,11 +1015,8 @@ function CaptureButtonContainer({
 }
 
 function FlashButtonContainer(props) {
-  const animation = React.useRef(
-    new Animated.Value(this.getAnimatedValue(props))
-  );
-
   const getAnimatedValue = ({ id }) => (id === "live" ? 1 : 0);
+  const animation = React.useRef(new Animated.Value(getAnimatedValue(props)));
 
   const previousId = React.useRef(props.id);
 
@@ -1272,14 +1285,14 @@ function RotatingIcon(props) {
 
   React.useEffect(() => {
     if (viewPager)
-      viewPager.current.scrollToIndex({
+      viewPager.current?.scrollToIndex({
         index: props.index,
         animated: false,
       });
   }, [props.index, viewPager]);
 
   const renderItem = ({ item, index }) => {
-    const { itemWidth } = this.props;
+    const { itemWidth } = props;
     const maxRotation = 80;
     const inputMargin = itemWidth * 0.333333333;
     if (!item) {
@@ -1291,7 +1304,7 @@ function RotatingIcon(props) {
       padding: 4,
       transform: [
         {
-          rotateY: this.animatedValue.interpolate({
+          rotateY: animatedValue.current.interpolate({
             inputRange: [
               (index - 1) * itemWidth + inputMargin,
               index * itemWidth,
