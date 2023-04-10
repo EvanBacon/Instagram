@@ -193,7 +193,7 @@ function TabBar({ visible }) {
         {[
           { name: "index", icon: "home" },
           { name: "explore", icon: "explore" },
-          { name: "more", icon: "more" },
+          { name: "/more", icon: "more" },
         ].map((tab, i) => (
           <TabBarItem key={i} name={tab.name}>
             {({ focused, pressed, hovered }) => (
