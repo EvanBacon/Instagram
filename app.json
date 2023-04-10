@@ -13,6 +13,7 @@
       "backgroundColor": "#ffffff"
     },
     "web": {
+      "bundler": "metro",
       "barStyle": "black-translucent"
     }
   }

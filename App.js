@@ -1,39 +1,41 @@
-import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { Audio } from 'expo-av';
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { connect } from 'react-redux';
+import "@expo/metro-runtime";
+import { withErrorOverlay } from "@expo/metro-runtime/error-overlay";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+// import { Audio } from "expo-av";
+import * as React from "react";
+// import { StyleSheet, View } from "react-native";
+// import { connect } from "react-redux";
 
-import Stories from './components/Stories/StoriesExperimental';
-import MainNavigation from './navigation/MainNavigation';
-import NavigationService from './navigation/NavigationService';
-import Gate from './rematch/Gate';
-import dispatch from './rematch/dispatch';
+// import Stories from "./components/Stories/StoriesExperimental";
+// import MainNavigation from "./navigation/MainNavigation";
+// import NavigationService from "./navigation/NavigationService";
+import Gate from "./rematch/Gate";
+// import dispatch from "./rematch/dispatch";
 
-import * as Permissions from 'expo-permissions';
+// import * as Permissions from "expo-permissions";
 
-const Settings = {
-  permissions: [Permissions.CAMERA, Permissions.AUDIO_RECORDING],
-};
+// const Settings = {
+//   permissions: [Permissions.CAMERA, Permissions.AUDIO_RECORDING],
+// };
 // import Stories from './components/Stories/Stories';
-export default class App extends React.Component {
+class App extends React.Component {
   componentDidMount() {
-    for (const permission of Settings.permissions) {
-      dispatch().permissions.getAsync({ permission });
-    }
+    // for (const permission of Settings.permissions) {
+    //   dispatch().permissions.getAsync({ permission });
+    // }
   }
   render() {
     return (
       <Gate>
         <ActionSheetProvider>
           <AudioMode>
-            <ConnectedInnerApp>
+            {/* <ConnectedInnerApp>
               <MainNavigation
-                ref={navigatorRef => {
+                ref={(navigatorRef) => {
                   NavigationService.setTopLevelNavigator(navigatorRef);
                 }}
               />
-            </ConnectedInnerApp>
+            </ConnectedInnerApp> */}
           </AudioMode>
         </ActionSheetProvider>
       </Gate>
@@ -44,16 +46,16 @@ export default class App extends React.Component {
 class AudioMode extends React.PureComponent {
   _applyMode = async () => {
     try {
-      await Audio.setAudioModeAsync({
-        // ...this.state.modeToSet,
-        playThroughEarpieceAndroid: true,
-        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-        shouldDuckAndroid: true,
-        // iOS values don't matter, this is Android-only selector
-        allowsRecordingIOS: false,
-        playsInSilentModeIOS: false,
-        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      });
+      // await Audio.setAudioModeAsync({
+      //   // ...this.state.modeToSet,
+      //   playThroughEarpieceAndroid: true,
+      //   interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+      //   shouldDuckAndroid: true,
+      //   // iOS values don't matter, this is Android-only selector
+      //   allowsRecordingIOS: false,
+      //   playsInSilentModeIOS: false,
+      //   interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      // });
       // this.setState({ setMode: this.state.modeToSet });
     } catch (error) {
       alert(error.message);
@@ -64,26 +66,28 @@ class AudioMode extends React.PureComponent {
   }
 }
 
-class InnerApp extends React.Component {
-  render() {
-    const { offset, children, carouselOpen } = this.props;
-    return (
-      <React.Fragment>
-        {children}
-        <View
-          style={[
-            { overflow: 'hidden', ...StyleSheet.absoluteFillObject },
-            // offset,
-            carouselOpen ? { display: 'flex' } : { display: 'none' },
-          ]}
-        >
-          <Stories />
-        </View>
-      </React.Fragment>
-    );
-  }
-}
+// class InnerApp extends React.Component {
+//   render() {
+//     const { offset, children, carouselOpen } = this.props;
+//     return (
+//       <React.Fragment>
+//         {children}
+//         <View
+//           style={[
+//             { overflow: "hidden", ...StyleSheet.absoluteFillObject },
+//             // offset,
+//             carouselOpen ? { display: "flex" } : { display: "none" },
+//           ]}
+//         >
+//           <Stories />
+//         </View>
+//       </React.Fragment>
+//     );
+//   }
+// }
 
-const ConnectedInnerApp = connect(({ stories }) => ({
-  ...stories,
-}))(InnerApp);
+// const ConnectedInnerApp = connect(({ stories }) => ({
+//   ...stories,
+// }))(InnerApp);
+
+export default withErrorOverlay(App);

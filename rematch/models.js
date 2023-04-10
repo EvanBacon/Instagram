@@ -1,6 +1,6 @@
-import * as Permissions from 'expo-permissions';
+// import * as Permissions from 'expo-permissions';
 
-import dispatch from './dispatch';
+import dispatch from "./dispatch";
 
 export const image = {
   state: null,
@@ -35,20 +35,20 @@ export const permissions = {
   effects: {
     getAsync: async (props = {}) => {
       const { permission } = props;
-      const { status } = await Permissions.getAsync(permission);
-      dispatch().permissions.update({ [permission]: status });
+      // const { status } = await Permissions.getAsync(permission);
+      // dispatch().permissions.update({ [permission]: status });
     },
     askAsync: async (props = {}) => {
       const { permission } = props;
-      const { status } = await Permissions.askAsync(permission);
-      dispatch().permissions.update({ [permission]: status });
+      // const { status } = await Permissions.askAsync(permission);
+      // dispatch().permissions.update({ [permission]: status });
     },
   },
 };
 
 export const camera = {
   state: {
-    type: 'front',
+    type: "front",
   },
   reducers: {
     update: (state, payload) => ({ ...state, ...payload }),
@@ -56,7 +56,7 @@ export const camera = {
     flip: ({ type, ...state }) => {
       return {
         ...state,
-        type: type === 'back' ? 'front' : 'back',
+        type: type === "back" ? "front" : "back",
       };
     },
   },
@@ -69,4 +69,4 @@ export const camera = {
   },
 };
 
-export { default as stories } from './stories';
+export { default as stories } from "./stories";

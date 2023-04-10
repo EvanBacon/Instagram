@@ -23,8 +23,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^3.2.0",
-    "@react-navigation/web": "^1.0.0-alpha.9",
+    "@expo/react-native-action-sheet": "^4.0.1",
     "@rematch/core": "^1.1.0",
     "@rematch/persist": "^1.1.6",
     "date-format": "^2.1.0",
@@ -33,6 +32,7 @@
     "expo-blur": "~12.2.2",
     "expo-camera": "~13.2.1",
     "expo-linear-gradient": "~12.1.2",
+    "expo-router": "^1.5.3",
     "i18n-js": "^3.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

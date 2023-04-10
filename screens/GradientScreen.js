@@ -1,19 +1,20 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import captureRef from 'expo/build/takeSnapshotAsync/captureRef';
-import React from 'react';
+import { LinearGradient } from "expo-linear-gradient";
+// import captureRef from 'expo/build/takeSnapshotAsync/captureRef';
+import React from "react";
 import {
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import * as Animatable from 'react-native-animatable';
+} from "react-native";
+import * as Animatable from "react-native-animatable";
 
-import IconButton from '../components/IconButton';
-import Header from '../components/MediaHeader';
-import dispatch from '../rematch/dispatch';
+import IconButton from "../components/IconButton";
+import Header from "../components/MediaHeader";
+import dispatch from "../rematch/dispatch";
 
+const captureRef = () => null;
 const typefaceButtonSize = 36;
 
 class TypefaceButton extends React.Component {
@@ -28,16 +29,16 @@ class TypefaceButton extends React.Component {
           style={{
             borderWidth: 2,
             borderRadius: typefaceButtonSize + 4,
-            borderColor: 'white',
+            borderColor: "white",
             paddingVertical: 4,
             paddingHorizontal: 16,
             minWidth: 80,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0,0,0,0.05)',
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.05)",
           }}
         >
-          <Text style={{ color: 'white', fontSize: 12, textAlign: 'center' }}>
+          <Text style={{ color: "white", fontSize: 12, textAlign: "center" }}>
             {title.toUpperCase()}
           </Text>
         </View>
@@ -46,9 +47,9 @@ class TypefaceButton extends React.Component {
   }
 }
 
-const DEFAULT_PLACEHOLDER = 'Tap to Type';
+const DEFAULT_PLACEHOLDER = "Tap to Type";
 class TypeScreen extends React.Component {
-  state = { useEffect: false, value: '', placeholder: DEFAULT_PLACEHOLDER };
+  state = { useEffect: false, value: "", placeholder: DEFAULT_PLACEHOLDER };
 
   constructor(props) {
     super(props);
@@ -62,12 +63,12 @@ class TypeScreen extends React.Component {
     if (!this.imageContainer) {
       return;
     }
-    await new Promise(res => this.setState({ placeholder: '' }, res));
+    await new Promise((res) => this.setState({ placeholder: "" }, res));
     try {
       const image = await captureRef(this.imageContainer, {
-        format: 'png',
+        format: "png",
         quality: 0.9,
-        result: 'data-uri',
+        result: "data-uri",
       });
       dispatch().image.set(image);
     } catch (e) {
@@ -85,7 +86,7 @@ class TypeScreen extends React.Component {
       typeface,
     } = this.props;
     const opacity = this.state.useEffect ? 1 : 0.5;
-    const isLight = gradientTheme === 'light';
+    const isLight = gradientTheme === "light";
     const textColor = isLight
       ? `rgba(255,255,255,${opacity})`
       : `rgba(0,0,0,${opacity})`;
@@ -94,7 +95,7 @@ class TypeScreen extends React.Component {
         <View
           style={{ flex: 1 }}
           key="image-container"
-          ref={ref => (this.imageContainer = ref)}
+          ref={(ref) => (this.imageContainer = ref)}
         >
           <LinearGradient
             style={[
@@ -104,24 +105,24 @@ class TypeScreen extends React.Component {
             {...gradient}
           />
           <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             <TextInput
-              onChangeText={value => this.setState({ value })}
+              onChangeText={(value) => this.setState({ value })}
               placeholderTextColor={textColor}
               placeholder={this.state.placeholder}
               style={[
                 {
-                  outlineStyle: 'none',
+                  outlineStyle: "none",
                   color: textColor,
                   fontSize: 28,
                   // fontWeight: 'bold',
-                  textAlign: 'center',
+                  textAlign: "center",
                   padding: 6,
                   borderRadius: 4,
                 },
                 this.state.useEffect && {
-                  backgroundColor: isLight ? 'red' : 'white',
+                  backgroundColor: isLight ? "red" : "white",
                 },
                 typeface.style,
               ]}
@@ -130,7 +131,7 @@ class TypeScreen extends React.Component {
           </View>
         </View>
         <Header>
-          <IconButton name={'text-effect'} onPress={this.onEffectPressed} />
+          <IconButton name={"text-effect"} onPress={this.onEffectPressed} />
           <TypefaceButton
             title={typeface.name}
             onPress={onPressTypefaceButton}

@@ -1,10 +1,10 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from 'expo-blur';
-import { Camera } from 'expo-camera';
-import * as Font from 'expo-font';
-import * as Permissions from 'expo-permissions';
-import { element, func, oneOfType } from 'prop-types';
-import React from 'react';
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
+import { Camera } from "expo-camera";
+import * as Font from "expo-font";
+// import * as Permissions from 'expo-permissions';
+import { element, func, oneOfType } from "prop-types";
+import React from "react";
 import {
   Animated,
   Dimensions,
@@ -18,69 +18,69 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from 'react-native';
-import { connect } from 'react-redux';
+} from "react-native";
+import { connect } from "react-redux";
 
-import Assets from '../Assets';
-import FaceButton from '../components/FaceButton';
-import IconButton from '../components/IconButton';
-import Header from '../components/MediaHeader';
-import ProfileImage from '../components/ProfileImage';
-import Slider from '../components/Slider';
-import ViewPager from '../components/ViewPager';
-import MediaLibraryData from '../constants/MediaLibraryData';
-import NavigationService from '../navigation/NavigationService';
-import dispatch from '../rematch/dispatch';
-import EditorScreen from './CameraMediaEditorScreen';
-import GradientScreen from './GradientScreen';
-import MusicScreen from './MusicScreen';
+import Assets from "../Assets";
+import FaceButton from "../components/FaceButton";
+import IconButton from "../components/IconButton";
+import Header from "../components/MediaHeader";
+import ProfileImage from "../components/ProfileImage";
+import Slider from "../components/Slider";
+import ViewPager from "../components/ViewPager";
+import MediaLibraryData from "../constants/MediaLibraryData";
+import NavigationService from "../navigation/NavigationService";
+import dispatch from "../rematch/dispatch";
+import EditorScreen from "./CameraMediaEditorScreen";
+import GradientScreen from "./GradientScreen";
+import MusicScreen from "./MusicScreen";
 
 // import Popular from './data/Popular.json';
 const pages = [
   {
-    name: 'Type',
+    name: "Type",
     icon: null,
-    id: 'type',
+    id: "type",
     isFlipable: true,
-    screen: props => <GradientScreen {...props} />,
+    screen: (props) => <GradientScreen {...props} />,
     headerLeftIconName: null,
   },
   {
-    name: 'Music',
-    id: 'music',
+    name: "Music",
+    id: "music",
     isFilterable: true,
     hideFooter: true,
-    icon: Assets['inf.png'],
+    icon: Assets["inf.png"],
     screen: () => <MusicScreen />,
   },
-  { name: 'Live', id: 'live', isFilterable: true, icon: null },
+  { name: "Live", id: "live", isFilterable: true, icon: null },
   {
-    name: 'Boomerang',
-    id: 'boomerang',
+    name: "Boomerang",
+    id: "boomerang",
     isFilterable: true,
-    icon: Assets['inf.png'],
+    icon: Assets["inf.png"],
   },
-  { name: 'Normal', id: 'normal', isFilterable: true, icon: null },
+  { name: "Normal", id: "normal", isFilterable: true, icon: null },
   {
-    name: 'Superzoom',
-    id: 'superzoom',
+    name: "Superzoom",
+    id: "superzoom",
     isFilterable: false,
-    icon: Assets['rewind.png'],
+    icon: Assets["rewind.png"],
   },
-  { name: 'Focus', id: 'focus', isFilterable: false, icon: Assets['inf.png'] },
+  { name: "Focus", id: "focus", isFilterable: false, icon: Assets["inf.png"] },
   {
-    name: 'Rewind',
-    id: 'rewind',
+    name: "Rewind",
+    id: "rewind",
     isFilterable: true,
-    icon: Assets['rewind.png'],
+    icon: Assets["rewind.png"],
   },
   {
-    name: 'Hands-Free',
-    id: 'handsfree',
+    name: "Hands-Free",
+    id: "handsfree",
     isFilterable: true,
-    icon: Assets['ball.png'],
+    icon: Assets["ball.png"],
   },
-].map(value => {
+].map((value) => {
   return {
     ...value,
     name: value.name.toUpperCase(),
@@ -88,38 +88,38 @@ const pages = [
 });
 
 // const INITIAL_TAB_ID = 'music';
-const INITIAL_TAB_ID = 'normal';
+const INITIAL_TAB_ID = "normal";
 const INITIAL_TAB = Math.max(
   0,
-  pages.findIndex(({ id }) => id === INITIAL_TAB_ID),
+  pages.findIndex(({ id }) => id === INITIAL_TAB_ID)
 );
 
 const types = [
   {
-    name: 'Strong',
+    name: "Strong",
     style: {
-      fontFamily: 'insta-strong',
+      fontFamily: "insta-strong",
       fontSize: 36,
     },
   },
   {
-    name: 'Modern',
+    name: "Modern",
     style: {
-      fontFamily: 'insta-modern',
+      fontFamily: "insta-modern",
       fontSize: 36,
     },
   },
   {
-    name: 'Neon',
+    name: "Neon",
     style: {
-      fontFamily: 'insta-neon',
+      fontFamily: "insta-neon",
       fontSize: 56,
     },
   },
   {
-    name: 'Typewriter',
+    name: "Typewriter",
     style: {
-      fontFamily: 'insta-typewriter',
+      fontFamily: "insta-typewriter",
       fontSize: 36,
     },
   },
@@ -129,38 +129,38 @@ const gradients = [
   {
     start: [1, 0],
     end: [0, 0.9],
-    colors: ['#E4C9BF', '#E89D99', '#DF6D71'],
-    theme: 'light',
+    colors: ["#E4C9BF", "#E89D99", "#DF6D71"],
+    theme: "light",
   },
   {
     start: [1, 0],
     end: [0, 1],
-    colors: ['#62BFEA', '#76CEF5', '#82BFD7'],
-    theme: 'light',
+    colors: ["#62BFEA", "#76CEF5", "#82BFD7"],
+    theme: "light",
   },
   {
     start: [0, 0],
     end: [1, 1],
-    colors: ['#F3F4F2', '#BDBDBC'],
-    theme: 'dark',
+    colors: ["#F3F4F2", "#BDBDBC"],
+    theme: "dark",
   },
   {
     start: [0, 0],
     end: [1, 1],
-    colors: ['#222222', '#010102'],
-    theme: 'light',
+    colors: ["#222222", "#010102"],
+    theme: "light",
   },
 ];
 
 let takePictureGlobal;
 class CameraScreen extends React.Component {
   static defaultProps = {
-    headerLeftIconName: 'settings',
-    headerLeft: props => (
+    headerLeftIconName: "settings",
+    headerLeft: (props) => (
       <IconButton
         enabled={!DISABLE_CAMERA_SETTINGS}
         {...props}
-        onPress={() => NavigationService.navigate('CameraSettingsScreen')}
+        onPress={() => NavigationService.navigate("CameraSettingsScreen")}
       />
     ),
   };
@@ -172,7 +172,7 @@ class CameraScreen extends React.Component {
   takePicture = () => {
     if (this.camera) {
       this.camera.takePictureAsync({
-        onPictureSaved: photo => {
+        onPictureSaved: (photo) => {
           dispatch().image.set(photo);
         },
       });
@@ -184,28 +184,28 @@ class CameraScreen extends React.Component {
       page,
       headerLeft,
       camera = {},
-      headerLeftIconName = 'settings',
+      headerLeftIconName = "settings",
       hasPermission,
     } = this.props;
     return (
       <View
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
       >
         {!hasPermission && <CameraPermissionScreen />}
         {hasPermission && (
           <Camera
-            ref={ref => (this.camera = ref)}
+            ref={(ref) => (this.camera = ref)}
             style={{ flex: 1 }}
             {...camera}
           />
         )}
-        {page.id !== 'music' && (
+        {page.id !== "music" && (
           <Header>
             {headerLeft({ name: headerLeftIconName })}
             <IconButton
-              name={'chevron-right'}
+              name={"chevron-right"}
               onPress={() => {
-                NavigationService.navigate('SocialUI');
+                NavigationService.navigate("SocialUI");
               }}
             />
           </Header>
@@ -217,20 +217,20 @@ class CameraScreen extends React.Component {
 
 function CameraPermissionScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={{ marginBottom: 36 }}>
         <Text
           style={{
-            fontWeight: 'bold',
-            color: 'white',
+            fontWeight: "bold",
+            color: "white",
             fontSize: 18,
-            textAlign: 'center',
+            textAlign: "center",
             marginBottom: 8,
           }}
         >
           Share on Expogram
         </Text>
-        <Text style={{ color: 'white', opacity: 0.6, textAlign: 'center' }}>
+        <Text style={{ color: "white", opacity: 0.6, textAlign: "center" }}>
           Enable access so you can start taking photos and videos.
         </Text>
       </View>
@@ -238,11 +238,11 @@ function CameraPermissionScreen() {
       <View>
         <ConnectedPermissionButton
           name="Camera"
-          permission={Permissions.CAMERA}
+          permission={"Permissions.CAMERA"}
         />
         <ConnectedPermissionButton
           name="Microphone"
-          permission={Permissions.AUDIO_RECORDING}
+          permission={"Permissions.AUDIO_RECORDING"}
         />
       </View>
     </View>
@@ -250,18 +250,18 @@ function CameraPermissionScreen() {
 }
 
 function PermissionButton({ permission, name, ...props }) {
-  const hasPermission = props[permission] === 'granted';
-  const isDenied = props[permission] === 'denied';
+  const hasPermission = props[permission] === "granted";
+  const isDenied = props[permission] === "denied";
   const text =
     hasPermission == null
-      ? 'Loading...'
+      ? "Loading..."
       : hasPermission
       ? `${name} Access Enabled`
       : `Enable ${name} Access`;
 
   const style = {
-    color: isDenied ? 'red' : hasPermission ? 'lightgray' : '#7e7ec3',
-    textAlign: 'center',
+    color: isDenied ? "red" : hasPermission ? "lightgray" : "#7e7ec3",
+    textAlign: "center",
     padding: 12,
   };
   return (
@@ -270,7 +270,7 @@ function PermissionButton({ permission, name, ...props }) {
       onPress={async () => {
         dispatch().permissions.askAsync({ permission });
       }}
-      pointerEvents={hasPermission ? 'none' : undefined}
+      pointerEvents={hasPermission ? "none" : undefined}
     >
       {text}
     </Text>
@@ -283,9 +283,9 @@ const ConnectedPermissionButton = connect(({ permissions }) => ({
 
 const ConnectedCameraScreen = connect(({ camera, permissions }) => ({
   camera,
-  hasPermission:
-    permissions[Permissions.CAMERA] === 'granted' &&
-    permissions[Permissions.AUDIO_RECORDING] === 'granted',
+  // hasPermission:
+  //   permissions[Permissions.CAMERA] === "granted" &&
+  //   permissions[Permissions.AUDIO_RECORDING] === "granted",
 }))(CameraScreen);
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
@@ -302,7 +302,7 @@ class EditorComboScreen extends React.Component {
 }
 
 const ConnectedEditorComboScreen = connect(({ image }) => ({ image }))(
-  EditorComboScreen,
+  EditorComboScreen
 );
 
 export default ConnectedEditorComboScreen;
@@ -322,8 +322,8 @@ class MediaContainerScreen extends React.Component {
         },
       ],
       {
-        useNativeDriver: Platform.OS !== 'web',
-      },
+        useNativeDriver: Platform.OS !== "web",
+      }
     );
   }
 
@@ -344,17 +344,17 @@ class MediaContainerScreen extends React.Component {
     if (DISABLE_BOTTOM_DRAWER) {
       return (
         <Resizable>
-          {layout => <CameraContainerScreen window={layout} />}
+          {(layout) => <CameraContainerScreen window={layout} />}
         </Resizable>
       );
     }
     return (
       <Resizable>
-        {layout => {
+        {(layout) => {
           const drawerHeight = layout.height * 0.9;
           return (
             <AnimatedScrollView
-              ref={ref => (this.scrollView = ref)}
+              ref={(ref) => (this.scrollView = ref)}
               scrollEventThrottle={16}
               onScroll={this.onScroll}
               pagingEnabled
@@ -374,8 +374,8 @@ class MediaContainerScreen extends React.Component {
               <MediaScreen
                 window={layout}
                 style={{
-                  width: '100%',
-                  backgroundColor: 'black',
+                  width: "100%",
+                  backgroundColor: "black",
                   height: drawerHeight,
                 }}
               />
@@ -388,30 +388,30 @@ class MediaContainerScreen extends React.Component {
 }
 
 export class Resizable extends React.Component {
-  static displayName = 'Resizable';
+  static displayName = "Resizable";
   static propTypes = {
     children: oneOfType([func, element]),
   };
 
   componentDidMount() {
-    Dimensions.addEventListener('change', this.resize);
+    Dimensions.addEventListener("change", this.resize);
   }
   componentWillUnmount() {
-    Dimensions.removeEventListener('change', this.resize);
+    Dimensions.removeEventListener("change", this.resize);
   }
 
   resize = ({ window }) => {
-    console.log('layout', window);
+    console.log("layout", window);
 
-    this.setState(state => ({ ...state, ...window }));
+    this.setState((state) => ({ ...state, ...window }));
   };
 
-  state = { ...Dimensions.get('window') };
+  state = { ...Dimensions.get("window") };
 
   render() {
     const { children } = this.props;
     const child =
-      typeof children === 'function' ? children(this.state) : children;
+      typeof children === "function" ? children(this.state) : children;
 
     return React.cloneElement(React.Children.only(child), {});
   }
@@ -422,7 +422,7 @@ class BlurredOptionsContainer extends React.Component {
     const opacity = this.props.animation.interpolate({
       inputRange: [0, this.props.height],
       outputRange: [0, 1],
-      extrapolate: 'clamp',
+      extrapolate: "clamp",
     });
     return (
       <View
@@ -435,40 +435,40 @@ class BlurredOptionsContainer extends React.Component {
         {this.props.children}
         <Animated.View
           style={{ ...StyleSheet.absoluteFillObject, opacity }}
-          pointerEvents={this.props.isEnabled ? 'auto' : 'none'}
+          pointerEvents={this.props.isEnabled ? "auto" : "none"}
         >
           <TouchableWithoutFeedback
             style={StyleSheet.absoluteFill}
             onPress={this.props.onPress}
           >
             <BlurView
-              tint={'dark'}
+              tint={"dark"}
               intensity={50}
               style={{
                 flex: 1,
-                justifyContent: 'flex-end',
-                alignItems: 'stretch',
+                justifyContent: "flex-end",
+                alignItems: "stretch",
               }}
             >
               <View
                 style={{
-                  alignItems: 'center',
+                  alignItems: "center",
                   padding: 8,
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
+                  justifyContent: "space-between",
+                  flexDirection: "row",
                 }}
               >
                 <Text
                   style={{
-                    color: 'white',
-                    fontWeight: 'bold',
+                    color: "white",
+                    fontWeight: "bold",
                     fontSize: 16,
                   }}
                 >
                   LAST 24 HOURS
                 </Text>
 
-                <IconButton name={'camera'} />
+                <IconButton name={"camera"} />
               </View>
             </BlurView>
           </TouchableWithoutFeedback>
@@ -483,7 +483,7 @@ class MediaScreen extends React.Component {
     return (
       <View style={this.props.style}>
         <FlatList
-          keyExtractor={(item, index) => index + '--'}
+          keyExtractor={(item, index) => index + "--"}
           renderItem={({ item }) => (
             <MediaItem window={this.props.window} {...item} />
           )}
@@ -513,12 +513,12 @@ class MediaItem extends React.Component {
           margin: 1,
           width: itemWidth,
           height: itemHeight,
-          backgroundColor: 'black',
+          backgroundColor: "black",
         }}
         onPress={this.onPress}
       >
         <Image
-          style={{ flex: 1, resizeMode: 'cover' }}
+          style={{ flex: 1, resizeMode: "cover" }}
           source={this.props.image}
         />
       </TouchableOpacity>
@@ -543,10 +543,10 @@ class CameraContainerScreen extends React.Component {
   async componentDidMount() {
     try {
       await Font.loadAsync({
-        'insta-strong': Assets.fonts['insta-strong.otf'],
-        'insta-neon': Assets.fonts['insta-neon.otf'],
-        'insta-typewriter': Assets.fonts['insta-typewriter.ttf'],
-        'insta-modern': Assets.fonts['insta-modern.ttf'],
+        "insta-strong": Assets.fonts["insta-strong.otf"],
+        "insta-neon": Assets.fonts["insta-neon.otf"],
+        "insta-typewriter": Assets.fonts["insta-typewriter.ttf"],
+        "insta-modern": Assets.fonts["insta-modern.ttf"],
       });
     } catch (error) {
     } finally {
@@ -561,13 +561,8 @@ class CameraContainerScreen extends React.Component {
   };
 
   render() {
-    const {
-      ready,
-      index,
-      selectedFont,
-      selectedGradient,
-      useGradientCamera,
-    } = this.state;
+    const { ready, index, selectedFont, selectedGradient, useGradientCamera } =
+      this.state;
     const { height, width } = this.props.window;
     if (!ready) {
       return <View />;
@@ -581,8 +576,8 @@ class CameraContainerScreen extends React.Component {
         style={{
           flex: 1,
           height,
-          backgroundColor: 'black',
-          justifyContent: 'flex-end',
+          backgroundColor: "black",
+          justifyContent: "flex-end",
         }}
       >
         <ConnectedCameraScreen
@@ -594,7 +589,7 @@ class CameraContainerScreen extends React.Component {
           <View
             pointerEvents="box-none"
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               left: 0,
               right: 0,
@@ -632,33 +627,33 @@ class CameraContainerScreen extends React.Component {
           page={page}
           window={this.props.window}
           initialIndex={INITIAL_TAB}
-          data={pages.map(value => value.name)}
-          onIndexChange={index => {
+          data={pages.map((value) => value.name)}
+          onIndexChange={(index) => {
             this.setState({ index });
           }}
         />
         <View
           style={{
-            position: 'absolute',
+            position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden',
+            justifyContent: "center",
+            alignItems: "center",
+            overflow: "hidden",
           }}
         >
-          {Platform.OS === 'web' && (
+          {Platform.OS === "web" && (
             <View
               style={{
                 width: 15,
                 height: 15,
                 borderTopLeftRadius: 2,
-                backgroundColor: 'white',
+                backgroundColor: "white",
                 transform: [
-                  { rotate: '45deg' },
-                  { translateX: '50%' },
-                  { translateY: '50%' },
+                  { rotate: "45deg" },
+                  { translateX: "50%" },
+                  { translateY: "50%" },
                 ],
               }}
             />
@@ -689,15 +684,15 @@ class UserProfilePicture extends React.Component {
         />
         <View
           style={{
-            position: 'absolute',
+            position: "absolute",
             bottom: 0,
             right: 0,
             borderWidth: StyleSheet.hairlineWidth,
-            borderColor: 'black',
+            borderColor: "black",
             width: userProfilePictureIndicatorSize,
             height: userProfilePictureIndicatorSize,
             borderRadius: userProfilePictureIndicatorSize / 2,
-            backgroundColor: 'lime',
+            backgroundColor: "lime",
           }}
         />
       </View>
@@ -712,21 +707,21 @@ class WhosActive extends React.Component {
     return (
       <View
         style={{
-          flexDirection: 'row',
-          width: '90%',
-          justifyContent: 'space-between',
+          flexDirection: "row",
+          width: "90%",
+          justifyContent: "space-between",
         }}
       >
-        <Text style={{ fontSize: 10, color: 'white' }}>
+        <Text style={{ fontSize: 10, color: "white" }}>
           {users
             .slice(0, 2)
             .map(({ name }) => name)
-            .join(', ') + `, and ${users.length - 2} others are active now`}
+            .join(", ") + `, and ${users.length - 2} others are active now`}
         </Text>
 
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: "row" }}>
           {users.slice(0, 3).map((user, index) => (
-            <UserProfilePicture key={index + '-img'} account={user.account} />
+            <UserProfilePicture key={index + "-img"} account={user.account} />
           ))}
         </View>
       </View>
@@ -745,17 +740,17 @@ class GoLiveButton extends React.Component {
 
     return (
       <Animated.View
-        pointerEvents={isActive ? 'auto' : 'none'}
-        style={{ width: '100%', opacity }}
+        pointerEvents={isActive ? "auto" : "none"}
+        style={{ width: "100%", opacity }}
       >
         <TouchableOpacity style={{ flex: 1 }}>
           <View
             style={{
               height: innerCaptureButtonHeight,
               borderRadius: innerCaptureButtonHeight / 2,
-              backgroundColor: 'white',
-              justifyContent: 'center',
-              alignItems: 'center',
+              backgroundColor: "white",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Text
@@ -779,9 +774,9 @@ const GradientButton = ({ gradient, onPress }) => (
       style={{
         borderWidth: 2,
         borderRadius: gradientButtonSize + 4,
-        borderColor: 'white',
+        borderColor: "white",
         padding: 2,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
       }}
     >
       <LinearGradient
@@ -798,24 +793,24 @@ const GradientButton = ({ gradient, onPress }) => (
 
 const users = [
   {
-    name: 'Brent Vatne',
-    account: 'notbrent',
+    name: "Brent Vatne",
+    account: "notbrent",
   },
   {
-    name: 'theavocoder',
-    account: 'lydiahallie',
+    name: "theavocoder",
+    account: "lydiahallie",
   },
   {
-    name: 'expo',
-    account: 'expo',
+    name: "expo",
+    account: "expo",
   },
   {
-    name: 'Charlie Cheever',
-    account: 'ccheever',
+    name: "Charlie Cheever",
+    account: "ccheever",
   },
   {
-    name: 'James Ide',
-    account: 'ji',
+    name: "James Ide",
+    account: "ji",
   },
 ];
 
@@ -826,7 +821,7 @@ class MainFooter extends React.Component {
     this.liveAnimation = new Animated.Value(this.getAnimatedValue(props));
   }
 
-  getAnimatedValue = ({ page }) => (page.id === 'live' ? 1 : 0);
+  getAnimatedValue = ({ page }) => (page.id === "live" ? 1 : 0);
 
   UNSAFE_componentWillReceiveProps(nextProps, prevState, snapshot) {
     if (nextProps.page.id !== this.props.page.id) {
@@ -847,17 +842,17 @@ class MainFooter extends React.Component {
     } = this.props;
 
     const footerStyle = {
-      display: page.hideFooter ? 'none' : 'flex',
+      display: page.hideFooter ? "none" : "flex",
       paddingHorizontal: 0,
       paddingVertical: 24,
-      justifyContent: 'space-between',
-      flexDirection: 'row',
-      alignItems: 'center',
+      justifyContent: "space-between",
+      flexDirection: "row",
+      alignItems: "center",
       zIndex: 1,
     };
 
     switch (page.id) {
-      case 'type':
+      case "type":
         return (
           <View style={[footerStyle, { paddingHorizontal: 24 }]}>
             <GradientButton
@@ -872,7 +867,7 @@ class MainFooter extends React.Component {
             <IconButton
               onPress={onPressGradientCameraButton}
               key="camera"
-              name={'camera'}
+              name={"camera"}
             />
           </View>
         );
@@ -880,11 +875,11 @@ class MainFooter extends React.Component {
         const liveOpacity = this.liveAnimation.interpolate({
           inputRange: [0.2, 1],
           outputRange: [0, 1],
-          extrapolate: 'clamp',
+          extrapolate: "clamp",
         });
         const liveTranslationY = this.liveAnimation.interpolate({
           inputRange: [0, 1],
-          outputRange: ['-100%', '0%'],
+          outputRange: ["-100%", "0%"],
         });
 
         return (
@@ -892,9 +887,9 @@ class MainFooter extends React.Component {
             style={{
               ...footerStyle,
 
-              flexDirection: 'column',
+              flexDirection: "column",
               // alignItems: 'stretch',
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
             <Animated.View
@@ -902,20 +897,20 @@ class MainFooter extends React.Component {
                 opacity: liveOpacity,
                 transform: [{ translateY: liveTranslationY }],
                 marginBottom: 14,
-                width: '80%',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center',
+                width: "80%",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                alignItems: "center",
               }}
             >
               <WhosActive users={users} />
             </Animated.View>
             <View
               style={{
-                width: '100%',
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center',
+                width: "100%",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                alignItems: "center",
               }}
             >
               <FlashButtonContainer
@@ -928,7 +923,7 @@ class MainFooter extends React.Component {
                 selectedIndex={index}
                 animation={this.liveAnimation}
                 icon={page.icon}
-                isActive={page.id === 'live'}
+                isActive={page.id === "live"}
               />
 
               <FlipButtonContainer
@@ -954,24 +949,24 @@ class CaptureButtonContainer extends React.Component {
 
     const width = animation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['10%', '50%'],
+      outputRange: ["10%", "50%"],
     });
     return (
       <Animated.View
         style={{
           width,
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Animated.View
-          pointerEvents={isActive ? 'none' : 'auto'}
+          pointerEvents={isActive ? "none" : "auto"}
           style={{
             ...StyleSheet.absoluteFillObject,
             opacity,
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <CaptureButton
@@ -983,7 +978,7 @@ class CaptureButtonContainer extends React.Component {
         <GoLiveButton
           animation={animation}
           isActive={isActive}
-          pointerEvents={!isActive ? 'none' : 'auto'}
+          pointerEvents={!isActive ? "none" : "auto"}
         />
       </Animated.View>
     );
@@ -997,7 +992,7 @@ class FlashButtonContainer extends React.Component {
     this.animation = new Animated.Value(this.getAnimatedValue(props));
   }
 
-  getAnimatedValue = ({ id }) => (id === 'live' ? 1 : 0);
+  getAnimatedValue = ({ id }) => (id === "live" ? 1 : 0);
 
   UNSAFE_componentWillReceiveProps(nextProps, prevState, snapshot) {
     if (nextProps.id !== this.props.id) {
@@ -1009,10 +1004,10 @@ class FlashButtonContainer extends React.Component {
   }
 
   render() {
-    const isLive = this.props.id === 'live';
+    const isLive = this.props.id === "live";
     const moveFlip = this.animation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['75%', '0%'],
+      outputRange: ["75%", "0%"],
     });
 
     const fadeFace = this.animation.interpolate({
@@ -1024,7 +1019,7 @@ class FlashButtonContainer extends React.Component {
       <View
         style={{
           flex: 1,
-          height: '100%',
+          height: "100%",
           // alignItems: 'center',
         }}
       >
@@ -1032,26 +1027,25 @@ class FlashButtonContainer extends React.Component {
           style={{
             flex: 1,
             marginLeft: this.props.width * 0.1,
-            width: '50%',
-            flexDirection: 'row',
-            alignItems: 'center',
+            width: "50%",
+            flexDirection: "row",
+            alignItems: "center",
           }}
         >
           <Animated.View
-            style={{ position: 'absolute', left: 0, opacity: fadeFace }}
-            pointerEvents={isLive ? 'none' : 'auto'}
+            style={{ position: "absolute", left: 0, opacity: fadeFace }}
+            pointerEvents={isLive ? "none" : "auto"}
           >
             <GalleryButton
               onPress={this.props.openMediaDrawer}
               source={{
-                uri:
-                  'https://pbs.twimg.com/profile_images/1052466125055746048/kMLDBsaD_400x400.jpg',
+                uri: "https://pbs.twimg.com/profile_images/1052466125055746048/kMLDBsaD_400x400.jpg",
               }}
             />
           </Animated.View>
           <Animated.View
             style={{
-              position: 'absolute',
+              position: "absolute",
               // right: 0,
               left: moveFlip,
               // opacity: fadeFace,
@@ -1068,14 +1062,14 @@ class FlashButtonContainer extends React.Component {
 }
 
 const FlashNextState = {
-  off: 'on',
-  on: 'auto',
-  auto: 'off',
+  off: "on",
+  on: "auto",
+  auto: "off",
 };
 
 class FlipCameraButton extends React.Component {
   state = {
-    flashState: 'off',
+    flashState: "off",
   };
   animation = new Animated.Value(0);
   currentValue = 0;
@@ -1090,7 +1084,7 @@ class FlipCameraButton extends React.Component {
   render() {
     const rotate = this.animation.interpolate({
       inputRange: [0, 180],
-      outputRange: ['0deg', '180deg'],
+      outputRange: ["0deg", "180deg"],
     });
     return (
       <Animated.View style={{ transform: [{ rotate }] }}>
@@ -1102,7 +1096,7 @@ class FlipCameraButton extends React.Component {
 
 class FlashButton extends React.Component {
   state = {
-    flashState: 'off',
+    flashState: "off",
   };
   onPress = () => {
     this.setState({ flashState: FlashNextState[this.state.flashState] });
@@ -1136,12 +1130,12 @@ class FlipButtonContainer extends React.Component {
   render() {
     const moveFlip = this.animation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0%', '50%'],
+      outputRange: ["0%", "50%"],
     });
 
     const rotateFace = this.animation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0deg', '-30deg'],
+      outputRange: ["0deg", "-30deg"],
     });
 
     const fadeFace = this.animation.interpolate({
@@ -1151,7 +1145,7 @@ class FlipButtonContainer extends React.Component {
 
     const liveWidth = this.props.liveAnimation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['50%', '75%'],
+      outputRange: ["50%", "75%"],
     });
     // const liveOffset = this.props.liveAnimation.interpolate({
     //   inputRange: [0, 1],
@@ -1162,25 +1156,25 @@ class FlipButtonContainer extends React.Component {
       <View
         style={{
           flex: 1,
-          height: '100%',
-          alignItems: 'center',
+          height: "100%",
+          alignItems: "center",
         }}
       >
         <Animated.View
           style={{
             flex: 1,
             width: liveWidth,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-around',
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
           }}
         >
-          <Animated.View style={{ position: 'absolute', left: moveFlip }}>
+          <Animated.View style={{ position: "absolute", left: moveFlip }}>
             <FlipCameraButton />
           </Animated.View>
           <Animated.View
             style={{
-              position: 'absolute',
+              position: "absolute",
               right: moveFlip,
               opacity: fadeFace,
               transform: [{ rotate: rotateFace }],
@@ -1215,16 +1209,16 @@ class CaptureButton extends React.Component {
       >
         <BlurView
           pointerEvents="none"
-          tint={'light'}
+          tint={"light"}
           intensity={50}
           style={{
             width,
             height: width,
             maxWidth: width,
             borderRadius: width / 2,
-            backgroundColor: 'transparent',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundColor: "transparent",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <View
@@ -1233,14 +1227,14 @@ class CaptureButton extends React.Component {
               width: innerWidth,
               aspectRatio: 1,
               borderRadius: innerWidth / 2,
-              backgroundColor: 'white',
-              justifyContent: 'center',
-              alignItems: 'center',
+              backgroundColor: "white",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <RotatingIcon
               index={selectedIndex}
-              data={pages.map(item => item.icon)}
+              data={pages.map((item) => item.icon)}
               itemWidth={innerWidth}
             />
           </View>
@@ -1258,7 +1252,7 @@ class GalleryButton extends React.Component {
     return (
       <TouchableOpacity
         style={{ width: size, height: size }}
-        pointerEvents={enabled ? 'auto' : 'none'}
+        pointerEvents={enabled ? "auto" : "none"}
         onPress={onPress}
       >
         <Image
@@ -1266,10 +1260,10 @@ class GalleryButton extends React.Component {
           style={{
             opacity: enabled ? 1 : 0.5,
             flex: 1,
-            resizeMode: 'contain',
+            resizeMode: "contain",
             borderRadius: 4,
             borderWidth: StyleSheet.hairlineWidth,
-            borderColor: 'white',
+            borderColor: "white",
           }}
         />
       </TouchableOpacity>
@@ -1317,14 +1311,14 @@ class RotatingIcon extends React.Component {
               index * itemWidth,
               (index + 1) * itemWidth - inputMargin,
             ],
-            outputRange: [`-${maxRotation}deg`, '0deg', `${maxRotation}deg`],
+            outputRange: [`-${maxRotation}deg`, "0deg", `${maxRotation}deg`],
           }),
         },
       ],
     };
     return (
       <Animated.View style={animatedStyle}>
-        <Image style={{ flex: 1, resizeMode: 'contain' }} source={item} />
+        <Image style={{ flex: 1, resizeMode: "contain" }} source={item} />
       </Animated.View>
     );
   };
@@ -1335,9 +1329,9 @@ class RotatingIcon extends React.Component {
     return (
       <ViewPager
         pagingEnabled
-        useNativeDriver={Platform.OS !== 'web'}
+        useNativeDriver={Platform.OS !== "web"}
         scroll={this.animatedValue}
-        ref={ref => (this.viewPager = ref)}
+        ref={(ref) => (this.viewPager = ref)}
         data={data}
         renderItem={this.renderItem}
         style={{
