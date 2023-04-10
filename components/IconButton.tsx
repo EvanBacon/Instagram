@@ -1,24 +1,27 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import React from "react";
+import { TouchableOpacity } from "react-native";
 
-import InstaIcon from './InstaIcon';
-
-// import Popular from './data/Popular.json';
+import InstaIcon from "./InstaIcon";
 
 const iconButtonSize = 30;
 
-const IconButton = ({
+export const IconButton = ({
   style,
   containerStyle,
   enabled = true,
   onPress,
   active,
   name,
-  size,
-  color,
+}: {
+  style?: any;
+  containerStyle?: any;
+  enabled?: boolean;
+  onPress?: () => void;
+  active?: boolean;
+  name: string;
 }) => (
   <TouchableOpacity
-    pointerEvents={enabled ? 'auto' : 'none'}
+    disabled={!enabled}
     style={[containerStyle, { width: iconButtonSize, height: iconButtonSize }]}
     onPress={onPress}
   >

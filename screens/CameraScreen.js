@@ -21,19 +21,19 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 
-import Assets from "../Assets";
-import FaceButton from "../components/FaceButton";
-import IconButton from "../components/IconButton";
-import Header from "../components/MediaHeader";
-import ProfileImage from "../components/ProfileImage";
-import Slider from "../components/Slider";
-import ViewPager from "../components/ViewPager";
-import MediaLibraryData from "../constants/MediaLibraryData";
-import NavigationService from "../navigation/NavigationService";
-import dispatch from "../rematch/dispatch";
-import EditorScreen from "./CameraMediaEditorScreen";
-import GradientScreen from "./GradientScreen";
-import MusicScreen from "./MusicScreen";
+import Assets from "@/Assets";
+import FaceButton from "@/components/FaceButton";
+import IconButton from "@/components/IconButton";
+import Header from "@/components/MediaHeader";
+import ProfileImage from "@/components/ProfileImage";
+import Slider from "@/components/Slider";
+import ViewPager from "@/components/ViewPager";
+import MediaLibraryData from "@/constants/MediaLibraryData";
+import NavigationService from "@/navigation/NavigationService";
+import dispatch from "@/rematch/dispatch";
+import EditorScreen from "@/screens/CameraMediaEditorScreen";
+import GradientScreen from "@/screens/GradientScreen";
+import MusicScreen from "@/screens/MusicScreen";
 
 // import Popular from './data/Popular.json';
 const pages = [
