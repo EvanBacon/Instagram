@@ -1,5 +1,7 @@
-node_modules/**/*
-.expo/**/*
+node_modules/
+.expo/
+dist/
+npm-debug.*
 
-/web-build
-/web-report
+# macOS
+.DS_Store
