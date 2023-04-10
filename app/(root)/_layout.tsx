@@ -5,5 +5,15 @@ export const unstable_settings = {
 };
 
 export default function Layout() {
-  return <Tabs />;
+  return (
+    <Tabs>
+      <Tabs.Screen name="index" />
+      <Tabs.Screen
+        name="[user]"
+        options={{
+          href: "/baconbrix",
+        }}
+      />
+    </Tabs>
+  );
 }

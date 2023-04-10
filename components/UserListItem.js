@@ -1,10 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import FollowButton from './FollowButton';
-import LikeButton from './LikeButton';
-import ProfileImage from './ProfileImage';
-import ReplyButton from './ReplyButton';
+import FollowButton from "./FollowButton";
+import LikeButton from "./LikeButton";
+import { ProfileImage } from "./ProfileImage";
+import ReplyButton from "./ReplyButton";
 
 export default class UserListItem extends React.Component {
   static defaultProps = {
@@ -23,8 +23,8 @@ export default class UserListItem extends React.Component {
             onPress={() => {}}
             style={{
               flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <LikeButton size={16} active={isLiked} color="gray" />
@@ -54,13 +54,13 @@ export default class UserListItem extends React.Component {
         onPress={this.onPress}
         style={{
           borderBottomWidth: isFirst ? StyleSheet.hairlineWidth : 0,
-          borderBottomColor: 'rgba(0,0,0,0.3)',
-          flexDirection: 'row',
+          borderBottomColor: "rgba(0,0,0,0.3)",
+          flexDirection: "row",
           paddingHorizontal: 12,
           paddingVertical: 8,
           minHeight: 64,
           marginBottom: 4,
-          alignItems: 'stretch',
+          alignItems: "stretch",
         }}
       >
         <View>
@@ -70,7 +70,7 @@ export default class UserListItem extends React.Component {
               width: 36,
               height: 36,
               marginRight: 8,
-              resizeMode: 'cover',
+              resizeMode: "cover",
               aspectRatio: 1,
               borderRadius: 36 / 2,
             }}
@@ -79,21 +79,21 @@ export default class UserListItem extends React.Component {
 
         <View
           style={{
-            flexDirection: 'row',
+            flexDirection: "row",
             flex: 1,
-            justifyContent: 'space-between',
+            justifyContent: "space-between",
           }}
         >
           <View
             style={{
               flex: 1,
-              justifyContent: 'space-between',
+              justifyContent: "space-between",
             }}
           >
-            <Text style={{ flexWrap: 'wrap' }}>
-              <Text style={{ fontWeight: '500' }}>{account}</Text> {title}
+            <Text style={{ flexWrap: "wrap" }}>
+              <Text style={{ fontWeight: "500" }}>{account}</Text> {title}
             </Text>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: "row" }}>
               <Text style={{ opacity: 0.6, marginRight: 12 }}>{date}</Text>
               {hasReply && <ReplyButton />}
             </View>

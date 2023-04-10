@@ -25,7 +25,7 @@ import Assets from "@/Assets";
 import FaceButton from "@/components/FaceButton";
 import IconButton from "@/components/IconButton";
 import Header from "@/components/MediaHeader";
-import ProfileImage from "@/components/ProfileImage";
+import { ProfileImage } from "@/components/ProfileImage";
 import Slider from "@/components/Slider";
 import ViewPager from "@/components/ViewPager";
 import MediaLibraryData from "@/constants/MediaLibraryData";

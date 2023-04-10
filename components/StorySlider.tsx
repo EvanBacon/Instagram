@@ -1,5 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -7,25 +7,19 @@ import {
   TouchableOpacity,
   View,
   findNodeHandle,
-} from 'react-native';
+} from "react-native";
 
-import dispatch from '../rematch/dispatch';
-import ProfileImage from './ProfileImage';
-import useLayout from '../useLayout';
+import dispatch from "../rematch/dispatch";
+import { ProfileImage } from "./ProfileImage";
+import useLayout from "../useLayout";
 
 const imagePadding = 2;
 const imageBorderWidth = 2;
 
 class OutlineImage extends React.Component {
   render() {
-    const {
-      style,
-      source,
-      renderImage,
-      account,
-      imageSize,
-      ...props
-    } = this.props;
+    const { style, source, renderImage, account, imageSize, ...props } =
+      this.props;
 
     const imageWrapperSize = imageSize + (imagePadding + imageBorderWidth) * 2;
 
@@ -40,9 +34,9 @@ class OutlineImage extends React.Component {
               height: imageSize,
               width: imageSize,
               borderRadius: imageSize / 2,
-              overflow: 'hidden',
-              resizeMode: 'cover',
-              backgroundColor: 'lightgray',
+              overflow: "hidden",
+              resizeMode: "cover",
+              backgroundColor: "lightgray",
             },
             style,
           ]}
@@ -61,21 +55,21 @@ class OutlineImage extends React.Component {
           padding: imagePadding,
           borderRadius: imageWrapperSize / 2,
           borderWidth: imageBorderWidth,
-          borderColor: '#CA4074',
+          borderColor: "#CA4074",
         }}
       >
         {imageComponent}
         <View
           style={[
             {
-              position: 'absolute',
+              position: "absolute",
               top: imagePadding,
               right: imagePadding,
               left: imagePadding,
               bottom: imagePadding,
               borderRadius: imageWrapperSize / 2,
               borderWidth: StyleSheet.hairlineWidth,
-              borderColor: 'rgba(0,0,0,0.0975)',
+              borderColor: "rgba(0,0,0,0.0975)",
             },
           ]}
         />
@@ -97,7 +91,7 @@ class StoryItem extends React.Component {
 
     return (
       <TouchableOpacity
-        ref={ref => (this.item = ref)}
+        ref={(ref) => (this.item = ref)}
         onPress={() => {
           this.item.measure((ox, oy, width, height, px, py) => {
             let photoComponent = findNodeHandle(this.item);
@@ -113,7 +107,7 @@ class StoryItem extends React.Component {
             dispatch().stories.openCarousel({ index, offset });
           });
         }}
-        style={{ alignItems: 'center', marginRight: 12 }}
+        style={{ alignItems: "center", marginRight: 12 }}
       >
         <OutlineImage
           source={source}
@@ -135,9 +129,9 @@ const NewStory = () => {
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
+            justifyContent: "center",
             marginTop: 4,
-            alignItems: 'center',
+            alignItems: "center",
           }}
         >
           <Ionicons name="ios-add" size={48} />
@@ -160,9 +154,9 @@ function Stories({ stories, hasNew }) {
         styles.row,
         isLarge && {
           marginVertical: 24,
-          borderColor: '#e6e6e6',
+          borderColor: "#e6e6e6",
           borderRadius: 3,
-          backgroundColor: '#FAFAFA',
+          backgroundColor: "#FAFAFA",
 
           borderWidth: StyleSheet.hairlineWidth,
         },
@@ -182,11 +176,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   row: {
-    backgroundColor: 'white',
-    flexDirection: 'row',
+    backgroundColor: "white",
+    flexDirection: "row",
     paddingVertical: 10,
     paddingHorizontal: 12,
   },

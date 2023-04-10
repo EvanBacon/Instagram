@@ -9,6 +9,7 @@ export default function Layout() {
     <Stack
       screenOptions={{
         presentation: "modal",
+        headerShown: false,
         // backBehavior: 'order',
         // headerMode: 'screen',
         // headerTransitionPreset: 'fade-in-place',

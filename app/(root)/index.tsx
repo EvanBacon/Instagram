@@ -1,34 +1,55 @@
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-export default function Page() {
+import FeedList from "@/components/FeedList";
+import SplashScreen from "@/components/SplashScreen";
+import Posts from "@/constants/Posts";
+import useLayout from "@/useLayout";
+import { Stack } from "expo-router";
+
+export default function HomeScreen() {
+  const { onLayout, width } = useLayout();
+  const [isShowingSplashScreen, setShowingSplash] = React.useState(true);
+  let lastWidth = NaN;
+  React.useEffect(() => {
+    if (width != null && width !== lastWidth) {
+      lastWidth = width;
+      setShowingSplash(false);
+    }
+  }, [width]);
+
+  const isLarge = width >= 600;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Feed</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
+    <>
+      <Stack.Screen
+        options={{
+          title: "Instagram",
+        }}
+      />
+      <View onLayout={onLayout} style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: isLarge ? "center" : "stretch",
+          }}
+          style={{
+            backgroundColor: "rgb(250,250,250)",
+            flex: 1,
+          }}
+        >
+          <FeedList isLarge={isLarge} style={styles.container} data={Posts} />
+          {isShowingSplashScreen && <SplashScreen />}
+        </ScrollView>
       </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+    maxWidth: 600,
+
+    backgroundColor: "transparent",
   },
 });

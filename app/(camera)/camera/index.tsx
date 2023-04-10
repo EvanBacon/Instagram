@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
-import { Camera } from "expo-camera";
+import { Camera, PermissionStatus } from "expo-camera";
 import * as Font from "expo-font";
 import React from "react";
 import {
@@ -165,12 +165,21 @@ function CameraScreen({
   // )),
 
   page,
-  hasPermission,
+  // hasPermission,
   ...props
 }: {
   page: unknown;
   hasPermission: boolean;
 }) {
+  const cameraPermission = Camera.useCameraPermissions({
+    get: true,
+    request: false,
+  });
+  const microphonePermission = Camera.useMicrophonePermissions({
+    get: true,
+    request: false,
+  });
+
   React.useEffect(() => {
     takePictureGlobal = takePicture;
   }, []);
@@ -186,6 +195,9 @@ function CameraScreen({
       });
     }
   };
+
+  const hasPermission =
+    cameraPermission[0]?.granted && microphonePermission[0]?.granted;
 
   return (
     <View
@@ -206,7 +218,12 @@ function CameraScreen({
           },
         }}
       />
-      {!hasPermission && <CameraPermissionScreen />}
+      {!hasPermission && (
+        <CameraPermissionScreen
+          cameraPermission={cameraPermission}
+          microphonePermission={microphonePermission}
+        />
+      )}
       {hasPermission && (
         <Camera ref={camera} style={{ flex: 1 }} {...props.camera} />
       )}
@@ -230,7 +247,13 @@ function CameraScreen({
   );
 }
 
-function CameraPermissionScreen() {
+function CameraPermissionScreen({
+  cameraPermission,
+  microphonePermission,
+}: {
+  cameraPermission: ReturnType<typeof Camera.useCameraPermissions>;
+  microphonePermission: ReturnType<typeof Camera.useMicrophonePermissions>;
+}) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={{ marginBottom: 36 }}>
@@ -251,22 +274,84 @@ function CameraPermissionScreen() {
       </View>
 
       <View>
-        <ConnectedPermissionButton
+        <PermissionButton
           name="Camera"
-          permission={"Permissions.CAMERA"}
+          onPress={() => {
+            cameraPermission[1]();
+          }}
+          status={cameraPermission[0]?.status}
         />
-        <ConnectedPermissionButton
+        <PermissionButton
           name="Microphone"
-          permission={"Permissions.AUDIO_RECORDING"}
+          onPress={() => {
+            microphonePermission[1]();
+          }}
+          status={microphonePermission[0]?.status}
         />
       </View>
     </View>
   );
 }
 
-function PermissionButton({ permission, name, ...props }) {
-  const hasPermission = props[permission] === "granted";
-  const isDenied = props[permission] === "denied";
+// const PermissionsContext = React.createContext();
+
+// function PermissionsProvider({ children }) {
+//   const [permissions, dispatch] = React.useReducer(
+//     (state, action) => {
+//       switch (action.type) {
+//         case "set": {
+//           return {
+//             ...state,
+//             ...action.permissions,
+//           };
+//         }
+//         default: {
+//           return state;
+//         }
+//       }
+//     },
+//     {
+//       camera: null,
+//       audioRecording: null,
+//     }
+//   );
+
+//   React.useEffect(() => {
+//     (async () => {
+//       const { status: camera } = await Camera..askAsync(
+//         Permissions.CAMERA
+//       );
+//       const { status: audioRecording } = await Permissions.askAsync(
+//         Permissions.AUDIO_RECORDING
+//       );
+//       dispatch({
+//         type: "set",
+//         permissions: {
+//           camera,
+//           audioRecording,
+//         },
+//       });
+//     })();
+//   }, []);
+
+//   return (
+//     <PermissionsContext.Provider value={{ permissions, dispatch }}>
+//       {children}
+//     </PermissionsContext.Provider>
+//   );
+// }
+
+function PermissionButton({
+  status,
+  onPress,
+  name,
+}: {
+  onPress: () => any;
+  name: string;
+  status: PermissionStatus;
+}) {
+  const hasPermission = status === "granted";
+  const isDenied = status === "denied";
   const text =
     hasPermission == null
       ? "Loading..."
@@ -282,9 +367,7 @@ function PermissionButton({ permission, name, ...props }) {
   return (
     <Text
       style={style}
-      onPress={async () => {
-        dispatch().permissions.askAsync({ permission });
-      }}
+      onPress={onPress}
       pointerEvents={hasPermission ? "none" : undefined}
     >
       {text}
@@ -292,9 +375,9 @@ function PermissionButton({ permission, name, ...props }) {
   );
 }
 
-const ConnectedPermissionButton = connect(({ permissions }) => ({
-  ...permissions,
-}))(PermissionButton);
+// const ConnectedPermissionButton = connect(({ permissions }) => ({
+//   ...permissions,
+// }))(PermissionButton);
 
 const ConnectedCameraScreen = connect(({ camera, permissions }) => ({
   camera,

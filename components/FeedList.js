@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Animated, FlatList, StyleSheet, View } from 'react-native';
+import PropTypes from "prop-types";
+import React from "react";
+import { Animated, FlatList, StyleSheet, View } from "react-native";
 
-import { Stories } from '../constants/Posts';
-import FeedListFooter from './FeedListFooter';
-import Item from './Item';
-import StorySlider from './StorySlider';
+import { Stories } from "../constants/Posts";
+import FeedListFooter from "@/components/FeedListFooter";
+import Item from "@/components/Item";
+import StorySlider from "@/components/StorySlider";
 
 export const profileImageSize = 32;
 
 export default class FeedList extends React.Component {
   static defaultProps = {
-    ListHeaderComponent: props => <StorySlider stories={Stories} />,
+    ListHeaderComponent: (props) => <StorySlider stories={Stories} />,
   };
 
   _scrollValue = new Animated.Value(0);
@@ -53,8 +53,8 @@ export default class FeedList extends React.Component {
       <React.Fragment>
         <FlatList
           showsVerticalScrollIndicator={false}
-          style={{ backgroundColor: 'transparent' }}
-          ref={ref => (this.list = ref)}
+          style={{ backgroundColor: "transparent" }}
+          ref={(ref) => (this.list = ref)}
           scrollEventThrottle={16}
           onScroll={onScroll}
           scrollEnabled={!isDragging}
@@ -67,7 +67,7 @@ export default class FeedList extends React.Component {
               isLarge={props.isLarge}
               getParent={() => this.list}
               isDragging={isDragging}
-              onGestureStart={selectedPhoto => {
+              onGestureStart={(selectedPhoto) => {
                 this.setState({
                   selectedPhoto,
                   isDragging: true,
@@ -77,15 +77,15 @@ export default class FeedList extends React.Component {
               item={item}
             />
           )}
-          ListFooterComponent={props => (
+          ListFooterComponent={(props) => (
             <FeedListFooter {...props} onPress={onPressFooter} />
           )}
-          keyExtractor={(item, index) => item.key + ' ' + index}
+          keyExtractor={(item, index) => item.key + " " + index}
           {...props}
         />
         {isDragging ? (
           <SelectedPhoto
-            key={selectedPhoto ? selectedPhoto.photoURI : ''}
+            key={selectedPhoto ? selectedPhoto.photoURI : ""}
             selectedPhoto={selectedPhoto}
           />
         ) : null}
@@ -118,7 +118,7 @@ class SelectedPhoto extends React.Component {
 
     let imageStyle = [
       {
-        position: 'absolute',
+        position: "absolute",
         zIndex: 10,
         width: selectedPhoto.measurement.w,
         height: selectedPhoto.measurement.h,
@@ -130,7 +130,7 @@ class SelectedPhoto extends React.Component {
     let backgroundOpacityValue = scaleValue.interpolate({
       inputRange: [1.0, 1.1, 2.0],
       outputRange: [0.0, 0.15, 0.75],
-      extrapolate: 'clamp',
+      extrapolate: "clamp",
     });
 
     return (
@@ -159,7 +159,7 @@ class SelectedPhoto extends React.Component {
   }
 }
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
 export class BodyPortal extends React.PureComponent {
   render() {
@@ -170,18 +170,18 @@ export class BodyPortal extends React.PureComponent {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
   },
   background: {
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
 });
