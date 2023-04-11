@@ -1,7 +1,6 @@
 import { Link } from "expo-router";
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-// import NavigationService from '../navigation/NavigationService';
 import IconBar from "./IconBar";
 
 interface Props {
@@ -14,14 +13,6 @@ interface Props {
 }
 
 export const ItemFooter: React.FC<Props> = ({ item }) => {
-  // const openComments = () => {
-  //   NavigationService.navigate('Profile_Comments', {
-  //     item: {
-  //       date: 'April 2',
-  //       ...item,
-  //     },
-  //   });
-  // };
   const { account, description, date, comments } = item;
   return (
     <View style={styles.container}>

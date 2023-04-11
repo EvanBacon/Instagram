@@ -12,9 +12,9 @@ export function ProfileImage({
   size?: "Small" | "Medium" | "Large";
 }) {
   const renderSource = source || {
-    uri: `https://avatars.io/twitter/${account}/${size}`,
+    uri:
+      (typeof window === "undefined" ? "" : window.location.origin) +
+      `/profiles/${account}.jpeg`,
   };
-  // TODO: Bacon: Instagram seems broken
-  // let renderSource = source || { uri: `https://avatars.io/instagram/${account}/${size}` };
   return <Image source={renderSource} {...props} />;
 }
