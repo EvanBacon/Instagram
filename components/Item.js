@@ -232,40 +232,38 @@ class Item extends React.PureComponent {
     const { imageWidth, imageHeight, item, isLarge } = this.props;
 
     return (
-      <Link href="/(post-modal)/p/123">
-        <View
-          style={[
-            { backgroundColor: "white" },
-            isLarge && {
-              borderColor: "#e6e6e6",
-              borderRadius: 3,
-              borderWidth: StyleSheet.hairlineWidth,
-              marginBottom: 15,
-            },
-          ]}
-          ref={(parentNode) => (this._parent = parentNode)}
-        >
-          <ItemHeader item={item} />
-          <DisableBodyScrollingView>
-            <Animated.View
-              {...this._gestureHandler.panHandlers}
-              testID="webkit-disable-touches"
-              style={{
-                opacity: this._opacity,
-              }}
-            >
-              <ItemImage
-                ref={(node) => (this._photoComponent = node)}
-                imageWidth={imageWidth}
-                imageHeight={imageHeight}
-                source={item.source}
-              />
-            </Animated.View>
-          </DisableBodyScrollingView>
+      <View
+        style={[
+          { backgroundColor: "white" },
+          isLarge && {
+            borderColor: "#e6e6e6",
+            borderRadius: 3,
+            borderWidth: StyleSheet.hairlineWidth,
+            marginBottom: 15,
+          },
+        ]}
+        ref={(parentNode) => (this._parent = parentNode)}
+      >
+        <ItemHeader item={item} />
+        <DisableBodyScrollingView>
+          <Animated.View
+            {...this._gestureHandler.panHandlers}
+            testID="webkit-disable-touches"
+            style={{
+              opacity: this._opacity,
+            }}
+          >
+            <ItemImage
+              ref={(node) => (this._photoComponent = node)}
+              imageWidth={imageWidth}
+              imageHeight={imageHeight}
+              source={item.source}
+            />
+          </Animated.View>
+        </DisableBodyScrollingView>
 
-          <ItemFooter item={item} />
-        </View>
-      </Link>
+        <ItemFooter item={item} />
+      </View>
     );
   }
 }

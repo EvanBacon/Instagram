@@ -30,7 +30,7 @@ export const ItemFooter: React.FC<Props> = ({ item }) => {
         <Text style={styles.itemAccount}>{account}</Text> {description}
       </Text>
       {comments && comments.length > 0 && (
-        <Link asChild href="./comments">
+        <Link asChild href="/(post-modal)/p/123">
           <TouchableOpacity style={styles.commentLink}>
             <Text style={styles.commentLinkText}>
               View all {comments.length} comments

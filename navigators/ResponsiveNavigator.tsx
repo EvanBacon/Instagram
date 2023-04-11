@@ -1,7 +1,7 @@
 import { Icon } from "@/navigators/icon";
 import { makeIcon, TabBarIcon } from "@/navigators/TabBarIcon";
 import { TabbedNavigator } from "@/navigators/TabbedSlot";
-import { Pressable } from "@bacons/react-views";
+import { Pressable, StyleSheet } from "@bacons/react-views";
 import { NavigationHelpersContext } from "@react-navigation/native";
 import { Link, Tabs } from "expo-router";
 import React from "react";
@@ -92,16 +92,20 @@ function useWidth(size) {
 
 const NAV_MEDIUM_WIDTH = 244;
 
+const jsStyles = StyleSheet.create({
+  sideBar: {
+    minWidth: 72,
+    width: 72,
+  },
+});
+
 function SideBar({ visible }) {
   const isLarge = useWidth(1265);
-  const isSmallHorizontal = useWidth(768);
 
   return (
     <Div
       style={[
-        {
-          minWidth: 60,
-        },
+        jsStyles.sideBar,
 
         ...Platform.select({
           default: [
@@ -111,11 +115,6 @@ function SideBar({ visible }) {
             isLarge && {
               minWidth: NAV_MEDIUM_WIDTH,
             },
-            !isLarge &&
-              isSmallHorizontal && {
-                minWidth: 72,
-                width: 72,
-              },
           ],
 
           web: [cssStyles.largeVisible, cssStyles.sideBar],
@@ -128,35 +127,26 @@ function SideBar({ visible }) {
             position: Platform.select({ web: "fixed", default: "absolute" }),
             height: "100%",
             maxHeight: "100%",
-            paddingHorizontal: 4,
             alignItems: "stretch",
             borderRightWidth: 1,
             borderRightColor: "rgb(230, 230, 230)",
             // borderRightColor: "rgb(38, 38, 38)",
-            minWidth: 60,
+            minWidth: 72,
+            width: 72,
+            paddingTop: 8,
+            paddingHorizontal: 12,
+            paddingBottom: 20,
           },
           ...Platform.select({
             default: [
               isLarge &&
                 ({
+                  width: NAV_MEDIUM_WIDTH,
                   minWidth: NAV_MEDIUM_WIDTH,
                   alignItems: "flex-start",
                 } as const),
-              !isLarge &&
-                isSmallHorizontal && {
-                  minWidth: 72,
-                  width: 72,
-                },
-              !isLarge && {
-                paddingHorizontal: 16,
-              },
-              isSmallHorizontal && {
-                paddingTop: 8,
-                paddingHorizontal: 12,
-                paddingBottom: 20,
-              },
             ],
-            web: [cssStyles.sideBarInner],
+            // web: [cssStyles.sideBarInner],
           }),
         ]}
       >
