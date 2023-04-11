@@ -1,4 +1,5 @@
 import { Link, useNavigation, useRouter } from "expo-router";
+import { Platform } from "react-native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Page() {
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     backgroundColor: "rgba(0,0,0,0.6)",
     flex: 1,
-    position: "fixed",
+    position: Platform.select({ web: "fixed", default: "absolute" }),
     top: 0,
     left: 0,
     right: 0,

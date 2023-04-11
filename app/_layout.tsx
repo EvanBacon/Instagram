@@ -19,7 +19,7 @@ export default function Layout() {
         >
           <Stack.Screen name="(app)" />
           <Stack.Screen
-            name="(post-modal)"
+            name="(post-modal)/p/[post-id]"
             options={{
               presentation: "transparentModal",
               animation: "none",

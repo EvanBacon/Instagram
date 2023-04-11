@@ -1,4 +1,5 @@
 import { MaterialTopTabs } from "@/navigators/MaterialTopTabs";
+import { Slot } from "expo-router";
 import * as React from "react";
 
 export const unstable_settings = {
@@ -6,9 +7,11 @@ export const unstable_settings = {
 };
 
 export default function Layout() {
+  return <Slot />;
   return (
     <MaterialTopTabs
       screenOptions={{
+        lazy: true,
         swipeEnabled: true,
         tabBarStyle: {
           display: "none",

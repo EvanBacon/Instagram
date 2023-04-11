@@ -3,6 +3,7 @@
     "name": "Expogram",
     "description": "Dev photo sharing app",
     "slug": "Expogram",
+    "scheme": "expogram",
     "privacy": "public",
     "version": "1.0.0",
     "orientation": "portrait",

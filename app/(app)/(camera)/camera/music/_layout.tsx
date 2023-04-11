@@ -1,4 +1,4 @@
-import SearchBar from "@/components/SearchBar/SearchBar";
+// import SearchBar from "@/components/SearchBar/SearchBar";
 import { MaterialTopTabs } from "@/navigators/MaterialTopTabs";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { BlurView } from "expo-blur";
@@ -18,7 +18,7 @@ export default function MusicScreen() {
     >
       <Stack.Screen options={{ headerShown: false }} />
       <BlurView tint={"dark"} intensity={100} style={{ flex: 1 }}>
-        <SearchBar
+        {/* <SearchBar
           round
           containerStyle={{
             backgroundColor: "transparent",
@@ -30,7 +30,7 @@ export default function MusicScreen() {
             outlineStyle: "none",
           }}
           placeholder="Search music"
-        />
+        /> */}
         <MaterialLayout />
       </BlurView>
     </Animatable.View>

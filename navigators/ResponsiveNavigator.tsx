@@ -3,7 +3,7 @@ import { makeIcon, TabBarIcon } from "@/navigators/TabBarIcon";
 import { TabbedNavigator } from "@/navigators/TabbedSlot";
 import { Pressable } from "@bacons/react-views";
 import { NavigationHelpersContext } from "@react-navigation/native";
-import { Link } from "expo-router";
+import { Link, Tabs } from "expo-router";
 import React from "react";
 import { Platform, useWindowDimensions, ViewStyle } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -19,14 +19,17 @@ function HeaderLogo() {
     <Link
       style={[
         { paddingVertical: 20, alignItems: "flex-start" },
-        isSmallHorizontal &&
-          !isLargeHorizontal && {
-            paddingTop: 0,
-            minHeight: 96,
-            marginTop: 12,
-            paddingBottom: 23,
-            height: 96,
-          },
+        Platform.select({
+          default: isSmallHorizontal &&
+            !isLargeHorizontal && {
+              paddingTop: 0,
+              minHeight: 96,
+              marginTop: 12,
+              paddingBottom: 23,
+              height: 96,
+            },
+          web: cssStyles.headerLink,
+        }),
       ]}
       href="/"
       asChild
@@ -49,8 +52,26 @@ function HeaderLogo() {
               },
             ]}
           >
-            {isLargeHorizontal && <Icon name="logo" fill={DARK} />}
-            {!isLargeHorizontal && <Icon name="logo-small" fill={DARK} />}
+            <Icon
+              style={[
+                Platform.select({
+                  default: !isLargeHorizontal && { display: "none" },
+                  web: cssStyles.wideVisible,
+                }),
+              ]}
+              name="logo"
+              fill={DARK}
+            />
+            <Icon
+              style={[
+                Platform.select({
+                  default: isLargeHorizontal && { display: "none" },
+                  web: cssStyles.wideHidden,
+                }),
+              ]}
+              name="logo-small"
+              fill={DARK}
+            />
           </H1>
         )}
       </Pressable>
@@ -78,25 +99,30 @@ function SideBar({ visible }) {
   return (
     <Div
       style={[
-        !visible && {
-          display: "none",
-        },
         {
           minWidth: 60,
         },
-        isLarge && {
-          minWidth: NAV_MEDIUM_WIDTH,
-        },
-        !isLarge &&
-          isSmallHorizontal && {
-            minWidth: 72,
-            width: 72,
-          },
+
+        ...Platform.select({
+          default: [
+            !visible && {
+              display: "none",
+            },
+            isLarge && {
+              minWidth: NAV_MEDIUM_WIDTH,
+            },
+            !isLarge &&
+              isSmallHorizontal && {
+                minWidth: 72,
+                width: 72,
+              },
+          ],
+
+          web: [cssStyles.largeVisible, cssStyles.sideBar],
+        }),
       ]}
     >
       <Div
-        id="foobar"
-        data-preserve-jsx="true"
         style={[
           {
             position: Platform.select({ web: "fixed", default: "absolute" }),
@@ -107,32 +133,31 @@ function SideBar({ visible }) {
             borderRightWidth: 1,
             borderRightColor: "rgb(230, 230, 230)",
             // borderRightColor: "rgb(38, 38, 38)",
-          },
-
-          {
             minWidth: 60,
           },
-          isLarge && {
-            minWidth: NAV_MEDIUM_WIDTH,
-          },
-          !isLarge &&
-            isSmallHorizontal && {
-              minWidth: 72,
-              width: 72,
-            },
-
-          isLarge && {
-            alignItems: "flex-start",
-          },
-          !isLarge && {
-            paddingHorizontal: 16,
-          },
-
-          isSmallHorizontal && {
-            paddingTop: 8,
-            paddingHorizontal: 12,
-            paddingBottom: 20,
-          },
+          ...Platform.select({
+            default: [
+              isLarge &&
+                ({
+                  minWidth: NAV_MEDIUM_WIDTH,
+                  alignItems: "flex-start",
+                } as const),
+              !isLarge &&
+                isSmallHorizontal && {
+                  minWidth: 72,
+                  width: 72,
+                },
+              !isLarge && {
+                paddingHorizontal: 16,
+              },
+              isSmallHorizontal && {
+                paddingTop: 8,
+                paddingHorizontal: 12,
+                paddingBottom: 20,
+              },
+            ],
+            web: [cssStyles.sideBarInner],
+          }),
         ]}
       >
         <Header
@@ -144,9 +169,12 @@ function SideBar({ visible }) {
               height: "100%",
               justifyContent: "space-between",
             },
-            !isLarge && {
-              alignItems: "center",
-            },
+            Platform.select({
+              default: !isLarge && {
+                alignItems: "center",
+              },
+              web: cssStyles.sideBarHeader,
+            }),
           ]}
         >
           <HeaderLogo />
@@ -174,10 +202,17 @@ function SideBar({ visible }) {
 function TabBar({ visible }) {
   return (
     <Div
-      style={{
-        paddingBottom: useSafeAreaInsets().bottom,
-        display: visible ? "flex" : "none",
-      }}
+      style={[
+        {
+          paddingBottom: useSafeAreaInsets().bottom,
+        },
+        Platform.select({
+          default: {
+            display: visible ? "flex" : "none",
+          },
+          web: cssStyles.smallVisible,
+        }),
+      ]}
     >
       <Nav
         style={{
@@ -319,13 +354,18 @@ function SideBarTabItem({
           <Span
             style={[
               {
-                display: isLarge ? "flex" : "none",
                 color: "#000",
                 fontSize: 16,
                 marginLeft: 16,
                 marginRight: 16,
                 lineHeight: 24,
               },
+              Platform.select({
+                default: {
+                  display: isLarge ? "flex" : "none",
+                },
+                web: cssStyles.sideBarTabItemText,
+              }),
               focused && {
                 fontWeight: "bold",
               },
@@ -339,31 +379,42 @@ function SideBarTabItem({
   );
 }
 
+import cssStyles from "@/styles/root-layout.module.scss";
+
 export function ResponsiveNavigator() {
   const isRowLayout = useWidth(768);
 
+  if (Platform.OS === "ios") {
+    return <Tabs />;
+  }
+
   return (
-    <>
-      <TabbedNavigator
-        screenOptions={{
-          tabBarShowLabel: false,
-          headerShown: false,
-          tabBarActiveTintColor: "black",
-        }}
-      >
-        <Div
-          style={{
+    <TabbedNavigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarActiveTintColor: "black",
+      }}
+    >
+      <Div
+        style={[
+          {
             flex: 1,
-            flexDirection: isRowLayout ? "row" : "column",
-          }}
-        >
-          <SideBar visible={isRowLayout} />
-          <AppHeader visible={!isRowLayout} />
-          <TabbedNavigator.Slot />
-          <TabBar visible={!isRowLayout} />
-        </Div>
-      </TabbedNavigator>
-    </>
+          },
+          Platform.select({
+            default: {
+              flexDirection: isRowLayout ? "row" : "column",
+            },
+            web: cssStyles.container,
+          }),
+        ]}
+      >
+        <SideBar visible={isRowLayout} />
+        <AppHeader visible={!isRowLayout} />
+        <TabbedNavigator.Slot />
+        <TabBar visible={!isRowLayout} />
+      </Div>
+    </TabbedNavigator>
   );
 }
 
@@ -374,11 +425,14 @@ function AppHeader({ visible }) {
       <Div style={{ height }} />
       <Header
         style={[
-          !visible && {
-            display: "none",
-          },
+          Platform.select({
+            default: !visible && {
+              display: "none",
+            },
+            web: cssStyles.smallVisible,
+          }),
           {
-            position: "fixed",
+            position: Platform.select({ web: "fixed", default: "absolute" }),
             top: 0,
             left: 0,
             right: 0,

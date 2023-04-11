@@ -1,7 +1,19 @@
-import { LinearGradient } from "expo-linear-gradient";
+import Assets from "@/Assets";
+import FaceButton from "@/components/FaceButton";
+import IconButton from "@/components/IconButton";
+import Header from "@/components/MediaHeader";
+import { ProfileImage } from "@/components/ProfileImage";
+import Slider from "@/components/Slider";
+import { ViewPager } from "@/components/ViewPager";
+import MediaLibraryData from "@/constants/MediaLibraryData";
+import dispatch from "@/rematch/dispatch";
+import EditorScreen from "@/screens/CameraMediaEditorScreen";
+import GradientScreen from "@/screens/GradientScreen";
 import { BlurView } from "expo-blur";
 import { Camera, PermissionStatus } from "expo-camera";
-import * as Font from "expo-font";
+import { useFonts } from "expo-font";
+import { LinearGradient } from "expo-linear-gradient";
+import { Link, Stack } from "expo-router";
 import React from "react";
 import {
   Animated,
@@ -20,20 +32,7 @@ import {
 import { connect } from "react-redux";
 
 // TODO: Bacon: `@/Assets` doesn't work !!
-import Assets from "@/Assets";
-import FaceButton from "@/components/FaceButton";
-import IconButton from "@/components/IconButton";
-import Header from "@/components/MediaHeader";
-import { ProfileImage } from "@/components/ProfileImage";
-import Slider from "@/components/Slider";
-import { ViewPager } from "@/components/ViewPager";
-import MediaLibraryData from "@/constants/MediaLibraryData";
-import dispatch from "@/rematch/dispatch";
-import EditorScreen from "@/screens/CameraMediaEditorScreen";
-import GradientScreen from "@/screens/GradientScreen";
 // import MusicScreen from "@/screens/MusicScreen";
-import { Link, Stack, useRouter } from "expo-router";
-
 const MusicScreen = () => <Text>Music</Text>;
 // import Popular from './data/Popular.json';
 const pages = [
@@ -375,15 +374,8 @@ function PermissionButton({
   );
 }
 
-// const ConnectedPermissionButton = connect(({ permissions }) => ({
-//   ...permissions,
-// }))(PermissionButton);
-
-const ConnectedCameraScreen = connect(({ camera, permissions }) => ({
+const ConnectedCameraScreen = connect(({ camera }) => ({
   camera,
-  // hasPermission:
-  //   permissions[Permissions.CAMERA] === "granted" &&
-  //   permissions[Permissions.AUDIO_RECORDING] === "granted",
 }))(CameraScreen);
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
@@ -473,83 +465,6 @@ function MediaContainerScreen(props: {}) {
     </AnimatedScrollView>
   );
 }
-
-// class MediaContainerScreen extends React.Component {
-//   animation = new Animated.Value(0);
-
-//   constructor(props) {
-//     super(props);
-//     this.onScroll = Animated.event(
-//       [
-//         {
-//           nativeEvent: { contentOffset: { y: this.animation } },
-//         },
-//       ],
-//       {
-//         useNativeDriver: Platform.OS !== "web",
-//       }
-//     );
-//   }
-
-//   openMediaDrawer = () => {
-//     if (DISABLE_BOTTOM_DRAWER || !this.scrollView) {
-//       return;
-//     }
-//     this.scrollView._component.scrollToEnd({ duration: 300, animated: true });
-//   };
-//   openCamera = () => {
-//     if (DISABLE_BOTTOM_DRAWER || !this.scrollView) {
-//       return;
-//     }
-//     this.scrollView._component.scrollTo({ x: 0, y: 0, duration: 300 });
-//   };
-
-//   render() {
-//     if (DISABLE_BOTTOM_DRAWER) {
-//       return (
-//         <Resizable>
-//           {(layout) => <CameraContainerScreen window={layout} />}
-//         </Resizable>
-//       );
-//     }
-//     return (
-//       <Resizable>
-//         {(layout) => {
-//           const drawerHeight = layout.height * 0.9;
-//           return (
-//             <AnimatedScrollView
-//               ref={(ref) => (this.scrollView = ref)}
-//               scrollEventThrottle={16}
-//               onScroll={this.onScroll}
-//               pagingEnabled
-//               style={{ flex: 1 }}
-//               contentContainerStyle={{ height: layout.height + drawerHeight }}
-//             >
-//               <BlurredOptionsContainer
-//                 height={layout.height}
-//                 animation={this.animation}
-//                 onPress={this.openCamera}
-//               >
-//                 <CameraContainerScreen
-//                   window={layout}
-//                   openMediaDrawer={this.openMediaDrawer}
-//                 />
-//               </BlurredOptionsContainer>
-//               <MediaScreen
-//                 window={layout}
-//                 style={{
-//                   width: "100%",
-//                   backgroundColor: "black",
-//                   height: drawerHeight,
-//                 }}
-//               />
-//             </AnimatedScrollView>
-//           );
-//         }}
-//       </Resizable>
-//     );
-//   }
-// }
 
 function BlurredOptionsContainer(props) {
   const opacity = props.animation.interpolate({
@@ -653,7 +568,6 @@ function MediaItem(props: { image: any }) {
 
 const USE_GRADIENT = true;
 
-import { useFonts } from "expo-font";
 function CameraContainerScreen({
   openMediaDrawer,
 }: {

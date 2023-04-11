@@ -3,10 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function Page() {
   return (
     <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Messages</Text>
-        <Text style={styles.subtitle}>To ... then do.</Text>
-      </View>
+      <View style={styles.main}></View>
     </View>
   );
 }

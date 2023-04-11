@@ -9,7 +9,7 @@ import * as React from "react";
 // import Stories from "./components/Stories/StoriesExperimental";
 // import MainNavigation from "./navigation/MainNavigation";
 // import NavigationService from "./navigation/NavigationService";
-import Gate from "./rematch/Gate";
+import Gate from "@/rematch/Gate";
 // import dispatch from "./rematch/dispatch";
 
 // import * as Permissions from "expo-permissions";
@@ -29,13 +29,13 @@ class App extends React.Component {
       <Gate>
         <ActionSheetProvider>
           <AudioMode>
-            {/* <ConnectedInnerApp>
+            <ConnectedInnerApp>
               <MainNavigation
                 ref={(navigatorRef) => {
                   NavigationService.setTopLevelNavigator(navigatorRef);
                 }}
               />
-            </ConnectedInnerApp> */}
+            </ConnectedInnerApp>
           </AudioMode>
         </ActionSheetProvider>
       </Gate>
@@ -66,28 +66,28 @@ class AudioMode extends React.PureComponent {
   }
 }
 
-// class InnerApp extends React.Component {
-//   render() {
-//     const { offset, children, carouselOpen } = this.props;
-//     return (
-//       <React.Fragment>
-//         {children}
-//         <View
-//           style={[
-//             { overflow: "hidden", ...StyleSheet.absoluteFillObject },
-//             // offset,
-//             carouselOpen ? { display: "flex" } : { display: "none" },
-//           ]}
-//         >
-//           <Stories />
-//         </View>
-//       </React.Fragment>
-//     );
-//   }
-// }
+class InnerApp extends React.Component {
+  render() {
+    const { offset, children, carouselOpen } = this.props;
+    return (
+      <React.Fragment>
+        {children}
+        <View
+          style={[
+            { overflow: "hidden", ...StyleSheet.absoluteFillObject },
+            // offset,
+            carouselOpen ? { display: "flex" } : { display: "none" },
+          ]}
+        >
+          <Stories />
+        </View>
+      </React.Fragment>
+    );
+  }
+}
 
-// const ConnectedInnerApp = connect(({ stories }) => ({
-//   ...stories,
-// }))(InnerApp);
+const ConnectedInnerApp = connect(({ stories }) => ({
+  ...stories,
+}))(InnerApp);
 
 export default withErrorOverlay(App);

@@ -1,0 +1,106 @@
+.container {
+  flex-direction: column;
+
+  //  media query for > 768px
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.headerLogo {
+  //  media query for > 768px and < 1264px
+
+  @media (min-width: 768px) and (max-width: 1264px) {
+    padding-top: 0px;
+    min-height: 96px;
+    margin-top: 12px;
+    padding-bottom: 23px;
+    height: 96px;
+  }
+  @media (min-width: 1264px) {
+    width: 40%;
+  }
+}
+
+.sideBarTabItemText {
+  @media (max-width: 1264px) {
+    display: none;
+  }
+}
+
+.headerLink {
+  @media (min-width: 768px) and (max-width: 1264px) {
+    padding-top: 0px;
+    min-height: 96px;
+    margin-top: 12px;
+    padding-bottom: 23px;
+    height: 96px;
+  }
+}
+
+.smallVisible {
+  display: flex;
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+.largeVisible {
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+}
+
+.wideHidden {
+  @media (min-width: 1264px) {
+    display: none;
+  }
+}
+.wideVisible {
+  @media (max-width: 1264px) {
+    display: none;
+  }
+}
+
+.sideBar {
+  @media (max-width: 768px) {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    min-width: 72;
+    width: 72;
+  }
+
+  @media (min-width: 1264px) {
+    min-width: 244;
+    width: 244;
+  }
+}
+.sideBarInner {
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media (min-width: 1264px) {
+    padding-left: 0px;
+    padding-right: 0px;
+    min-width: 244px;
+    width: 244px;
+    align-items: flex-start;
+  }
+  @media (min-width: 768px) and (max-width: 1264px) {
+    min-width: 72px;
+    width: 72px;
+  }
+  @media (min-width: 768px) {
+    padding-top: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 20px;
+  }
+}
+
+.sideBarHeader {
+    @media (max-width: 1264px) {
+        align-items: center;
+    }
+}

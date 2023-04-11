@@ -38,9 +38,9 @@ export default function HomeScreen() {
           }}
         >
           <FeedList isLarge={isLarge} style={styles.container} data={Posts} />
-          {isShowingSplashScreen && <SplashScreen />}
         </ScrollView>
       </View>
+      {isShowingSplashScreen && <SplashScreen />}
     </>
   );
 }
