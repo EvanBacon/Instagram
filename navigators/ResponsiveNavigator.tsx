@@ -1,13 +1,14 @@
 import { Icon } from "@/navigators/icon";
 import { makeIcon, TabBarIcon } from "@/navigators/TabBarIcon";
 import { TabbedNavigator } from "@/navigators/TabbedSlot";
+import cssStyles from "@/styles/root-layout.module.scss";
 import { Pressable, StyleSheet } from "@bacons/react-views";
+import { Div, H1, Header, Nav, Span } from "@expo/html-elements";
 import { NavigationHelpersContext } from "@react-navigation/native";
-import { Link, Tabs } from "expo-router";
+import { Link } from "expo-router";
 import React from "react";
 import { Platform, useWindowDimensions, ViewStyle } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Div, H1, Nav, Header, Span } from "@expo/html-elements";
 
 const DARK = "rgba(41, 41, 41, 1)";
 
@@ -130,7 +131,6 @@ function SideBar({ visible }) {
             alignItems: "stretch",
             borderRightWidth: 1,
             borderRightColor: "rgb(230, 230, 230)",
-            // borderRightColor: "rgb(38, 38, 38)",
             minWidth: 72,
             width: 72,
             paddingTop: 8,
@@ -146,7 +146,7 @@ function SideBar({ visible }) {
                   alignItems: "flex-start",
                 } as const),
             ],
-            // web: [cssStyles.sideBarInner],
+            web: [cssStyles.sideBarInner],
           }),
         ]}
       >
@@ -336,8 +336,6 @@ function SideBarTabItem({
             {icon({
               focused,
               color: "#000",
-              //   style:
-              //     isSmallHorizontal && !isLarge ? { width: 24, height: 24 } : {},
             })}
           </Div>
 
@@ -369,14 +367,8 @@ function SideBarTabItem({
   );
 }
 
-import cssStyles from "@/styles/root-layout.module.scss";
-
 export function ResponsiveNavigator() {
   const isRowLayout = useWidth(768);
-
-  if (Platform.OS === "ios") {
-    return <Tabs />;
-  }
 
   return (
     <TabbedNavigator
@@ -409,7 +401,8 @@ export function ResponsiveNavigator() {
 }
 
 function AppHeader({ visible }) {
-  const height = 60;
+  const { top } = useSafeAreaInsets();
+  const height = 60 + top;
   return (
     <>
       <Div style={{ height }} />
@@ -422,11 +415,14 @@ function AppHeader({ visible }) {
             web: cssStyles.smallVisible,
           }),
           {
+            paddingTop: top,
+            zIndex: 10,
+            backgroundColor: "white",
             position: Platform.select({ web: "fixed", default: "absolute" }),
             top: 0,
             left: 0,
             right: 0,
-            height,
+            height: height,
             paddingHorizontal: 16,
             flexDirection: "row",
             alignItems: "center",
