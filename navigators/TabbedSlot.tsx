@@ -1,8 +1,12 @@
+import { CommonActions } from "@react-navigation/native";
+import { TabRouter } from "@react-navigation/routers";
 import { Link, Navigator } from "expo-router";
+import { Screen as RouterScreen } from "expo-router/src/views/Screen";
 import * as React from "react";
 import { StyleSheet, ViewStyle } from "react-native";
 import { Screen, ScreenContainer } from "react-native-screens";
-import { CommonActions } from "@react-navigation/native";
+
+import { useLinkBuilder } from "./useLinkBuilder";
 
 function useNavigatorContext() {
   const context = Navigator.useContext();
@@ -22,9 +26,6 @@ function useNavigatorContext() {
 
   return context;
 }
-
-import { TabRouter } from "@react-navigation/routers";
-import { useLinkBuilder } from "./useLinkBuilder";
 
 export function TabbedNavigator(props: React.ComponentProps<typeof Navigator>) {
   return <Navigator {...props} router={TabRouter} />;
@@ -91,13 +92,6 @@ export default function TabbedSlot({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    overflow: "hidden",
-  },
-});
-
 function useContextRoute(name: string) {
   const context = Navigator.useContext();
 
@@ -114,10 +108,6 @@ function useContextRoute(name: string) {
         .join(", ")}`
     );
   }
-
-  // const current = state.routes.find((route, i) => {
-  //   return state.index === i;
-  // });
 
   if (!current) {
     return null;
@@ -180,8 +170,13 @@ export function TabLink({
   );
 }
 
-import { Screen as RouterScreen } from "expo-router/src/views/Screen";
-
 TabbedNavigator.Slot = TabbedSlot;
 TabbedNavigator.Link = TabLink;
 TabbedNavigator.Screen = RouterScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    overflow: "hidden",
+  },
+});

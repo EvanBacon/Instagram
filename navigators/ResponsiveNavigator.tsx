@@ -3,14 +3,13 @@ import { makeIcon, TabBarIcon } from "@/navigators/TabBarIcon";
 import { TabbedNavigator } from "@/navigators/TabbedSlot";
 import cssStyles from "@/styles/root-layout.module.scss";
 import { Pressable, StyleSheet } from "@bacons/react-views";
+import { View } from "@bacons/react-views";
 import { Div, H1, Header, Nav, Span } from "@expo/html-elements";
 import { NavigationHelpersContext } from "@react-navigation/native";
 import { Link } from "expo-router";
 import React from "react";
 import { Platform, useWindowDimensions, ViewStyle } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-const DARK = "rgba(41, 41, 41, 1)";
 
 function HeaderLogo() {
   const isLargeHorizontal = useWidth(1264);
@@ -39,39 +38,27 @@ function HeaderLogo() {
         {({ hovered }) => (
           <H1
             style={[
+              jsStyles.headerLogo,
               {
-                margin: 0,
-                display: "flex",
-                // flex: 1,
-                alignItems: "center",
-                padding: 12,
-                marginVertical: 4,
-                borderRadius: 4,
-                transitionProperty: ["background-color", "box-shadow"],
-                transitionDuration: "200ms",
                 backgroundColor: hovered ? "rgba(0, 0, 0, 0.1)" : "transparent",
               },
             ]}
           >
             <Icon
-              style={[
-                Platform.select({
-                  default: !isLargeHorizontal && { display: "none" },
-                  web: cssStyles.wideVisible,
-                }),
-              ]}
+              style={Platform.select({
+                default: !isLargeHorizontal && { display: "none" },
+                web: cssStyles.wideVisible,
+              })}
               name="logo"
-              fill={DARK}
+              fill={Colors.dark}
             />
             <Icon
-              style={[
-                Platform.select({
-                  default: isLargeHorizontal && { display: "none" },
-                  web: cssStyles.wideHidden,
-                }),
-              ]}
+              style={Platform.select({
+                default: isLargeHorizontal && { display: "none" },
+                web: cssStyles.wideHidden,
+              })}
               name="logo-small"
-              fill={DARK}
+              fill={Colors.dark}
             />
           </H1>
         )}
@@ -90,15 +77,6 @@ function useWidth(size) {
   }
   return width >= size;
 }
-
-const NAV_MEDIUM_WIDTH = 244;
-
-const jsStyles = StyleSheet.create({
-  sideBar: {
-    minWidth: 72,
-    width: 72,
-  },
-});
 
 function SideBar({ visible }) {
   const isLarge = useWidth(1265);
@@ -124,19 +102,7 @@ function SideBar({ visible }) {
     >
       <Div
         style={[
-          {
-            position: Platform.select({ web: "fixed", default: "absolute" }),
-            height: "100%",
-            maxHeight: "100%",
-            alignItems: "stretch",
-            borderRightWidth: 1,
-            borderRightColor: "rgb(230, 230, 230)",
-            minWidth: 72,
-            width: 72,
-            paddingTop: 8,
-            paddingHorizontal: 12,
-            paddingBottom: 20,
-          },
+          jsStyles.sidebarInner,
           ...Platform.select({
             default: [
               isLarge &&
@@ -204,17 +170,7 @@ function TabBar({ visible }) {
         }),
       ]}
     >
-      <Nav
-        style={{
-          flexDirection: "row",
-          borderTopWidth: 1,
-          borderTopColor: "rgba(230, 230, 230, 1)",
-          justifyContent: "space-around",
-          alignItems: "center",
-          height: 49,
-          paddingHorizontal: 16,
-        }}
-      >
+      <Nav style={jsStyles.nav}>
         {[
           { name: "index", icon: "home" },
           { name: "explore", icon: "explore" },
@@ -306,7 +262,7 @@ function SideBarTabItem({
       }}
     >
       {({ focused, hovered }) => (
-        <Div
+        <View
           style={[
             {
               padding: 12,
@@ -321,7 +277,7 @@ function SideBarTabItem({
             },
           ]}
         >
-          <Div
+          <View
             style={[
               {
                 transitionTimingFunction: "cubic-bezier(0.17, 0.17, 0, 1)",
@@ -337,7 +293,7 @@ function SideBarTabItem({
               focused,
               color: "#000",
             })}
-          </Div>
+          </View>
 
           <Span
             style={[
@@ -361,7 +317,7 @@ function SideBarTabItem({
           >
             {children}
           </Span>
-        </Div>
+        </View>
       )}
     </TabBarItem>
   );
@@ -380,9 +336,7 @@ export function ResponsiveNavigator() {
     >
       <Div
         style={[
-          {
-            flex: 1,
-          },
+          jsStyles.flex1,
           Platform.select({
             default: {
               flexDirection: isRowLayout ? "row" : "column",
@@ -414,26 +368,74 @@ function AppHeader({ visible }) {
             },
             web: cssStyles.smallVisible,
           }),
-          {
-            paddingTop: top,
-            zIndex: 10,
-            backgroundColor: "white",
-            position: Platform.select({ web: "fixed", default: "absolute" }),
-            top: 0,
-            left: 0,
-            right: 0,
-            height: height,
-            paddingHorizontal: 16,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderBottomWidth: 1,
-            borderBottomColor: "rgb(230, 230, 230)",
-          },
+          { height, paddingTop: top },
+          jsStyles.appHeader,
         ]}
       >
-        <Icon name="logo" fill={DARK} />
+        <Icon name="logo" fill={Colors.dark} />
       </Header>
     </>
   );
 }
+
+const Colors = {
+  lightGray: "rgba(230, 230, 230, 1)",
+  dark: "rgba(41, 41, 41, 1)",
+};
+
+const NAV_MEDIUM_WIDTH = 244;
+
+const jsStyles = StyleSheet.create({
+  sideBar: {
+    minWidth: 72,
+    width: 72,
+  },
+  sidebarInner: {
+    position: Platform.select({ web: "fixed", default: "absolute" }),
+    height: "100%",
+    maxHeight: "100%",
+    alignItems: "stretch",
+    borderRightWidth: 1,
+    borderRightColor: Colors.lightGray,
+    minWidth: 72,
+    width: 72,
+    paddingTop: 8,
+    paddingHorizontal: 12,
+    paddingBottom: 20,
+  },
+  flex1: { flex: 1 },
+  appHeader: {
+    zIndex: 10,
+    backgroundColor: "white",
+    position: Platform.select({ web: "fixed", default: "absolute" }),
+    top: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lightGray,
+  },
+  headerLogo: {
+    margin: 0,
+    display: "flex",
+    // flex: 1,
+    alignItems: "center",
+    padding: 12,
+    marginVertical: 4,
+    borderRadius: 4,
+    transitionProperty: ["background-color", "box-shadow"],
+    transitionDuration: "200ms",
+  },
+  nav: {
+    flexDirection: "row",
+    borderTopWidth: 1,
+    borderTopColor: Colors.lightGray,
+    justifyContent: "space-around",
+    alignItems: "center",
+    height: 49,
+    paddingHorizontal: 16,
+  },
+});

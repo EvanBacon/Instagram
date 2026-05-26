@@ -1,89 +1,90 @@
+$size-xs: 768px;
+$size-l: 1264px;
+$ui-sidebar: 244px;
+
 .container {
   flex-direction: column;
-
-  //  media query for > 768px
-
-  @media (min-width: 768px) {
+  @media (min-width: $size-xs) {
     flex-direction: row;
   }
 }
-.headerLogo {
-  //  media query for > 768px and < 1264px
 
-  @media (min-width: 768px) and (max-width: 1264px) {
+.headerLogo {
+  @media (min-width: $size-xs) and (max-width: $size-l) {
     padding-top: 0px;
     min-height: 96px;
     margin-top: 12px;
     padding-bottom: 23px;
     height: 96px;
   }
-  @media (min-width: 1264px) {
+  @media (min-width: $size-l) {
     width: 40%;
   }
 }
 
 .sideBarTabItemText {
-  @media (max-width: 1264px) {
+  @media (max-width: $size-l) {
     display: none;
   }
 }
 
 .headerLink {
-  @media (min-width: 768px) and (max-width: 1264px) {
+  @media (min-width: $size-xs) and (max-width: $size-l) {
     padding-top: 0px;
     min-height: 96px;
+    height: 96px;
     margin-top: 12px;
     padding-bottom: 23px;
-    height: 96px;
   }
 }
 
 .smallVisible {
   display: flex;
-  @media (min-width: 768px) {
+  @media (min-width: $size-xs) {
     display: none;
   }
 }
+
 .largeVisible {
   display: none;
-  @media (min-width: 768px) {
+  @media (min-width: $size-xs) {
     display: flex;
   }
 }
 
 .wideHidden {
-  @media (min-width: 1264px) {
+  @media (min-width: $size-l) {
     display: none;
   }
 }
+
 .wideVisible {
-  @media (max-width: 1264px) {
+  @media (max-width: $size-l) {
     display: none;
   }
 }
 
 .sideBar {
-    display: none;
-    @media (min-width: 768px) {
-      display: flex;
+  display: none;
+  @media (min-width: $size-xs) {
+    display: flex;
   }
-  @media (min-width: 1264px) {
-    min-width: 244;
-    width: 244;
+  @media (min-width: $size-l) {
+    min-width: $ui-sidebar;
+    width: $ui-sidebar;
   }
 }
 
 .sideBarInner {
-
-  @media (min-width: 1264px) {
-    min-width: 244px;
-    width: 244px;
+  @media (min-width: $size-l) {
+    min-width: $ui-sidebar;
+    width: $ui-sidebar;
     align-items: flex-start;
-  }  
+  }
 }
 
 .sideBarHeader {
-    @media (max-width: 1264px) {
-        align-items: center;
-    }
+  @media (max-width: $size-l) {
+    align-items: center;
+  }
 }

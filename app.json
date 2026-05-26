@@ -15,6 +15,7 @@
     },
     "web": {
       "bundler": "metro",
+      "output": "static",
       "barStyle": "black-translucent"
     },
     "experiments": {
